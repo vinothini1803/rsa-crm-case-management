@@ -1,0 +1,22 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    #- sleep 300 #( Gitlab to github mirror )
+    - hostname
+    - sudo su root
+    - cd /data/var/www/VDMS/Case-Management
+    - sudo git pull origin main
+    - sudo git checkout origin/main -f
+    - sudo npm install
+    - sudo npm run build
+    - npx sequelize-cli db:migrate
+    - sudo pm2 reload all
+    - ls -la
+  tags:
+    - VDMS
+    - Prod
+  only:
+    - main

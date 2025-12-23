@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>New Case Created</title>
+  </head>
+  <style>
+    .case-detail-title {
+      margin: 0px 0px;
+      padding: 0px 0px 15px 0px;
+      font-size: 23px;
+      font-weight: 400;
+      text-align: start;
+      color: var(--tuna-light, #352342);
+    }
+    .casedetail {
+      display: flex;
+      flex-wrap: wrap;
+      /* justify-content: center;
+      align-items: center; */
+    }
+    .casedeatail-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .case-info-title {
+      flex: 1;
+    }
+    .case-info-data {
+      flex: 1;
+    }
+    .case-info-data::before {
+      content: ":";
+      margin-right: 12px;
+    }
+    .case-info-data-text {
+      font-size: 14px;
+
+      font-weight: 700;
+    }
+    /* For mobile screens (example: screen width less than 768px) */
+    @media (max-width: 768px) {
+      .casedetail {
+        flex-direction: column; /* Change to a column layout for mobile */
+      }
+
+      /* Optional: Adjust individual item styles for mobile */
+      .case-info-title,
+      .case-info-data {
+        flex: none; /* Reset flex to default behavior */
+        width: 100%; /* Take full width of the container */
+
+        margin-bottom: 8px; /* Optional: Add space between items */
+      }
+      .case-info-data::before {
+        content: none;
+      }
+    }
+  </style>
+
+  <body>
+    <div style="padding: 46px 70px; background-color: #f1fcc8">
+      {{{content}}}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,256 @@
+{
+  "apiGatewayService": {
+    "host": "http://localhost",
+    "version": "api/v1",
+    "port": "9200",
+    "app-id": "RAS-CRM-user",
+    "api-key": "",
+    "serviceAccess": {
+      "case": "case"
+    },
+    "endpoint": {
+      "deleteAttachment": "deleteAttachment",
+      "rsaActivityRequest": "rsa/activityRequest"
+    }
+  },
+  "userService": {
+    "host": "http://localhost",
+    "version": "api/v1",
+    "port": "9201",
+    "app-id": "RAS-CRM-user",
+    "api-key": "",
+    "serviceAccess": {
+      "user": "user"
+    },
+    "endpoint": {
+      "login": "login",
+      "logout": "logout",
+      "register": "register",
+      "getAllUser": "getAllUsers",
+      "getUser": "getUser",
+      "getEntityUser": "getEntityUser",
+      "update": "update",
+      "forgotPassword": "forgot-password",
+      "updatePassword": "updatePassword",
+      "listRole": "listRole",
+      "addRole": "addRole",
+      "listPermissions": "listPermissions",
+      "validateToken": "validateToken",
+      "getAllSeeder": "seeder",
+      "getCallCenterByAgent": "getCallCenterByAgent",
+      "getUsersByRole": "getUsersByRole",
+      "fetchUsersFcmToken": "fetchUsersFcmToken",
+      "getUserIdsByRole": "getUserIdsByRole",
+      "getUserFCMTokenByRoleId": "getUserFCMTokenByRoleId",
+      "getUserFCMTokenByCallCenterId": "getUserFCMTokenByCallCenterId",
+      "getTLFCMTokenByAgentId": "getTLFCMTokenByAgentId",
+      "getFCMTokenById": "getFCMTokenById",
+      "getSMEFCMTokenByAgentId": "getSMEFCMTokenByAgentId",
+      "removeInvalidFCMToken": "removeInvalidFCMToken",
+      "templateGetMasterDetails": "template/getMasterDetails",
+      "templateGetSendToDetails": "template/getSendToDetails",
+      "roleGetDetailByName": "role/getDetailByName",
+      "checkUserWithRole": "checkUserWithRole",
+      "getFCMTokenByAgentName": "getFCMTokenByAgentName",
+      "commonGetMasterDetails": "common/getMasterDetails",
+      "updateUserLogin": "updateUserLogin",
+      "getAgentsByRole": "getAgentsByRole"
+    }
+  },
+  "MasterService": {
+    "host": "http://localhost",
+    "version": "api/v1",
+    "port": "9202",
+    "app-id": "RAS-CRM-user",
+    "api-key": "",
+    "serviceAccess": {
+      "master": "master",
+      "dealers": "dealers",
+      "clients": "clients"
+    },
+    "endpoint": {
+      "newCaseEmailReceivers": "newCaseEmailReceivers",
+      "generateCaseSerialNumber": "serialNumber/generateCaseSerialNumber",
+      "generateGenericSerialNumber": "serialNumber/generateGenericSerialNumber",
+      "getPickupAndDropDealerDetail": "getPickupAndDropDealerDetail",
+      "getMasterCaseAttachmentData": "case/getData/attachementData",
+      "getCaseData": "case/getData",
+      "getMasterCaseData": "case/list/getData",
+      "getAspActivitiesData": "asp/activities/data",
+      "aspActivitiesSearchMasterData": "asp/activities/data/searchMasterData",
+      "configs": {
+        "getAllConfig": "configs",
+        "getByName": "configs/getByName",
+        "getConfigById": "configs/getById"
+      },
+      "vehicleTypes": {
+        "getAllVehicleTypes": "vehicleTypes"
+      },
+      "vehicleMakes": {
+        "getAllVehicleMakes": "vehicleMakes"
+      },
+      "vehicleModels": {
+        "getAllVehicleModels": "vehicleModels"
+      },
+      "clients": {
+        "getAllClients": "clients",
+        "getDetail": "getDetail",
+        "getClientServiceEntitlements": "clients/getClientServiceEntitlements"
+      },
+      "subject": {
+        "getAllSubject": "caseSubjects"
+      },
+      "service": {
+        "getAllService": "services"
+      },
+      "subServices": {
+        "getAllSubServices": "subServices"
+      },
+      "states": {
+        "getAllState": "states"
+      },
+      "cities": {
+        "getAllCity": "cities"
+      },
+      "asps": {
+        "getAllAsp": "asps",
+        "getAspDetails": "asps/getDetails",
+        "getAspSubAsps": "asps/getAspSubAsps"
+      },
+      "aspMechanics": {
+        "getAllAspMechanic": "aspMechanics",
+        "getDetails": "aspMechanics/getDetails",
+        "getById": "aspMechanics/getById"
+      },
+      "dealers": {
+        "getAllDealers": "dealers",
+        "getDealerDetail": "getDealerDetail",
+        "getDealerDetailByCode": "getDealerDetailByCode",
+        "getNearestDealersByLocation": "getNearestDealersByLocation"
+      },
+      "caseStatuses": {
+        "getAllCaseStatuses": "caseStatuses",
+        "getcaseStatusName": "caseStatuses/getcaseStatusName"
+      },
+      "caseCancelReasons": {
+        "getAllCaseCancelReasons": "caseCancelReasons"
+      },
+      "aspActivityRejectReasons": {
+        "getAllAspActivityRejectReasons": "aspActivityRejectReasons",
+        "getById": "aspActivityRejectReasons/getById"
+      },
+      "inventories": {
+        "getAllInventories": "inventories"
+      },
+      "paymentMethods": {
+        "getAllPaymentMethods": "paymentMethods"
+      },
+      "additionalCharges": {
+        "getAllAdditionalCharges": "additionalCharges"
+      },
+      "seeders": {
+        "getAllSeeders": "seeders"
+      },
+      "configTypes": "configTypes",
+      "addresses": "addresses",
+      "caseSubjects": {
+        "caseSubjects": "caseSubjects",
+        "getcaseSubjectName": "caseSubjects/getcaseSubjectName"
+      },
+      "getActivityCharges": "updateActivityCharges",
+      "getNspLocs": "nsp/getLocs",
+      "getTax": "taxes/getData",
+      "getClientServiceEntitlementDetails": "clients/getClientServiceEntitlementDetails",
+      "getServiceMasterDetails": "services/get",
+      "getMasterDetails": "common/getMasterDetails",
+      "getCitiesByRole": "common/getCitiesByRole",
+      "getCallCentersByRole": "common/getCallCentersByRole",
+      "getClientsByRole": "common/getClientsByRole",
+      "getLanguage": "languages/getFormData",
+      "getAspMasterDetails": "nsp/getMasterDetail",
+      "getPriceBaseClientId": "deliveryRequestPrice/getPriceBaseClientId",
+      "getServiceDetailMaster": "serviceDetailMaster",
+      "aspActivityStatuses": {
+        "getByIds": "aspActivityStatuses/getByIds"
+      },
+      "getReminderConfigDetails": "reminder/getFormData",
+      "getOverAllMapViewAspMechanics": "nsp/getOverAllMapViewAspMechanics",
+      "milestone": {
+        "getMilestoneAgainstCaseActivity": "milestone/getMilestoneAgainstCaseActivity"
+      },
+      "getSlaSettings": "sla/getSlaSettings",
+      "ownPatrolVehicle": {
+        "getByIds": "ownPatrolVehicle/getByIds",
+        "getAspIdsByServiceOrganisationIds": "ownPatrolVehicle/getAspIdsByServiceOrganisationIds"
+      },
+      "getCaseRequestMasterData": "case/getData/caseRequestMasterData",
+      "manager": {
+        "getAspByAspTypeAndRm": "manager/getAspByAspTypeAndRm",
+        "getMasterDetails": "manager/getMasterDetails"
+      },
+      "getCityData": "cities/getCityData",
+      "getClientDetail": "clients/getClientDetail",
+      "getClientDetailByDid": "clients/getClientDetailByDid",
+      "template": {
+        "getMasterDetails": "template/getMasterDetails",
+        "getFormDataDetails": "template/getFormDataDetails",
+        "getSendToDetails": "template/getSendToDetails",
+        "getSeederDetails": "template/getSeederDetails"
+      },
+      "rsaGetActivityCustomerAndAspRateCard": "deliveryRequestPrice/rsaGetActivityCustomerAndAspRateCard",
+      "getAdditionalKmCost": "deliveryRequestPrice/getAdditionalKmCost",
+      "vdmGetActivityClientAndAspRateCard": "deliveryRequestPrice/vdmGetActivityClientAndAspRateCard",
+      "overAllMapCaseViewMasterDetail": "case/getData/overAllMapCaseViewMasterDetail",
+      "policyDetailUpdateFormData": "case/getData/policyDetailUpdateFormData",
+      "otherService": {
+        "getMasterDetails": "otherService/getMasterDetails"
+      },
+      "sla": {
+        "getByCaseTypeAndTypeId": "sla/getByCaseTypeAndTypeId"
+      },
+      "slaViolateReason": {
+        "getById": "slaViolateReason/getById"
+      },
+      "callInitiation": {
+        "getExportData": "callInitiation/getExportData"
+      },
+      "dashboard": {
+        "getAgentOnGoingCaseMasterDetails": "dashboard/getAgentOnGoingCaseMasterDetails",
+        "getAgentServiceCountMasterDetails": "dashboard/getAgentServiceCountMasterDetails"
+      },
+      "getGoogleDistanceData": "distance/getGoogleDistanceData",
+      "getCrmListSearchData": "case/getData/crmListSearchData",
+      "getCrmListFilterData": "case/getData/crmListFilterData",
+      "getReminderListSearchData": "reminder/getReminderListSearchData"
+    }
+  },
+  "CaseService": {
+    "host": "http://localhost",
+    "port": "9203"
+  },
+  "L2AgentService": {
+    "host": "http://localhost",
+    "port": "9205",
+    "version": "api/v1",
+    "serviceAccess": {
+      "l2agent": "l2agent"
+    },
+    "endpoint": {
+      "agentAssignment": "agentAssignment",
+      "aspAutoAssignment": "aspAutoAssignment"
+    }
+  },
+  "reportService": {
+    "host": "http://localhost",
+    "version": "api/v1",
+    "port": "9206",
+    "app-id": "",
+    "api-key": "",
+    "serviceAccess": {
+      "report": "report"
+    },
+    "endpoint": {
+      "createReportSyncTableRecord": "createReportSyncTableRecord"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "",
+    "database": "rsa-crm-case-management",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "Tvsappuser",
+    "password": "TV$@ppu$er@2024",
+    "database": "rsa-crm-case-management",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "prod": {
+    "username": "tvsappuser",
+    "password": "tPTB4L4f0XNk@kti",
+    "database": "rsa-crm-case-management",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

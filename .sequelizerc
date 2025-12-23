@@ -1,0 +1,10 @@
+const path = require("path");
+require("dotenv").config();
+
+module.exports = {
+  env: process.env.NODE_ENV || "test",
+  config: path.resolve("build", "./database/sequelize.json"), // Change this to your database config file
+  "models-path": path.resolve("build", "./database/models"),
+  "seeders-path": path.resolve("build", "./database/seeders"),
+  "migrations-path": path.resolve("build", "./database/migrations"),
+};

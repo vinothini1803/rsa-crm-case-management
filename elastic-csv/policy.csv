@@ -1,0 +1,642 @@
+id,policyNo,policyType,policyStartDate,policyEndDate,tableName,membershipTypeId,membershipTypeName
+24665,null,Extended Warranty,2022-04-03,2025-04-02,memerbership,null,null
+27041,RSA33614,RSA Retail,2022-02-12,2025-02-11,memerbership,null,null
+28513,null,Extended Warranty,2023-10-27,2024-10-25,memerbership,null,null
+28527,null,Extended Warranty,2023-04-10,2024-04-08,memerbership,null,null
+28569,null,Extended Warranty,2023-05-31,2024-05-29,memerbership,null,null
+28571,null,Extended Warranty,2023-04-12,2024-04-10,memerbership,null,null
+28585,null,Extended Warranty,2023-06-16,2024-06-14,memerbership,null,null
+28593,null,Extended Warranty,2023-06-09,2024-06-07,memerbership,null,null
+28595,null,Extended Warranty,2023-04-11,2024-04-09,memerbership,null,null
+28597,null,Extended Warranty,2023-05-31,2024-05-29,memerbership,null,null
+28601,null,Extended Warranty,2023-05-03,2024-05-01,memerbership,null,null
+28605,null,Extended Warranty,2023-06-12,2024-06-10,memerbership,null,null
+28607,null,Extended Warranty,2023-06-04,2024-06-02,memerbership,null,null
+28611,null,Extended Warranty,2023-04-27,2024-04-25,memerbership,null,null
+28613,null,Extended Warranty,2023-05-05,2024-05-03,memerbership,null,null
+28617,null,Extended Warranty,2023-04-30,2024-04-28,memerbership,null,null
+28619,null,Extended Warranty,2023-04-23,2024-04-21,memerbership,null,null
+28621,null,Extended Warranty,2023-04-16,2024-04-14,memerbership,null,null
+28623,null,Extended Warranty,2023-08-24,2024-08-22,memerbership,null,null
+28625,null,Extended Warranty,2023-08-29,2024-08-27,memerbership,null,null
+28627,null,Extended Warranty,2023-06-13,2024-06-11,memerbership,null,null
+28629,null,Extended Warranty,2023-06-02,2024-05-31,memerbership,null,null
+28631,null,Extended Warranty,2023-05-08,2024-05-06,memerbership,null,null
+28633,null,Extended Warranty,2023-05-11,2024-05-09,memerbership,null,null
+28635,null,Extended Warranty,2023-06-04,2024-06-02,memerbership,null,null
+28637,null,Extended Warranty,2023-06-30,2024-06-28,memerbership,null,null
+28639,null,Extended Warranty,2023-04-30,2024-04-28,memerbership,null,null
+28641,null,Extended Warranty,2023-06-04,2024-06-02,memerbership,null,null
+28643,null,Extended Warranty,2023-09-20,2024-09-18,memerbership,null,null
+28645,null,Extended Warranty,2023-05-05,2024-05-03,memerbership,null,null
+28647,null,Extended Warranty,2023-06-09,2024-06-07,memerbership,null,null
+28649,null,Extended Warranty,2023-08-11,2024-08-09,memerbership,null,null
+28651,null,Extended Warranty,2023-08-09,2024-08-07,memerbership,null,null
+28653,null,Extended Warranty,2023-06-08,2024-06-06,memerbership,null,null
+28655,null,Extended Warranty,2023-08-08,2024-08-06,memerbership,null,null
+28657,null,Extended Warranty,2023-08-03,2024-08-01,memerbership,null,null
+28659,null,Extended Warranty,2023-06-29,2024-06-27,memerbership,null,null
+28661,null,Extended Warranty,2023-07-04,2024-07-02,memerbership,null,null
+28663,null,Extended Warranty,2023-07-02,2024-06-30,memerbership,null,null
+28665,null,Extended Warranty,2023-06-09,2024-06-07,memerbership,null,null
+28667,null,Extended Warranty,2023-08-27,2024-08-25,memerbership,null,null
+28669,null,Extended Warranty,2023-09-01,2024-08-30,memerbership,null,null
+28671,null,Extended Warranty,2023-05-28,2024-05-26,memerbership,null,null
+28673,null,Extended Warranty,2023-05-26,2024-05-24,memerbership,null,null
+28675,null,Extended Warranty,2023-04-29,2024-04-27,memerbership,null,null
+28677,null,Extended Warranty,2023-09-15,2024-09-13,memerbership,null,null
+28679,null,Extended Warranty,2023-04-30,2024-04-28,memerbership,null,null
+28681,null,Extended Warranty,2023-06-01,2024-05-30,memerbership,null,null
+28683,null,Extended Warranty,2023-07-20,2024-07-18,memerbership,null,null
+28685,null,Extended Warranty,2023-09-02,2024-08-31,memerbership,null,null
+28688,null,Extended Warranty,2023-05-31,2024-05-29,memerbership,null,null
+28690,null,Extended Warranty,2023-09-08,2024-09-06,memerbership,null,null
+28692,null,Extended Warranty,2023-06-19,2024-06-17,memerbership,null,null
+28694,null,Extended Warranty,2023-06-27,2024-06-25,memerbership,null,null
+28696,null,Extended Warranty,2023-09-06,2024-09-04,memerbership,null,null
+28698,null,Extended Warranty,2023-09-08,2024-09-06,memerbership,null,null
+28700,null,Extended Warranty,2023-07-26,2024-07-24,memerbership,null,null
+28702,null,Extended Warranty,2023-05-26,2024-05-24,memerbership,null,null
+28704,null,Extended Warranty,2023-08-18,2024-08-16,memerbership,null,null
+28706,null,Extended Warranty,2023-08-18,2024-08-16,memerbership,null,null
+28708,null,Extended Warranty,2023-07-23,2024-07-21,memerbership,null,null
+28710,null,Extended Warranty,2023-09-15,2024-09-13,memerbership,null,null
+28712,null,Extended Warranty,2023-09-08,2024-09-06,memerbership,null,null
+28714,null,Extended Warranty,2023-08-18,2024-08-16,memerbership,null,null
+28716,null,Extended Warranty,2023-11-05,2024-11-03,memerbership,null,null
+28718,null,Extended Warranty,2023-06-18,2024-06-16,memerbership,null,null
+28720,null,Extended Warranty,2024-01-07,2025-01-05,memerbership,null,null
+28722,null,Extended Warranty,2023-08-02,2024-07-31,memerbership,null,null
+28724,null,Extended Warranty,2023-11-24,2024-11-22,memerbership,null,null
+28726,null,Extended Warranty,2023-09-22,2024-09-20,memerbership,null,null
+28728,null,Extended Warranty,2023-11-01,2024-10-30,memerbership,null,null
+28730,null,Extended Warranty,2023-10-05,2024-10-03,memerbership,null,null
+28732,null,Extended Warranty,2023-10-19,2024-10-17,memerbership,null,null
+28734,null,Extended Warranty,2023-09-04,2024-09-02,memerbership,null,null
+28736,null,Extended Warranty,2023-09-08,2024-09-06,memerbership,null,null
+28738,null,Extended Warranty,2023-10-05,2024-10-03,memerbership,null,null
+28740,null,Extended Warranty,2023-10-30,2024-10-28,memerbership,null,null
+28742,null,Extended Warranty,2023-10-30,2024-10-28,memerbership,null,null
+28744,null,Extended Warranty,2023-10-02,2024-09-30,memerbership,null,null
+28746,null,Extended Warranty,2023-10-15,2024-10-13,memerbership,null,null
+28748,null,Extended Warranty,2023-07-30,2024-07-28,memerbership,null,null
+28750,null,Extended Warranty,2023-09-08,2024-09-06,memerbership,null,null
+28752,null,Extended Warranty,2023-09-13,2024-09-11,memerbership,null,null
+28754,null,Extended Warranty,2023-08-03,2024-08-01,memerbership,null,null
+28756,null,Extended Warranty,2023-11-17,2024-11-15,memerbership,null,null
+28758,null,Extended Warranty,2023-12-11,2024-12-09,memerbership,null,null
+28760,null,Extended Warranty,2023-11-12,2024-11-10,memerbership,null,null
+28762,null,Extended Warranty,2024-01-03,2025-01-01,memerbership,null,null
+28764,null,Extended Warranty,2023-12-12,2024-12-10,memerbership,null,null
+28766,null,Extended Warranty,2023-07-28,2024-07-26,memerbership,null,null
+28768,null,Extended Warranty,2024-01-14,2025-01-12,memerbership,null,null
+28770,null,Extended Warranty,2024-01-21,2025-01-19,memerbership,null,null
+28772,null,Extended Warranty,2023-10-12,2024-10-10,memerbership,null,null
+28774,null,Extended Warranty,2024-02-01,2025-01-30,memerbership,null,null
+28776,null,Extended Warranty,2023-10-04,2024-10-02,memerbership,null,null
+28778,null,Extended Warranty,2023-12-31,2024-12-29,memerbership,null,null
+28780,null,Extended Warranty,2023-12-28,2024-12-26,memerbership,null,null
+28782,null,Extended Warranty,2023-11-06,2024-11-04,memerbership,null,null
+28784,null,Extended Warranty,2024-01-12,2025-01-10,memerbership,null,null
+28786,null,Extended Warranty,2023-10-22,2024-10-20,memerbership,null,null
+28788,null,Extended Warranty,2023-11-03,2024-11-01,memerbership,null,null
+28790,null,Extended Warranty,2023-11-03,2024-11-01,memerbership,null,null
+28792,null,Extended Warranty,2023-10-10,2024-10-08,memerbership,null,null
+28794,null,Extended Warranty,2023-08-09,2024-08-07,memerbership,null,null
+28796,null,Extended Warranty,2024-01-09,2025-01-07,memerbership,null,null
+28798,null,Extended Warranty,2023-12-11,2024-12-09,memerbership,null,null
+28800,null,Extended Warranty,2024-01-04,2025-01-02,memerbership,null,null
+28802,null,Extended Warranty,2023-12-08,2024-12-06,memerbership,null,null
+28804,null,Extended Warranty,2023-12-03,2024-12-01,memerbership,null,null
+28806,null,Extended Warranty,2023-10-26,2024-10-24,memerbership,null,null
+28808,null,Extended Warranty,2024-02-07,2025-02-05,memerbership,null,null
+28810,null,Extended Warranty,2023-10-26,2024-10-24,memerbership,null,null
+28812,null,Extended Warranty,2023-11-05,2024-11-03,memerbership,null,null
+28814,null,Extended Warranty,2024-01-02,2024-12-31,memerbership,null,null
+44845,RSA52011,RSA Retail,2022-01-05,2025-01-04,memerbership,null,null
+45566,RSA21627,RSA Retail,2021-10-24,2024-10-23,memerbership,null,null
+48556,RSA58251,RSA Retail,2023-07-17,2024-07-16,memerbership,null,null
+58321,RSA41356,RSA Retail,2022-03-29,2025-03-28,memerbership,null,null
+60276,RSA59959,RSA Retail,2021-06-16,2025-06-15,memerbership,null,null
+65486,RSA57260,RSA Retail,2023-03-19,2025-03-18,memerbership,null,null
+67242,RSA27486,RSA Retail,2021-12-26,2024-12-25,memerbership,null,null
+69501,,Warranty,2020-07-02,2024-07-01,memerbership,null,null
+80022,RSA23881,RSA Retail,2021-06-26,2024-06-25,memerbership,null,null
+83986,RSA32373,RSA Retail,2022-01-31,2025-01-30,memerbership,null,null
+88501,RSA45444,RSA Retail,2022-03-17,2025-03-16,memerbership,null,null
+93580,,Warranty,2020-06-03,2024-06-02,memerbership,null,null
+115532,RSA74630,RSA Retail,2021-07-02,2024-07-01,memerbership,null,null
+118956,RSA61010,RSA Retail,2022-08-29,2024-08-28,memerbership,null,null
+119205,RSA59277,RSA Retail,2021-04-11,2024-04-10,memerbership,null,null
+119457,RSA46633,RSA Retail,2023-06-18,2024-06-17,memerbership,null,null
+119606,RSA61792,RSA Retail,2023-04-15,2024-04-14,memerbership,null,null
+119661,RSA40538,RSA Retail,2023-04-16,2024-04-15,memerbership,null,null
+119675,RSA48556,RSA Retail,2023-05-07,2026-05-06,memerbership,null,null
+119698,RSA51979,RSA Retail,2023-05-29,2024-05-28,memerbership,null,null
+119812,RSA60345,RSA Retail,2023-05-12,2024-05-11,memerbership,null,null
+120038,RSA61536,RSA Retail,2023-06-27,2024-06-26,memerbership,null,null
+120095,RSA60673,RSA Retail,2023-06-01,2024-05-31,memerbership,null,null
+120097,RSA60799,RSA Retail,2023-09-14,2024-09-13,memerbership,null,null
+120110,RSA60343,RSA Retail,2023-06-09,2024-06-08,memerbership,null,null
+120126,RSA59283,RSA Retail,2023-05-28,2024-05-27,memerbership,null,null
+120141,RSA44939,RSA Retail,2023-06-29,2024-06-28,memerbership,null,null
+120151,RSA60897,RSA Retail,2023-06-30,2024-06-29,memerbership,null,null
+120248,RSA61974,RSA Retail,2023-05-25,2024-05-24,memerbership,null,null
+120332,RSA61462,RSA Retail,2023-06-11,2024-06-10,memerbership,null,null
+120408,RSA60724,RSA Retail,2023-05-29,2024-05-28,memerbership,null,null
+120450,RSA59848,RSA Retail,2023-06-20,2024-06-19,memerbership,null,null
+120453,RSA60821,RSA Retail,2023-07-18,2024-07-17,memerbership,null,null
+120460,RSA61778,RSA Retail,2023-07-27,2026-07-26,memerbership,null,null
+120492,RSA61184,RSA Retail,2023-05-16,2026-05-15,memerbership,null,null
+120594,RSA51860,RSA Retail,2023-06-11,2024-06-10,memerbership,null,null
+120596,RSA61745,RSA Retail,2023-10-10,2025-10-09,memerbership,null,null
+120612,RSA61782,RSA Retail,2023-06-12,2024-06-11,memerbership,null,null
+120907,RSA59363,RSA Retail,2023-07-31,2024-07-30,memerbership,null,null
+120959,RSA59433,RSA Retail,2023-07-01,2024-06-30,memerbership,null,null
+120988,RSA59840,RSA Retail,2023-08-31,2026-08-30,memerbership,null,null
+121050,RSA59993,RSA Retail,2023-08-02,2024-08-01,memerbership,null,null
+121130,RSA61552,RSA Retail,2023-09-08,2024-09-07,memerbership,null,null
+121196,RSA59501,RSA Retail,2020-11-28,2024-11-27,memerbership,null,null
+121292,RSA59440,RSA Retail,2023-10-01,2024-09-30,memerbership,null,null
+121297,RSA45622,RSA Retail,2023-08-13,2024-08-12,memerbership,null,null
+121306,RSA61336,RSA Retail,2021-07-30,2024-07-29,memerbership,null,null
+121414,RSA60881,RSA Retail,2023-07-14,2026-07-13,memerbership,null,null
+121559,RSA59450,RSA Retail,2023-10-19,2024-10-18,memerbership,null,null
+121968,RSA55194,RSA Retail,2023-11-26,2024-11-25,memerbership,null,null
+122032,RSA60595,RSA Retail,2023-11-07,2024-11-06,memerbership,null,null
+122109,RSA61678,RSA Retail,2023-09-30,2024-09-29,memerbership,null,null
+122276,RSA60610,RSA Retail,2023-10-20,2024-10-19,memerbership,null,null
+122538,RSA60683,RSA Retail,2023-09-24,2024-09-23,memerbership,null,null
+122650,RSA61325,RSA Retail,2023-10-26,2024-10-25,memerbership,null,null
+122707,RSA61911,RSA Retail,2023-10-25,2024-10-24,memerbership,null,null
+122730,RSA59647,RSA Retail,2023-11-09,2026-11-08,memerbership,null,null
+122807,RSA61328,RSA Retail,2023-10-14,2026-10-13,memerbership,null,null
+122933,RSA59991,RSA Retail,2023-12-03,2024-12-02,memerbership,null,null
+123056,,Warranty,2020-04-30,2024-04-29,memerbership,null,null
+123121,RSA60169,RSA Retail,2021-08-04,2024-08-03,memerbership,null,null
+123147,RSA60131,RSA Retail,2023-04-18,2024-04-17,memerbership,null,null
+123154,RSA60924,RSA Retail,2021-05-14,2024-05-13,memerbership,null,null
+123230,RSA43084,RSA Retail,2021-09-28,2024-09-27,memerbership,null,null
+123291,RSA60840,RSA Retail,2021-04-17,2024-04-16,memerbership,null,null
+123365,RSA60953,RSA Retail,2023-10-15,2024-10-14,memerbership,null,null
+123417,RSA61789,RSA Retail,2021-05-21,2024-05-20,memerbership,null,null
+123592,RSA60061,RSA Retail,2022-03-07,2025-03-06,memerbership,null,null
+124031,RSA61137,RSA Retail,2023-12-29,2024-12-28,memerbership,null,null
+124051,,Warranty,2020-05-21,2024-05-20,memerbership,null,null
+124227,RSA60802,RSA Retail,2021-12-29,2024-12-28,memerbership,null,null
+124406,RSA14332,RSA Retail,2021-07-07,2024-07-06,memerbership,null,null
+124423,RSA59859,RSA Retail,2021-07-10,2024-07-09,memerbership,null,null
+124493,RSA61629,RSA Retail,2021-08-31,2024-08-30,memerbership,null,null
+124739,,Warranty,2020-05-27,2024-05-26,memerbership,null,null
+124770,RSA59667,RSA Retail,2019-09-04,2024-09-03,memerbership,null,null
+124788,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+124798,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+124799,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+124800,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+124801,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+124802,null,Warranty,2020-05-27,2024-05-26,memerbership,null,null
+124803,null,Warranty,2020-05-27,2024-05-26,memerbership,null,null
+124811,null,Warranty,2020-05-27,2024-05-26,memerbership,null,null
+124812,null,Warranty,2020-05-27,2024-05-26,memerbership,null,null
+124813,null,Warranty,2020-05-27,2024-05-26,memerbership,null,null
+124814,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+124815,null,Warranty,2020-05-27,2024-05-26,memerbership,null,null
+124816,null,Warranty,2020-05-27,2024-05-26,memerbership,null,null
+124901,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+124902,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+124907,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+124908,null,Warranty,2020-05-27,2024-05-26,memerbership,null,null
+124910,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+124911,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+124916,RSA61776,RSA Retail,2021-09-19,2024-09-18,memerbership,null,null
+124928,,Warranty,2020-05-27,2024-05-26,memerbership,null,null
+125040,,Warranty,2020-05-13,2024-05-12,memerbership,null,null
+125053,RSA60783,RSA Retail,2024-01-24,2026-01-23,memerbership,null,null
+125125,,Warranty,2020-05-28,2024-05-27,memerbership,null,null
+125126,,Warranty,2020-06-16,2024-06-15,memerbership,null,null
+125137,,Warranty,2020-04-23,2024-04-22,memerbership,null,null
+125164,RSA60495,RSA Retail,2021-12-16,2024-12-15,memerbership,null,null
+125196,,Warranty,2020-06-30,2024-06-29,memerbership,null,null
+125267,,Warranty,2020-04-29,2024-04-28,memerbership,null,null
+125337,RSA62647,RSA Retail,2022-08-28,2024-08-27,memerbership,null,null
+125355,,Warranty,2020-06-01,2024-05-31,memerbership,null,null
+125423,RSA59765,RSA Retail,2021-11-10,2024-11-09,memerbership,null,null
+125478,RSA59950,RSA Retail,2021-09-29,2024-09-28,memerbership,null,null
+125490,RSA60463,RSA Retail,2021-10-16,2024-10-15,memerbership,null,null
+125551,RSA60565,RSA Retail,2022-06-26,2025-06-25,memerbership,null,null
+125559,,Warranty,2020-06-30,2024-06-29,memerbership,null,null
+125655,,Warranty,2020-05-27,2024-05-26,memerbership,null,null
+125873,RSA60482,RSA Retail,2021-09-29,2024-09-28,memerbership,null,null
+125922,,Warranty,2020-04-29,2024-04-28,memerbership,null,null
+126078,RSA59962,RSA Retail,2021-10-31,2024-10-30,memerbership,null,null
+126189,,Warranty,2020-06-30,2024-06-29,memerbership,null,null
+126444,,Warranty,2020-06-19,2024-06-18,memerbership,null,null
+126452,RSA60029,RSA Retail,2022-07-19,2025-07-18,memerbership,null,null
+126476,RSA11168,RSA Retail,2021-08-18,2024-08-17,memerbership,null,null
+126508,RSA61888,RSA Retail,2021-09-16,2026-09-15,memerbership,null,null
+126517,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+126518,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+126519,null,Warranty,2020-05-25,2024-05-24,memerbership,null,null
+126520,null,Warranty,2020-05-25,2024-05-24,memerbership,null,null
+126525,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+126526,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+126527,null,Warranty,2020-05-25,2024-05-24,memerbership,null,null
+126528,null,Warranty,2020-05-25,2024-05-24,memerbership,null,null
+126582,RSA61637,RSA Retail,2021-08-24,2024-08-23,memerbership,null,null
+126624,,Warranty,2020-04-27,2024-04-26,memerbership,null,null
+126804,RSA41992,RSA Retail,2021-10-16,2024-10-15,memerbership,null,null
+126810,,Warranty,2020-05-25,2024-05-24,memerbership,null,null
+126867,RSA60564,RSA Retail,2021-10-30,2024-10-29,memerbership,null,null
+126916,RSA59238,RSA Retail,2018-04-22,2024-04-21,memerbership,null,null
+126950,,Warranty,2020-07-09,2024-07-08,memerbership,null,null
+127118,RSA61830,RSA Retail,2020-02-23,2025-02-22,memerbership,null,null
+127181,RSA60026,RSA Retail,2023-05-02,2026-05-01,memerbership,null,null
+127586,RSA59249,RSA Retail,2018-04-30,2024-04-29,memerbership,null,null
+127614,RSA60076,RSA Retail,2022-02-14,2025-02-13,memerbership,null,null
+127777,RSA59777,RSA Retail,2022-01-27,2025-01-26,memerbership,null,null
+127829,RSA60288,RSA Retail,2022-03-28,2025-03-27,memerbership,null,null
+127864,RSA61706,RSA Retail,2020-05-02,2024-05-01,memerbership,null,null
+127878,RSA58803,RSA Retail,2022-04-08,2025-04-07,memerbership,null,null
+127983,RSA59928,RSA Retail,2022-04-26,2025-04-25,memerbership,null,null
+128108,RSA61243,RSA Retail,2023-01-31,2026-01-30,memerbership,null,null
+128228,RSA60376,RSA Retail,2020-06-29,2025-06-28,memerbership,null,null
+128245,RSA60627,RSA Retail,2020-08-04,2025-08-03,memerbership,null,null
+128396,RSA60209,RSA Retail,2021-06-30,2024-06-29,memerbership,null,null
+128423,RSA61200,RSA Retail,2022-03-27,2025-03-26,memerbership,null,null
+128435,RSA61587,RSA Retail,2021-07-19,2024-07-18,memerbership,null,null
+128483,RSA61162,RSA Retail,2023-04-21,2024-04-20,memerbership,null,null
+128540,RSA60201,RSA Retail,2023-04-30,2024-04-29,memerbership,null,null
+128665,RSA38212,RSA Retail,2022-04-11,2025-04-10,memerbership,null,null
+128672,RSA61035,RSA Retail,2022-05-28,2025-05-27,memerbership,null,null
+128676,RSA61920,RSA Retail,2022-05-27,2024-05-26,memerbership,null,null
+128683,RSA61280,RSA Retail,2022-03-31,2025-03-30,memerbership,null,null
+128694,RSA60488,RSA Retail,2022-05-20,2025-05-19,memerbership,null,null
+128725,RSA60945,RSA Retail,2023-04-29,2024-04-28,memerbership,null,null
+128751,RSA60750,RSA Retail,2020-11-27,2025-11-26,memerbership,null,null
+128884,RSA60854,RSA Retail,2023-05-22,2024-05-21,memerbership,null,null
+128923,RSA59232,RSA Retail,2022-07-14,2024-07-13,memerbership,null,null
+128946,RSA60883,RSA Retail,2022-06-22,2024-06-21,memerbership,null,null
+128961,RSA59736,RSA Retail,2023-06-12,2026-06-11,memerbership,null,null
+129006,RSA60411,RSA Retail,2022-07-25,2024-07-24,memerbership,null,null
+129017,RSA27844,RSA Retail,2022-07-04,2025-07-03,memerbership,null,null
+129036,RSA61003,RSA Retail,2023-07-12,2025-07-11,memerbership,null,null
+129069,RSA59470,RSA Retail,2022-07-31,2024-07-30,memerbership,null,null
+129095,RSA60952,RSA Retail,2022-07-12,2024-07-11,memerbership,null,null
+129232,RSA59236,RSA Retail,2022-07-30,2025-07-29,memerbership,null,null
+129237,RSA60287,RSA Retail,2022-08-29,2025-08-28,memerbership,null,null
+129272,RSA61370,RSA Retail,2023-09-27,2024-09-26,memerbership,null,null
+129313,RSA61964,RSA Retail,2023-07-25,2024-07-24,memerbership,null,null
+129329,RSA60858,RSA Retail,2023-09-01,2024-08-31,memerbership,null,null
+129428,RSA45033,RSA Retail,2023-09-11,2024-09-10,memerbership,null,null
+129449,RSA60268,RSA Retail,2024-02-06,2025-02-05,memerbership,null,null
+129453,RSA60568,RSA Retail,2023-01-04,2026-01-03,memerbership,null,null
+129469,RSA59972,RSA Retail,2022-12-05,2024-12-04,memerbership,null,null
+129498,RSA40162,RSA Retail,2022-12-24,2025-12-23,memerbership,null,null
+129905,RSA60900,RSA Retail,2022-08-04,2025-08-03,memerbership,null,null
+130454,RSA54824,RSA Retail,2023-04-17,2026-04-16,memerbership,null,null
+131123,RSA54534,RSA Retail,2023-09-28,2024-09-27,memerbership,null,null
+131146,RSA62090,RSA Retail,2023-09-07,2024-09-06,memerbership,null,null
+131478,null,Warranty,2020-05-26,2024-05-25,memerbership,null,null
+131775,null,Warranty,2020-04-29,2024-04-28,memerbership,null,null
+131919,null,Warranty,2020-04-14,2024-04-13,memerbership,null,null
+131992,null,Warranty,2020-05-31,2024-05-30,memerbership,null,null
+132043,null,Warranty,2020-04-14,2024-04-13,memerbership,null,null
+132044,null,Warranty,2020-04-29,2024-04-28,memerbership,null,null
+132048,RSA59849,RSA Retail,2024-02-21,2025-02-20,memerbership,null,null
+132090,null,Warranty,2020-05-26,2024-05-25,memerbership,null,null
+132136,null,Warranty,2020-06-03,2024-06-02,memerbership,null,null
+132242,null,Warranty,2020-06-23,2024-06-22,memerbership,null,null
+132288,null,Warranty,2020-04-22,2024-04-21,memerbership,null,null
+132304,null,Warranty,2020-06-05,2024-06-04,memerbership,null,null
+132323,null,Warranty,2020-04-14,2024-04-13,memerbership,null,null
+132324,null,Warranty,2020-04-14,2024-04-13,memerbership,null,null
+132336,null,Warranty,2020-07-02,2024-07-01,memerbership,null,null
+132394,null,Warranty,2020-04-27,2024-04-26,memerbership,null,null
+132396,null,Warranty,2020-04-14,2024-04-13,memerbership,null,null
+132397,null,Warranty,2020-04-27,2024-04-26,memerbership,null,null
+132404,null,Warranty,2020-05-27,2024-05-26,memerbership,null,null
+132408,null,Warranty,2020-06-08,2024-06-07,memerbership,null,null
+132411,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+132418,null,Warranty,2020-06-05,2024-06-04,memerbership,null,null
+132520,null,Warranty,2020-04-29,2024-04-28,memerbership,null,null
+132687,null,Warranty,2020-06-23,2024-06-22,memerbership,null,null
+133129,RSA62089,RSA Retail,2022-03-27,2025-03-26,memerbership,null,null
+133280,RSA35455,RSA Retail,2022-04-21,2025-04-20,memerbership,null,null
+133349,RSA26983,RSA Retail,2022-07-03,2024-07-02,memerbership,null,null
+133447,RSA43174,RSA Retail,2022-06-21,2024-06-20,memerbership,null,null
+133467,RSA43742,RSA Retail,2023-07-16,2025-07-15,memerbership,null,null
+133484,RSA53287,RSA Retail,2022-08-17,2025-08-16,memerbership,null,null
+133494,RSA51627,RSA Retail,2022-07-17,2024-07-16,memerbership,null,null
+133546,RSA62059,RSA Retail,2022-08-25,2025-08-24,memerbership,null,null
+133599,RSA54702,RSA Retail,2023-09-14,2024-09-13,memerbership,null,null
+134625,RSA74865,RSA Retail,2021-07-09,2024-07-08,memerbership,null,null
+134968,RSA74945,RSA Retail,2021-07-11,2024-07-10,memerbership,null,null
+135047,RSA39226,RSA Retail,2024-03-27,2025-03-26,memerbership,null,null
+135210,RSA50955,RSA Retail,2023-04-11,2024-04-10,memerbership,null,null
+135399,RSA76060,RSA Retail,2021-08-09,2024-08-08,memerbership,null,null
+135512,RSA76518,RSA Retail,2021-08-19,2024-08-18,memerbership,null,null
+135601,RSA43464,RSA Retail,2023-05-22,2024-05-21,memerbership,null,null
+135639,RSA64697,RSA Retail,2023-04-09,2024-04-08,memerbership,null,null
+135908,RSA57956,RSA Retail,2023-05-29,2024-05-28,memerbership,null,null
+136065,RSA48825,RSA Retail,2023-05-31,2024-05-30,memerbership,null,null
+136200,RSA56041,RSA Retail,2023-09-08,2024-09-07,memerbership,null,null
+136279,RSA45688,RSA Retail,2023-07-01,2024-06-30,memerbership,null,null
+136574,RSA49980,RSA Retail,2023-08-01,2024-07-31,memerbership,null,null
+136723,RSA64136,RSA Retail,2023-10-06,2024-10-05,memerbership,null,null
+136748,RSA68237,RSA Retail,2020-12-28,2025-12-27,memerbership,null,null
+136803,RSA64773,RSA Retail,2023-08-30,2026-08-29,memerbership,null,null
+136958,RSA53847,RSA Retail,2023-09-27,2024-09-26,memerbership,null,null
+137017,RSA63142,RSA Retail,2023-10-20,2024-10-19,memerbership,null,null
+137166,RSA75674,RSA Retail,2023-10-30,2024-10-29,memerbership,null,null
+137476,RSA77921,RSA Retail,2018-06-12,2024-09-26,memerbership,null,null
+137709,RSA51522,RSA Retail,2023-11-06,2026-11-05,memerbership,null,null
+138392,,Warranty,2020-05-26,2024-05-25,memerbership,null,null
+138822,RSA52955,RSA Retail,2023-10-25,2024-10-24,memerbership,null,null
+138849,,Warranty,2020-04-30,2024-04-29,memerbership,null,null
+138904,RSA20137,RSA Retail,2021-04-20,2024-04-19,memerbership,null,null
+138965,,Warranty,2020-05-22,2024-05-21,memerbership,null,null
+138994,RSA65326,RSA Retail,2023-10-31,2026-10-30,memerbership,null,null
+139249,,Warranty,2020-04-29,2024-04-28,memerbership,null,null
+139683,RSA75759,RSA Retail,2023-11-21,2025-11-20,memerbership,null,null
+139796,,Warranty,2020-04-24,2024-04-23,memerbership,null,null
+140453,RSA54586,RSA Retail,2021-12-22,2024-12-21,memerbership,null,null
+140590,RSA75421,RSA Retail,2021-07-24,2024-07-23,memerbership,null,null
+140742,RSA26740,RSA Retail,2021-04-18,2024-04-17,memerbership,null,null
+140818,RSA75107,RSA Retail,2021-11-28,2024-11-27,memerbership,null,null
+140850,,Warranty,2020-05-01,2024-04-30,memerbership,null,null
+140859,RSA68398,RSA Retail,2023-11-26,2024-11-25,memerbership,null,null
+140898,null,Warranty,2020-06-02,2024-06-01,memerbership,null,null
+141426,null,Warranty,2020-06-05,2024-06-04,memerbership,null,null
+141875,null,Warranty,2020-06-01,2024-05-31,memerbership,null,null
+142007,null,Warranty,2020-05-18,2024-05-17,memerbership,null,null
+142206,null,Warranty,2020-05-31,2024-05-30,memerbership,null,null
+142286,RSA70551,RSA Retail,2021-07-08,2024-07-07,memerbership,null,null
+142537,,Warranty,2020-04-09,2024-04-08,memerbership,null,null
+142545,,Warranty,2020-05-31,2024-05-30,memerbership,null,null
+142612,RSA72168,RSA Retail,2022-02-19,2025-02-18,memerbership,null,null
+142698,,Warranty,2020-05-21,2024-05-20,memerbership,null,null
+142831,,Warranty,2020-04-23,2024-04-22,memerbership,null,null
+142868,RSA69409,RSA Retail,2022-01-28,2025-01-27,memerbership,null,null
+142944,null,Warranty,2020-05-20,2024-05-19,memerbership,null,null
+142975,null,Warranty,2020-06-17,2024-06-16,memerbership,null,null
+142976,null,Warranty,2020-06-01,2024-05-31,memerbership,null,null
+142995,null,Warranty,2020-06-04,2024-06-03,memerbership,null,null
+143069,null,Warranty,2020-06-23,2024-06-22,memerbership,null,null
+143070,null,Warranty,2020-05-20,2024-05-19,memerbership,null,null
+143318,null,Warranty,2020-06-11,2024-06-10,memerbership,null,null
+143758,null,Warranty,2020-05-29,2024-05-28,memerbership,null,null
+143820,,Warranty,2020-06-18,2024-06-17,memerbership,null,null
+143980,RSA73921,RSA Retail,2021-05-05,2024-05-04,memerbership,null,null
+144017,,Warranty,2020-05-25,2024-05-24,memerbership,null,null
+144062,RSA12579,RSA Retail,2021-08-29,2024-08-28,memerbership,null,null
+144123,null,Warranty,2020-04-09,2024-04-08,memerbership,null,null
+144154,null,Warranty,2020-06-09,2024-06-08,memerbership,null,null
+144159,null,Warranty,2020-06-18,2024-06-17,memerbership,null,null
+144176,null,Warranty,2020-05-27,2024-05-26,memerbership,null,null
+144192,null,Warranty,2020-06-29,2024-06-28,memerbership,null,null
+144218,null,Warranty,2020-05-11,2024-05-10,memerbership,null,null
+144254,null,Warranty,2020-05-31,2024-05-30,memerbership,null,null
+144263,null,Warranty,2020-04-27,2024-04-26,memerbership,null,null
+144271,,Warranty,2020-05-22,2024-05-21,memerbership,null,null
+144511,RSA64933,RSA Retail,2021-05-27,2024-05-26,memerbership,null,null
+144515,null,Warranty,2020-05-31,2024-05-30,memerbership,null,null
+144516,null,Warranty,2020-05-31,2024-05-30,memerbership,null,null
+144537,null,Warranty,2020-06-03,2024-06-02,memerbership,null,null
+144603,null,Warranty,2020-06-01,2024-05-31,memerbership,null,null
+144782,null,Warranty,2020-06-29,2024-06-28,memerbership,null,null
+144831,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+144832,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+144857,null,Warranty,2020-06-30,2024-06-29,memerbership,null,null
+144890,RSA73659,RSA Retail,2019-07-27,2024-04-20,memerbership,null,null
+144942,,Warranty,2020-05-05,2024-05-04,memerbership,null,null
+145027,,Warranty,2020-05-23,2024-05-22,memerbership,null,null
+145099,RSA62629,RSA Retail,2021-08-12,2024-08-11,memerbership,null,null
+145308,null,Warranty,2020-06-10,2024-06-09,memerbership,null,null
+145336,null,Warranty,2020-06-18,2024-06-17,memerbership,null,null
+145347,null,Warranty,2020-06-25,2024-06-24,memerbership,null,null
+145485,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+145535,null,Warranty,2020-05-20,2024-05-19,memerbership,null,null
+145621,null,Warranty,2020-06-30,2024-06-29,memerbership,null,null
+145651,RSA68475,RSA Retail,2021-09-12,2024-09-11,memerbership,null,null
+145806,null,Warranty,2020-05-29,2024-05-28,memerbership,null,null
+145938,null,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+145941,null,Warranty,2020-05-07,2024-05-06,memerbership,null,null
+146094,null,Warranty,2020-05-26,2024-05-25,memerbership,null,null
+146133,null,Warranty,2020-06-08,2024-06-07,memerbership,null,null
+146156,null,Warranty,2020-04-23,2024-04-22,memerbership,null,null
+146176,RSA68580,RSA Retail,2021-01-01,2024-12-31,memerbership,null,null
+146385,,Warranty,2020-06-20,2024-06-19,memerbership,null,null
+146424,,Warranty,2020-05-22,2024-05-21,memerbership,null,null
+146585,,Warranty,2020-05-29,2024-05-28,memerbership,null,null
+146599,,Warranty,2020-05-25,2024-05-24,memerbership,null,null
+146613,RSA49981,RSA Retail,2021-10-25,2024-10-24,memerbership,null,null
+146831,,Warranty,2020-05-20,2024-05-19,memerbership,null,null
+147237,,Warranty,2020-05-23,2024-05-22,memerbership,null,null
+147489,RSA21566,RSA Retail,2021-09-28,2024-09-27,memerbership,null,null
+147658,RSA69808,RSA Retail,2020-03-20,2025-03-19,memerbership,null,null
+147723,RSA16029,RSA Retail,2021-12-07,2024-12-06,memerbership,null,null
+147728,RSA75914,RSA Retail,2021-08-05,2024-08-04,memerbership,null,null
+147851,RSA57157,RSA Retail,2023-04-04,2026-04-03,memerbership,null,null
+148192,RSA65510,RSA Retail,2022-05-16,2024-05-15,memerbership,null,null
+148351,RSA69183,RSA Retail,2023-01-04,2025-01-03,memerbership,null,null
+148365,RSA76769,RSA Retail,2021-08-27,2024-08-26,memerbership,null,null
+148395,RSA22189,RSA Retail,2022-01-06,2025-01-05,memerbership,null,null
+148642,RSA68056,RSA Retail,2022-01-30,2025-01-29,memerbership,null,null
+148822,RSA49912,RSA Retail,2022-04-11,2024-04-10,memerbership,null,null
+149077,RSA42086,RSA Retail,2023-06-05,2025-06-04,memerbership,null,null
+149334,RSA30155,RSA Retail,2022-05-31,2024-05-30,memerbership,null,null
+149585,RSA45566,RSA Retail,2022-07-01,2025-06-30,memerbership,null,null
+149587,RSA58321,RSA Retail,2022-05-05,2025-05-04,memerbership,null,null
+149969,RSA31233,RSA Retail,2022-06-08,2024-06-07,memerbership,null,null
+150181,RSA77109,RSA Retail,2021-09-04,2024-09-03,memerbership,null,null
+150328,RSA62772,RSA Retail,2022-07-30,2025-07-29,memerbership,null,null
+150363,RSA35095,RSA Retail,2023-07-19,2024-07-18,memerbership,null,null
+150459,,RSA Retail,2022-08-07,2025-08-06,memerbership,null,null
+150632,RSA64636,RSA Retail,2022-10-25,2024-10-24,memerbership,null,null
+150839,RSA68369,RSA Retail,2022-12-21,2024-12-20,memerbership,null,null
+151104,RSA55796,RSA Retail,2023-10-16,2025-10-15,memerbership,null,null
+151249,RSA65962,RSA Retail,2023-11-14,2026-11-13,memerbership,null,null
+151268,RSA41276,RSA Retail,2022-11-28,2025-11-27,memerbership,null,null
+151603,RSA39519,RSA Retail,2023-01-08,2026-01-07,memerbership,null,null
+151911,RSA40262,RSA Retail,2023-12-01,2024-11-30,memerbership,null,null
+152150,RSA68645,RSA Retail,2024-01-25,2025-01-24,memerbership,null,null
+152191,RSA36433,RSA Retail,2023-02-12,2025-02-11,memerbership,null,null
+152228,RSA47624,RSA Retail,2024-01-05,2025-01-04,memerbership,null,null
+152276,RSA39584,RSA Retail,2024-01-23,2025-01-22,memerbership,null,null
+152548,RSA63735,RSA Retail,2023-03-11,2025-03-10,memerbership,null,null
+152552,RSA35854,RSA Retail,2023-01-31,2025-01-30,memerbership,null,null
+174976,RSA56821,RSA Retail,2023-05-15,2024-05-14,memerbership,null,null
+175243,RSA44821,RSA Retail,2023-06-01,2024-05-31,memerbership,null,null
+175445,RSA57269,RSA Retail,2023-05-31,2025-05-30,memerbership,null,null
+176443,RSA52158,RSA Retail,2023-11-15,2026-11-14,memerbership,null,null
+179818,RSA36193,RSA Retail,2022-01-13,2025-01-12,memerbership,null,null
+180658,RSA47614,RSA Retail,2023-11-11,2024-11-10,memerbership,null,null
+181288,RSA58769,RSA Retail,2023-04-23,2025-04-22,memerbership,null,null
+181522,RSA49820,RSA Retail,2023-06-22,2024-06-21,memerbership,null,null
+181927,RSA58794,RSA Retail,2023-11-29,2024-11-28,memerbership,null,null
+182299,RSA58802,RSA Retail,2023-11-25,2024-11-24,memerbership,null,null
+182585,,Warranty,2020-04-27,2024-04-26,memerbership,null,null
+182606,,Warranty,2020-05-21,2024-05-20,memerbership,null,null
+182631,,Warranty,2020-06-04,2024-06-03,memerbership,null,null
+182727,RSA58805,RSA Retail,2023-11-30,2024-11-29,memerbership,null,null
+182743,,Warranty,2020-05-06,2024-05-05,memerbership,null,null
+182950,,Warranty,2020-05-22,2024-05-21,memerbership,null,null
+182968,RSA45361,RSA Retail,2021-07-24,2024-07-23,memerbership,null,null
+182993,null,Warranty,2020-06-17,2024-06-16,memerbership,null,null
+183023,null,Warranty,2020-04-27,2024-04-26,memerbership,null,null
+183073,null,Warranty,2020-05-28,2024-05-27,memerbership,null,null
+183082,null,Warranty,2020-06-13,2024-06-12,memerbership,null,null
+183120,null,Warranty,2020-05-16,2024-05-15,memerbership,null,null
+183138,null,Warranty,2020-05-11,2024-05-10,memerbership,null,null
+183143,null,Warranty,2020-06-10,2024-06-09,memerbership,null,null
+183299,null,Warranty,2020-06-23,2024-06-22,memerbership,null,null
+183304,null,Warranty,2020-05-27,2024-05-26,memerbership,null,null
+183320,null,Warranty,2020-05-31,2024-05-30,memerbership,null,null
+183443,null,Warranty,2020-06-16,2024-06-15,memerbership,null,null
+183454,null,Warranty,2020-04-23,2024-04-22,memerbership,null,null
+183543,null,Warranty,2020-06-24,2024-06-23,memerbership,null,null
+183587,null,Warranty,2020-05-18,2024-05-17,memerbership,null,null
+183608,null,Warranty,2020-06-11,2024-06-10,memerbership,null,null
+183614,null,Warranty,2020-05-26,2024-05-25,memerbership,null,null
+183787,null,Warranty,2020-04-22,2024-04-21,memerbership,null,null
+183800,null,Warranty,2020-04-29,2024-04-28,memerbership,null,null
+184044,null,Warranty,2020-04-24,2024-04-23,memerbership,null,null
+184045,null,Warranty,2020-04-24,2024-04-23,memerbership,null,null
+184125,null,Warranty,2020-06-09,2024-06-08,memerbership,null,null
+184152,null,Warranty,2020-05-23,2024-05-22,memerbership,null,null
+184247,null,Warranty,2020-06-06,2024-06-05,memerbership,null,null
+184489,RSA45018,RSA Retail,2022-07-29,2025-07-28,memerbership,null,null
+184532,RSA54715,RSA Retail,2022-04-28,2024-04-27,memerbership,null,null
+185033,RSA39397,RSA Retail,2023-04-21,2024-04-20,memerbership,null,null
+185186,RSA52113,RSA Retail,2022-06-08,2024-06-07,memerbership,null,null
+185289,RSA58323,RSA Retail,2023-08-20,2024-08-19,memerbership,null,null
+185308,RSA37652,RSA Retail,2023-09-13,2024-09-12,memerbership,null,null
+185528,RSA49697,RSA Retail,2022-12-31,2024-12-30,memerbership,null,null
+185583,RSA46277,RSA Retail,2023-06-25,2024-06-24,memerbership,null,null
+186107,RSA50911,RSA Retail,2023-05-08,2024-05-07,memerbership,null,null
+186382,RSA62326,RSA Retail,2023-07-13,2024-07-12,memerbership,null,null
+187909,RSA53121,RSA Retail,2022-06-21,2025-06-20,memerbership,null,null
+188048,null,Warranty,2020-07-02,2024-07-01,memerbership,null,null
+188189,null,Warranty,2020-05-12,2024-05-11,memerbership,null,null
+188244,null,Warranty,2020-06-18,2024-06-17,memerbership,null,null
+188307,null,Warranty,2020-07-09,2024-07-08,memerbership,null,null
+188330,null,Warranty,2020-05-25,2024-05-24,memerbership,null,null
+188365,null,Warranty,2020-06-29,2024-06-28,memerbership,null,null
+188436,null,Warranty,2020-06-29,2024-06-28,memerbership,null,null
+188441,null,Warranty,2020-06-04,2024-06-03,memerbership,null,null
+188610,null,Warranty,2020-04-23,2024-04-22,memerbership,null,null
+188642,null,Warranty,2020-06-19,2024-06-18,memerbership,null,null
+188794,RSA42044,RSA Retail,2021-05-26,2024-05-25,memerbership,null,null
+189023,null,Warranty,2020-06-10,2024-06-09,memerbership,null,null
+189415,null,Warranty,2020-06-05,2024-06-04,memerbership,null,null
+189534,null,Warranty,2020-06-04,2024-06-03,memerbership,null,null
+189568,null,Warranty,2020-06-10,2024-06-09,memerbership,null,null
+189673,null,Warranty,2020-06-30,2024-06-29,memerbership,null,null
+189778,null,Warranty,2020-05-14,2024-05-13,memerbership,null,null
+190054,null,Warranty,2020-05-22,2024-05-21,memerbership,null,null
+190145,null,Warranty,2020-07-02,2024-07-01,memerbership,null,null
+190621,null,Warranty,2020-06-12,2024-06-11,memerbership,null,null
+190672,null,Warranty,2020-07-02,2024-07-01,memerbership,null,null
+190991,null,Warranty,2020-05-27,2024-05-26,memerbership,null,null
+191007,null,Warranty,2020-05-21,2024-05-20,memerbership,null,null
+191009,null,Warranty,2020-05-21,2024-05-20,memerbership,null,null
+191387,RSA58928,RSA Retail,2021-05-12,2024-05-11,memerbership,null,null
+191728,RSA42257,RSA Retail,2022-04-03,2025-04-02,memerbership,null,null
+191825,RSA58165,RSA Retail,2022-04-22,2025-04-21,memerbership,null,null
+192040,RSA51885,RSA Retail,2022-08-17,2025-08-16,memerbership,null,null
+192198,RSA47256,RSA Retail,2023-08-10,2024-08-09,memerbership,null,null
+192290,RSA54307,RSA Retail,2022-10-24,2025-10-23,memerbership,null,null
+192307,RSA49385,RSA Retail,2023-11-29,2024-11-28,memerbership,null,null
+194350,RSA51804,RSA Retail,2023-05-18,2024-05-17,memerbership,null,null
+194814,RSA26199,RSA Retail,2021-08-31,2024-08-30,memerbership,null,null
+195085,null,Warranty,2020-05-22,2024-05-21,memerbership,null,null
+195415,null,Warranty,2020-06-05,2024-06-04,memerbership,null,null
+195501,null,Warranty,2020-06-10,2024-06-09,memerbership,null,null
+195504,null,Warranty,2020-07-22,2024-07-21,memerbership,null,null
+195556,null,Warranty,2020-06-29,2024-06-28,memerbership,null,null
+195565,null,Warranty,2020-05-07,2024-05-06,memerbership,null,null
+195613,null,Warranty,2020-05-22,2024-05-21,memerbership,null,null
+195703,null,Warranty,2020-06-01,2024-05-31,memerbership,null,null
+195707,null,Warranty,2020-06-05,2024-06-04,memerbership,null,null
+195834,null,Warranty,2020-06-25,2024-06-24,memerbership,null,null
+195935,null,Warranty,2020-07-09,2024-07-08,memerbership,null,null
+196442,RSA27036,RSA Retail,2021-09-25,2024-09-24,memerbership,null,null
+196642,RSA62342,RSA Retail,2022-02-02,2025-02-01,memerbership,null,null
+196856,RSA53505,RSA Retail,2020-05-18,2024-05-17,memerbership,null,null
+197189,RSA27250,RSA Retail,2022-05-18,2025-05-17,memerbership,null,null
+197341,RSA62395,RSA Retail,2023-09-18,2024-09-17,memerbership,null,null
+197371,RSA53278,RSA Retail,2024-01-09,2025-01-08,memerbership,null,null
+198062,RSA48025,RSA Retail,2023-06-05,2024-06-04,memerbership,null,null
+198443,,Warranty,2020-05-31,2024-05-30,memerbership,null,null
+198444,,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+198531,,Warranty,2020-04-27,2024-04-26,memerbership,null,null
+198667,,Warranty,2020-06-16,2024-06-15,memerbership,null,null
+198680,RSA29434,RSA Retail,2022-10-26,2025-10-25,memerbership,null,null
+198885,,Warranty,2020-06-05,2024-06-04,memerbership,null,null
+198905,,Warranty,2020-05-12,2024-05-11,memerbership,null,null
+199177,RSA62630,RSA Retail,2022-09-24,2024-09-23,memerbership,null,null
+200127,,Warranty,2020-04-24,2024-04-23,memerbership,null,null
+200206,,Warranty,2020-05-21,2024-05-20,memerbership,null,null
+200371,,Warranty,2020-05-30,2024-05-29,memerbership,null,null
+200412,,Warranty,2020-06-30,2024-06-29,memerbership,null,null
+200426,RSA62254,RSA Retail,2019-08-11,2025-08-10,memerbership,null,null
+200456,,Warranty,2020-05-16,2024-05-15,memerbership,null,null
+200791,RSA62275,RSA Retail,2021-08-16,2024-08-15,memerbership,null,null
+201030,RSA47251,RSA Retail,2022-10-31,2025-10-30,memerbership,null,null
+201448,TVSAA-RSA-0322-201448,RSA Retail,2023-10-12,2024-10-11,memerbership,36,Renault 1 Year Plan
+206930,RSA52296,RSA Retail,2023-06-01,2024-05-31,memerbership,null,null
+207087,,Warranty,2020-06-17,2024-06-16,memerbership,null,null
+207656,,Warranty,2020-05-05,2024-05-04,memerbership,null,null
+208057,,Warranty,2020-05-09,2024-05-08,memerbership,null,null
+208129,RSA54752,RSA Retail,2023-07-01,2024-06-30,memerbership,null,null
+208242,RSA57727,RSA Retail,2023-07-01,2024-06-30,memerbership,null,null
+208292,RSA58293,RSA Retail,2023-07-30,2024-07-29,memerbership,null,null
+208485,RSA57991,RSA Retail,2023-10-05,2024-10-04,memerbership,null,null
+208758,,Warranty,2020-06-23,2024-06-22,memerbership,null,null
+208815,,RSA Retail,2022-01-08,2024-10-07,memerbership,null,null
+307486,TVSAA-RSA-0822-307486,RSA Retail,2022-08-27,2024-08-26,memerbership,37,Renault 2 Year Plan
+307487,TVSAA-RSA-0822-307487,RSA Retail,2022-08-27,2024-08-26,memerbership,37,Renault 2 Year Plan
+307490,TVSAA-RSA-0822-307490,RSA Retail,2022-08-27,2025-08-26,memerbership,38,Renault 3 Year Plan
+307499,TVSAA-RSA-0822-307499,RSA Retail,2022-08-27,2024-08-26,memerbership,37,Renault 2 Year Plan
+307501,TVSAA-RSA-0822-307501,RSA Retail,2022-08-27,2024-08-26,memerbership,37,Renault 2 Year Plan
+307502,TVSAA-RSA-0822-307502,RSA Retail,2022-08-27,2024-08-26,memerbership,37,Renault 2 Year Plan
+309921,TVSAA-RSA-0822-309921,RSA Retail,2022-08-30,2024-08-29,memerbership,37,Renault 2 Year Plan
+309922,TVSAA-RSA-0822-309922,RSA Retail,2022-08-30,2024-08-29,memerbership,37,Renault 2 Year Plan
+309925,TVSAA-RSA-0822-309925,RSA Retail,2022-01-31,2024-01-30,memerbership,37,Renault 2 Year Plan
+309927,TVSAA-RSA-0822-309927,RSA Retail,2024-05-31,2026-05-30,memerbership,37,Renault 2 Year Plan
+309929,TVSAA-RSA-0822-309929,RSA Retail,2022-08-31,2025-08-30,memerbership,38,Renault 3 Year Plan
+336006,TVSAA-RSA-0922-336006,RSA Retail,2023-09-29,2024-09-28,memerbership,36,Renault 1 Year Plan
+352183,TVSAA-RSA-0722-1618370,RSA Retail,2022-07-19,2024-07-18,memerbership,null,null
+352234,TVSAA-RSA-0722-1607217,RSA Retail,2022-07-15,2024-07-14,memerbership,null,null
+352282,TVSAA-RSA-0422-1291435,RSA Retail,2022-04-25,2025-04-24,memerbership,null,null
+352291,,Warranty,2020-05-11,2024-05-10,memerbership,null,null
+352305,RSA74674,RSA Retail,2021-07-03,2024-07-02,memerbership,null,null
+352348,,Warranty,2020-05-22,2024-05-21,memerbership,null,null
+352363,RSA78574,RSA Retail,2021-10-16,2024-10-15,memerbership,null,null
+352378,TVSAA-RSA-0522-1386348,RSA Retail,2022-05-22,2025-05-21,memerbership,null,null
+352398,TVSAA-RSA-0922-1792399,RSA Retail,2022-09-26,2024-09-25,memerbership,null,null
+352401,RSA42825,RSA Retail,2022-04-02,2025-04-01,memerbership,null,null
+352600,null,Warranty,2022-04-13,2024-04-13,memerbership,null,null
+352604,null,Warranty,2022-05-18,2024-05-18,memerbership,null,null
+352619,null,Warranty,2022-05-31,2024-05-31,memerbership,null,null
+352628,null,Warranty,2022-05-31,2024-05-31,memerbership,null,null
+352630,null,Warranty,2022-05-18,2024-05-18,memerbership,null,null
+352638,null,Warranty,2022-04-26,2024-04-26,memerbership,null,null
+352640,null,Warranty,2022-05-31,2024-05-31,memerbership,null,null
+352642,null,Warranty,2022-05-31,2024-05-31,memerbership,null,null
+352644,null,Warranty,2022-04-15,2024-04-15,memerbership,null,null
+352646,null,Warranty,2022-05-28,2024-05-28,memerbership,null,null
+352647,null,Warranty,2022-10-24,2024-10-24,memerbership,null,null
+352650,null,Warranty,2022-06-30,2024-06-30,memerbership,null,null
+352651,null,Warranty,2022-04-20,2024-04-20,memerbership,null,null
+342444,TVSAA-RSA-1022-342444,RSA Retail,2024-04-01,2026-03-31,memerbership,37,Renault 2 Year Plan
+343815,TVSAA-RSA-1022-343815,RSA Retail,2022-12-11,2024-12-10,memerbership,37,Renault 2 Year Plan
+350975,TVSAA-RSA-1022-350975,RSA Retail,2022-10-14,2024-10-13,memerbership,37,Renault 2 Year Plan
+351034,TVSAA-RSA-1022-351034,RSA Retail,2024-04-01,2025-03-31,memerbership,36,Renault 1 Year Plan
+351040,TVSAA-RSA-1022-351040,RSA Retail,2023-10-21,2024-10-20,memerbership,36,Renault 1 Year Plan
+351043,TVSAA-RSA-1022-351043,RSA Retail,2023-10-20,2024-10-19,memerbership,36,Renault 1 Year Plan
+351056,TVSAA-RSA-1022-351056,RSA Retail,2023-10-21,2025-10-20,memerbership,37,Renault 2 Year Plan
+244934,TVSAA-RSA-0622-244934,RSA Retail,2022-06-17,2024-06-16,memerbership,37,Renault 2 Year Plan
+244943,TVSAA-RSA-0622-244943,RSA Retail,2022-06-17,2024-06-16,memerbership,37,Renault 2 Year Plan
+244944,TVSAA-RSA-0622-244944,RSA Retail,2022-06-17,2024-06-16,memerbership,37,Renault 2 Year Plan
+281982,TVSAA-RSA-0722-281982,RSA Retail,2023-07-31,2024-07-30,memerbership,36,Renault 1 Year Plan

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>PSF Collected</title>
+  </head>
+  <style>
+    .feedback-detail-title {
+      margin: 0px 0px;
+      padding: 0px 0px 15px 0px;
+      font-size: 23px;
+      font-weight: 400;
+      text-align: start;
+      color: var(--tuna-light, #352342);
+    }
+    .feedbackdetail {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .feedbackdetail-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .feedback-info-title {
+      flex: 1;
+      font-weight: 600;
+    }
+    .feedback-info-data {
+      flex: 1;
+    }
+    .feedback-info-data::before {
+      content: ":";
+      margin-right: 12px;
+    }
+    .question-item {
+      margin-bottom: 15px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 4px;
+    }
+    .question-text {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #352342;
+    }
+    .answer-text {
+      color: #666;
+      margin-left: 20px;
+    }
+    /* For mobile screens */
+    @media (max-width: 768px) {
+      .feedbackdetail {
+        flex-direction: column;
+      }
+      .feedback-info-title,
+      .feedback-info-data {
+        flex: none;
+        width: 100%;
+        margin-bottom: 8px;
+      }
+      .feedback-info-data::before {
+        content: none;
+      }
+    }
+  </style>
+
+  <body>
+    <div style="padding: 46px 70px; background-color: #f1fcc8">
+      <!-- Header -->
+      <div
+        style="
+          display: flex;
+          padding-bottom: 20px;
+          align-items: left;
+          gap: 8px;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        "
+      >
+        <img src="{{portalLogoUrl}}" />
+      </div>
+      <h4
+        style="
+          margin: 0;
+          padding: 16px 0px;
+          font-size: 28px;
+          font-weight: 500;
+          text-align: center;
+          color: var(--tuna-light, #352342);
+        "
+      >
+        PSF Collected
+      </h4>
+      <p
+        style="
+          font-size: 14px;
+          font-weight: 500;
+          text-align: center;
+          margin: 0;
+          color: var(--tuna-light, #352342);
+          padding-bottom: 30px;
+          line-height: normal;
+        "
+      >
+        Case #{{caseNumber}} - PSF details are provided below.
+      </p>
+
+      <!-- Case Details -->
+      <h4 class="feedback-detail-title">Case Details</h4>
+      <div>
+        <div
+          style="
+            border-radius: 8px;
+            background: var(--chiffon-light, #9da08f);
+            font-size: 18px;
+            padding: 20px 14px;
+            margin-bottom: 20px;
+          "
+        >
+          <div class="feedbackdetail-card">
+            <div class="feedbackdetail">
+              <div class="feedback-info-title">Case Number</div>
+              <div class="feedback-info-data">{{caseNumber}}</div>
+            </div>
+            <div class="feedbackdetail">
+              <div class="feedback-info-title">Client Name</div>
+              <div class="feedback-info-data">{{clientName}}</div>
+            </div>
+            <div class="feedbackdetail">
+              <div class="feedback-info-title">Case Created Date</div>
+              <div class="feedback-info-data">{{caseCreatedDate}}</div>
+            </div>
+            <div class="feedbackdetail">
+              <div class="feedback-info-title">RM Name</div>
+              <div class="feedback-info-data">{{rmName}}</div>
+            </div>
+            <div class="feedbackdetail">
+              <div class="feedback-info-title">Customer Name</div>
+              <div class="feedback-info-data">{{customerName}}</div>
+            </div>
+            <div class="feedbackdetail">
+              <div class="feedback-info-title">Mobile</div>
+              <div class="feedback-info-data">{{mobile}}</div>
+            </div>
+            <div class="feedbackdetail">
+              <div class="feedback-info-title">Vehicle Number</div>
+              <div class="feedback-info-data">{{vehicleNumber}}</div>
+            </div>
+            <div class="feedbackdetail">
+              <div class="feedback-info-title">STATE</div>
+              <div class="feedback-info-data">{{state}}</div>
+            </div>
+            <div class="feedbackdetail">
+              <div class="feedback-info-title">CITY</div>
+              <div class="feedback-info-data">{{city}}</div>
+            </div>
+            <div class="feedbackdetail">
+              <div class="feedback-info-title">Mech ASP Name</div>
+              <div class="feedback-info-data">{{mechAspName}}</div>
+            </div>
+            <div class="feedbackdetail">
+              <div class="feedback-info-title">Tow ASP Name</div>
+              <div class="feedback-info-data">{{towAspName}}</div>
+            </div>
+            <div class="feedbackdetail">
+              <div class="feedback-info-title">Customer's voice</div>
+              <div class="feedback-info-data">{{customerVoice}}</div>
+            </div>
+            <div class="feedbackdetail">
+              <div class="feedback-info-title">Sub Disposition</div>
+              <div class="feedback-info-data">{{subDisposition}}</div>
+            </div>
+            <div class="feedbackdetail">
+              <div class="feedback-info-title">DATE</div>
+              <div class="feedback-info-data">{{date}}</div>
+            </div>
+            <div class="feedbackdetail">
+              <div class="feedback-info-title">Call Status</div>
+              <div class="feedback-info-data">{{callStatus}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Questions and Answers -->
+      {{#if questions}}
+      <h4 class="feedback-detail-title" style="margin-top: 30px">
+        Questions & Answers
+      </h4>
+      <div>
+        <div
+          style="
+            border-radius: 8px;
+            background: var(--chiffon-light, #9da08f);
+            font-size: 18px;
+            padding: 20px 14px;
+          "
+        >
+          {{#each questions}}
+          <div class="question-item">
+            <div class="question-text">{{this.question}}</div>
+            <div class="answer-text">{{this.answer}}</div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+
+      <!-- Comments -->
+      {{#if comments}}
+      <h4 class="feedback-detail-title" style="margin-top: 30px">Comments</h4>
+      <div>
+        <div
+          style="
+            border-radius: 8px;
+            background: var(--chiffon-light, #9da08f);
+            font-size: 18px;
+            padding: 20px 14px;
+          "
+        >
+          <p style="margin: 0; color: #666">{{comments}}</p>
+        </div>
+      </div>
+      {{/if}}
+
+      <!-- Footer -->
+      <div
+        style="
+          padding-top: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+        "
+      >
+        <p
+          style="
+            font-family: Source Sans 3;
+            font-size: 14px;
+            margin: 0;
+            font-style: normal;
+            font-weight: 400;
+          "
+        >
+          This is an automated notification email. Please do not reply to this
+          email.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

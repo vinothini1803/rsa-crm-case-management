@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>New Case Created</title>
+  </head>
+  <style>
+    .case-detail-title {
+      margin: 0px 0px;
+      padding: 0px 0px 15px 0px;
+      font-size: 23px;
+      font-weight: 400;
+      text-align: start;
+      color: var(--tuna-light, #352342);
+    }
+    .casedetail {
+      display: flex;
+      flex-wrap: wrap;
+      /* justify-content: center;
+      align-items: center; */
+    }
+    .casedeatail-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .case-info-title {
+      flex: 1;
+    }
+    .case-info-data {
+      flex: 1;
+    }
+    .case-info-data::before {
+      content: ":";
+      margin-right: 12px;
+    }
+    .case-info-data-text {
+      font-size: 14px;
+
+      font-weight: 700;
+    }
+    /* For mobile screens (example: screen width less than 768px) */
+    @media (max-width: 768px) {
+      .casedetail {
+        flex-direction: column; /* Change to a column layout for mobile */
+      }
+
+      /* Optional: Adjust individual item styles for mobile */
+      .case-info-title,
+      .case-info-data {
+        flex: none; /* Reset flex to default behavior */
+        width: 100%; /* Take full width of the container */
+
+        margin-bottom: 8px; /* Optional: Add space between items */
+      }
+      .case-info-data::before {
+        content: none;
+      }
+    }
+  </style>
+
+  <body>
+    <div style="padding: 46px 70px; background-color: #f1fcc8">
+      <!-- Header -->
+
+      <div
+        style="
+          display: flex;
+          padding-bottom: 20px;
+          align-items: left;
+          gap: 8px;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        "
+      >
+        <img src="{{portalLogoUrl}}" />
+      </div>
+      <h4
+        style="
+          margin: 0;
+          padding: 16px 0px;
+          font-size: 28px;
+          font-weight: 500;
+          text-align: center;
+          color: var(--tuna-light, #352342);
+        "
+      >
+        New Case Created
+      </h4>
+      <p
+        style="
+          font-size: 14px;
+          font-weight: 500;
+          text-align: center;
+          margin: 0;
+          color: var(--tuna-light, #352342);
+          padding-bottom: 30px;
+          line-height: normal;
+        "
+      >
+        Welcome to a new case! Our team is ready to dive into the detail and
+        address the vehicle delivery.
+      </p>
+
+      <!-- Body -->
+      <h4 class="case-detail-title">Case Details</h4>
+
+      <div>
+        <div
+          style="
+            border-radius: 8px;
+            background: var(--chiffon-light, #9da08f);
+            font-size: 18px;
+            padding: 20px 14px;
+          "
+        >
+          <div class="casedeatail-card">
+            <!-- Create Time  -->
+            <div class="casedetail">
+              <div class="case-info-title">Created Date & Time</div>
+
+              <div class="case-info-data">{{dateAndTime}}</div>
+            </div>
+
+            <!-- Create By -->
+            <div class="casedetail">
+              <div class="case-info-title">Created By</div>
+
+              <div class="case-info-data">{{createdBy}}</div>
+            </div>
+
+            <!-- Pick date and Time  -->
+            <div class="casedetail">
+              <div class="case-info-title">Pick date & Time</div>
+
+              <div class="case-info-data">{{pickUpDate}}, {{pickUpTime}}</div>
+            </div>
+
+            <!-- Vehicle info -->
+            <div class="casedetail">
+              <div class="case-info-title">Vehicle info</div>
+
+              <div class="case-info-data" style="display: flex">
+                <div style="display: flex; flex-direction: column; gap: 4px">
+                  <div class="case-info-data-text">{{vehicleMakeAndModel}}</div>
+                  <div>{{vehicleNumber}}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="casedetail">
+              <div class="case-info-title">Dealer Info</div>
+              <div class="case-info-data" style="display: flex">
+                <div style="display: flex; flex-direction: column; gap: 12px">
+                  <div style="display: flex; flex-direction: column; gap: 4px">
+                    <div class="case-info-data-text">Pickup Location</div>
+                    <div>{{pickupLocation}}</div>
+                  </div>
+                  <div style="display: flex; flex-direction: column; gap: 4px">
+                    <div class="case-info-data-text">Drop Location</div>
+                    <div>{{dropLocation}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div
+        style="
+          padding-top: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+        "
+      >
+        <p
+          style="
+            font-family: Source Sans 3;
+            font-size: 14px;
+            margin: 0;
+            font-style: normal;
+            font-weight: 400;
+          "
+        >
+          To view more information about this case, please click the "View Case"
+          button.
+        </p>
+        <br />
+        <a
+          href="{{viewCaseUrl}}"
+          style="
+            padding: 8px 24px;
+            text-decoration: none;
+            color: #cdd5ad;
+            border: transparent;
+            background-color: rgb(8, 6, 6);
+            border-radius: 4px;
+          "
+        >
+          <div>View Case</div>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
