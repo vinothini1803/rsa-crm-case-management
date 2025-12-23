@@ -14639,6 +14639,103 @@ export const getNotes: any = async (
   }
 };
 
+// export const createActivityAndActivityAspDetail: any = async (
+//   caseDetail: any,
+//   caseInformation: any,
+//   authUserId: number,
+//   serviceId: number,
+//   subServiceId: number,
+//   breakdownToDropDistance: string,
+//   isInitiallyCreated: any = null,
+//   isImmediateService: any = null,
+//   serviceInitiatingAt: any = null,
+//   serviceExpectedAt: any = null,
+//   aspAutoAllocation: number = 0,
+//   transaction: any
+// ) => {
+//   try {
+//     //GENERATE ACTIVITY NUMBER BASED ON SERIAL NUMBER
+//     const [generateActivityNumber, getMasterDetail] = await Promise.all([
+//       Utils.generateActivityNumber(),
+//       axios.post(`${masterService}/${endpointMaster.getMasterDetails}`, {
+//         subServiceId: subServiceId,
+//       }),
+//     ]);
+
+//     if (!generateActivityNumber.success) {
+//       return generateActivityNumber;
+//     }
+
+//     const newActivity: any = await Activities.create(
+//       {
+//         caseDetailId: caseDetail.id,
+//         activityStatusId: 1, //OPEN
+//         financeStatusId: 3, // NOT MATURED
+//         createdById: authUserId,
+//         isInitiallyCreated: isInitiallyCreated,
+//         isImmediateService: isImmediateService,
+//         serviceInitiatingAt: serviceInitiatingAt
+//           ? moment.tz(serviceInitiatingAt, "Asia/Kolkata").toDate()
+//           : null,
+//         serviceExpectedAt: serviceExpectedAt
+//           ? moment.tz(serviceExpectedAt, "Asia/Kolkata").toDate()
+//           : null,
+//         aspAutoAllocation: aspAutoAllocation,
+//       },
+//       { transaction: transaction }
+//     );
+//     newActivity.activityNumber = generateActivityNumber.number;
+//     await newActivity.save({ transaction: transaction });
+
+//     await ActivityAspDetails.create(
+//       {
+//         activityId: newActivity.dataValues.id,
+//         subServiceId: subServiceId,
+//         subServiceHasAspAssignment:
+//           getMasterDetail?.data?.data?.subService?.hasAspAssignment || null,
+//         serviceId: getMasterDetail?.data?.data?.subService?.serviceId || null,
+//         createdById: authUserId,
+//       },
+//       { transaction: transaction }
+//     );
+
+//     //Additional service activity notes
+//     const notesResponse = await getNotes(
+//       caseDetail,
+//       caseInformation,
+//       serviceId,
+//       subServiceId,
+//       breakdownToDropDistance
+//     );
+//     if (notesResponse && notesResponse.success) {
+//       newActivity.notes = JSON.stringify(notesResponse.notes);
+//       newActivity.customerNeedToPay = notesResponse.notes.customerNeedToPay;
+//       newActivity.nonMembershipType = notesResponse.notes.nonMembershipType;
+//       newActivity.additionalChargeableKm =
+//         notesResponse.notes.additionalChargeableKm;
+//       await newActivity.save({ transaction: transaction });
+//     }
+
+//     //CREATE REPORT SYNC TABLE RECORD FOR FINANCIAL REPORT AND ACTIVITY REPORT
+//     if (caseDetail.typeId == 31) {
+//       Utils.createReportSyncTableRecord(
+//         ["financialReportDetails", "activityReportDetails"],
+//         [newActivity.dataValues.id]
+//       );
+//     }
+
+//     return {
+//       success: true,
+//       activityId: newActivity.dataValues.id,
+//     };
+//   } catch (error: any) {
+//     return {
+//       success: false,
+//       error: error.message,
+//     };
+//   }
+// };
+
 export const createActivityAndActivityAspDetail: any = async (
   caseDetail: any,
   caseInformation: any,
@@ -14654,52 +14751,55 @@ export const createActivityAndActivityAspDetail: any = async (
   transaction: any
 ) => {
   try {
-    //GENERATE ACTIVITY NUMBER BASED ON SERIAL NUMBER
-    const [generateActivityNumber, getMasterDetail] = await Promise.all([
-      Utils.generateActivityNumber(),
-      axios.post(`${masterService}/${endpointMaster.getMasterDetails}`, {
-        subServiceId: subServiceId,
-      }),
-    ]);
+    const getMasterDetail = await axios.post(
+      `${masterService}/${endpointMaster.getMasterDetails}`,
+      { subServiceId }
+    );
 
-    if (!generateActivityNumber.success) {
-      return generateActivityNumber;
-    }
-
+    // 1️⃣ Create activity FIRST
     const newActivity: any = await Activities.create(
       {
         caseDetailId: caseDetail.id,
-        activityStatusId: 1, //OPEN
-        financeStatusId: 3, // NOT MATURED
+        activityStatusId: 1,
+        financeStatusId: 3,
         createdById: authUserId,
-        isInitiallyCreated: isInitiallyCreated,
-        isImmediateService: isImmediateService,
+        isInitiallyCreated,
+        isImmediateService,
         serviceInitiatingAt: serviceInitiatingAt
           ? moment.tz(serviceInitiatingAt, "Asia/Kolkata").toDate()
           : null,
         serviceExpectedAt: serviceExpectedAt
           ? moment.tz(serviceExpectedAt, "Asia/Kolkata").toDate()
           : null,
-        aspAutoAllocation: aspAutoAllocation,
+        aspAutoAllocation,
       },
-      { transaction: transaction }
+      { transaction }
     );
-    newActivity.activityNumber = generateActivityNumber.number;
-    await newActivity.save({ transaction: transaction });
 
+    // 2️⃣ Generate activity number from DB ID
+    const financialYear = Utils.getCurrentFinancialYear();
+    const activityNumber = `RCF${financialYear}${String(newActivity.id).padStart(9, "0")}`;
+
+    await newActivity.update(
+      { activityNumber },
+      { transaction }
+    );
+
+    // 3️⃣ Create ASP detail
     await ActivityAspDetails.create(
       {
-        activityId: newActivity.dataValues.id,
-        subServiceId: subServiceId,
+        activityId: newActivity.id,
+        subServiceId,
         subServiceHasAspAssignment:
           getMasterDetail?.data?.data?.subService?.hasAspAssignment || null,
-        serviceId: getMasterDetail?.data?.data?.subService?.serviceId || null,
+        serviceId:
+          getMasterDetail?.data?.data?.subService?.serviceId || null,
         createdById: authUserId,
       },
-      { transaction: transaction }
+      { transaction }
     );
 
-    //Additional service activity notes
+    // Notes logic remains unchanged
     const notesResponse = await getNotes(
       caseDetail,
       caseInformation,
@@ -14707,26 +14807,29 @@ export const createActivityAndActivityAspDetail: any = async (
       subServiceId,
       breakdownToDropDistance
     );
-    if (notesResponse && notesResponse.success) {
-      newActivity.notes = JSON.stringify(notesResponse.notes);
-      newActivity.customerNeedToPay = notesResponse.notes.customerNeedToPay;
-      newActivity.nonMembershipType = notesResponse.notes.nonMembershipType;
-      newActivity.additionalChargeableKm =
-        notesResponse.notes.additionalChargeableKm;
-      await newActivity.save({ transaction: transaction });
+
+    if (notesResponse?.success) {
+      await newActivity.update(
+        {
+          notes: JSON.stringify(notesResponse.notes),
+          customerNeedToPay: notesResponse.notes.customerNeedToPay,
+          nonMembershipType: notesResponse.notes.nonMembershipType,
+          additionalChargeableKm: notesResponse.notes.additionalChargeableKm,
+        },
+        { transaction }
+      );
     }
 
-    //CREATE REPORT SYNC TABLE RECORD FOR FINANCIAL REPORT AND ACTIVITY REPORT
     if (caseDetail.typeId == 31) {
       Utils.createReportSyncTableRecord(
         ["financialReportDetails", "activityReportDetails"],
-        [newActivity.dataValues.id]
+        [newActivity.id]
       );
     }
 
     return {
       success: true,
-      activityId: newActivity.dataValues.id,
+      activityId: newActivity.id,
     };
   } catch (error: any) {
     return {

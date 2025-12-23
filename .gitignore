@@ -1,6 +1,6 @@
 package-lock.json
 node_modules
 build
-.env
+# .env
 uploads
 .DS_Store

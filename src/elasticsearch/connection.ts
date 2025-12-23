@@ -6,6 +6,9 @@ export const client = new Client({
   node: process.env.ELK_SERVER_URL,
   auth: {
     username: "elastic",
-    password: "Qwerty123",
+    password: "9dLRnXYI39u2=nl*3JsN",
+  },
+ ssl: {
+    rejectUnauthorized: false, 
   },
 });

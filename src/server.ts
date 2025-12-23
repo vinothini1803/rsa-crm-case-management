@@ -47,13 +47,13 @@ class AppService {
   public async initDB() {
     try {
       //Relation function
-      // sequelize
-      //   .sync()
-      //   .then((data: any) => {
-      //     this.dbBootstraped = true;
-      //     console.log("connected to database");
-      //   })
-      //   .catch((err: any) => console.log(err));
+      sequelize
+        .sync()
+        .then((data: any) => {
+          this.dbBootstraped = true;
+          console.log("connected to database");
+        })
+        .catch((err: any) => console.log(err));
     } catch (e: any) {
       console.log({
         message: e.message,
