@@ -11,6 +11,9 @@ import http from "http";
 import path from "path";
 import cors from "cors";
 import cron from "node-cron";
+import { initSocket } from "./config/socket";
+import { initScheduler } from "./scheduler/initScheduler";
+// import  {scheduleReminder } from "./scheduler/scheduleReminder";
 
 class AppService {
   public dbBootstraped = false;
@@ -85,7 +88,9 @@ class AppService {
   public async start() {
     const DOCKER_HOST = "localhost";
     this.server = http.createServer(this.app);
-
+      initSocket(this.server);
+      initScheduler()
+      // scheduleReminder()
     this.server.listen(this.port, DOCKER_HOST, (err: any) => {
       if (err) {
         this.app.set("HEALTH_STATUS", "SERVER_LISTEN_FAILED");

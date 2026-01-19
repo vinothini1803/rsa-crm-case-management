@@ -47,6 +47,9 @@ import emailNotification from "../lib/emailNotification";
 import { crmSlaController } from "./crmSla";
 import { createLinkAndSendSmsToTarget } from "./linksController";
 import { getComparisionDate } from "./crmSla";
+import { Console } from "console";
+import { getIO } from "../config/socket";
+import { createAspStartReminders } from "../scheduler/createReminder";
 dotenv.config();
 
 //API with endpoint (API Gateway);
@@ -112,7 +115,10 @@ export namespace activitiesController {
         data: aspActivityDetail
           ? aspActivityDetail.dataValues.activityId
           : null,
-        isTechnicianAssigned: aspActivityDetail && aspActivityDetail.dataValues.aspMechanicId ? true : false,
+        isTechnicianAssigned:
+          aspActivityDetail && aspActivityDetail.dataValues.aspMechanicId
+            ? true
+            : false,
       });
     } catch (error: any) {
       return res.status(500).json({
@@ -122,7 +128,7 @@ export namespace activitiesController {
     }
   }
 
-  //CHECK ASP HAS REJECTED ACTIVITY FOR THE CASE AND SUB SERVICE - FOR NEAREST SERVICE PROVIDER LIST API 
+  //CHECK ASP HAS REJECTED ACTIVITY FOR THE CASE AND SUB SERVICE - FOR NEAREST SERVICE PROVIDER LIST API
   export async function getAspRejectedActivity(req: Request, res: Response) {
     try {
       const { aspId, caseDetailId, subServiceId } = req.body;
@@ -160,7 +166,10 @@ export namespace activitiesController {
   }
 
   //GET CASE ASSIGNED COUNT FOR SERVICE SCHEDULED DATE FOR ASP - FOR NEAREST SERVICE PROVIDER LIST API
-  export async function getAspCaseAssignedCountForScheduledDate(req: Request, res: Response) {
+  export async function getAspCaseAssignedCountForScheduledDate(
+    req: Request,
+    res: Response
+  ) {
     try {
       const { aspId, serviceScheduledDate } = req.body;
 
@@ -390,7 +399,10 @@ export namespace activitiesController {
     try {
       const { aspMechanicId, serviceScheduledDate } = req.body;
 
-      const result = await checkAspMechanicWorkStatus(aspMechanicId, serviceScheduledDate);
+      const result = await checkAspMechanicWorkStatus(
+        aspMechanicId,
+        serviceScheduledDate
+      );
 
       return res.status(200).json({
         success: result.success,
@@ -552,14 +564,14 @@ export namespace activitiesController {
         if (
           (checkActiveActivityAlreadyExists.dataValues.activityStatusId != 7 &&
             checkActiveActivityAlreadyExists.dataValues.activityStatusId !=
-            11 &&
+              11 &&
             checkActiveActivityAlreadyExists.dataValues.activityStatusId !=
-            12) ||
+              12) ||
           ((checkActiveActivityAlreadyExists.dataValues.activityStatusId == 7 ||
             checkActiveActivityAlreadyExists.dataValues.activityStatusId ==
-            11 ||
+              11 ||
             checkActiveActivityAlreadyExists.dataValues.activityStatusId ==
-            12) &&
+              12) &&
             checkActiveActivityAlreadyExists.dataValues.financeStatusId == 1)
         ) {
           return res.status(200).json({
@@ -628,25 +640,26 @@ export namespace activitiesController {
   ): Promise<{ success: boolean; transactionCount: number; error?: string }> {
     try {
       // Find all one-time service transactions from canceled activity
-      const canceledOrRejectedActivityTransactions: any = await ActivityTransactions.findAll({
-        where: {
-          activityId: canceledOrRejectedActivityId,
-          paymentTypeId: 174, // One time service
-          paymentStatusId: 191, // Success
-          refundStatusId: {
-            [Op.or]: [
-              {
-                [Op.is]: null, // Refund not initiated
-              },
-              {
-                [Op.eq]: 1303, // Refund failed
-              },
-            ],
+      const canceledOrRejectedActivityTransactions: any =
+        await ActivityTransactions.findAll({
+          where: {
+            activityId: canceledOrRejectedActivityId,
+            paymentTypeId: 174, // One time service
+            paymentStatusId: 191, // Success
+            refundStatusId: {
+              [Op.or]: [
+                {
+                  [Op.is]: null, // Refund not initiated
+                },
+                {
+                  [Op.eq]: 1303, // Refund failed
+                },
+              ],
+            },
           },
-        },
-        attributes: ["id", "membershipId"],
-        transaction: transaction,
-      });
+          attributes: ["id", "membershipId"],
+          transaction: transaction,
+        });
 
       if (canceledOrRejectedActivityTransactions.length === 0) {
         return { success: true, transactionCount: 0 };
@@ -656,7 +669,8 @@ export namespace activitiesController {
       const membershipIds: number[] = [];
       for (const canceledOrRejectedActivityTransaction of canceledOrRejectedActivityTransactions) {
         const transactionData: any =
-          canceledOrRejectedActivityTransaction.dataValues || canceledOrRejectedActivityTransaction;
+          canceledOrRejectedActivityTransaction.dataValues ||
+          canceledOrRejectedActivityTransaction;
         if (transactionData.membershipId) {
           membershipIds.push(transactionData.membershipId);
         }
@@ -703,7 +717,7 @@ export namespace activitiesController {
             where: { activityId: canceledOrRejectedActivityId },
             transaction: transaction,
           }
-        )
+        ),
       ]);
 
       // Update RSA membership records with new activityId
@@ -855,14 +869,14 @@ export namespace activitiesController {
         if (
           (checkActiveActivityAlreadyExists.dataValues.activityStatusId != 7 &&
             checkActiveActivityAlreadyExists.dataValues.activityStatusId !=
-            11 &&
+              11 &&
             checkActiveActivityAlreadyExists.dataValues.activityStatusId !=
-            12) ||
+              12) ||
           ((checkActiveActivityAlreadyExists.dataValues.activityStatusId == 7 ||
             checkActiveActivityAlreadyExists.dataValues.activityStatusId ==
-            11 ||
+              11 ||
             checkActiveActivityAlreadyExists.dataValues.activityStatusId ==
-            12) &&
+              12) &&
             checkActiveActivityAlreadyExists.dataValues.financeStatusId == 1)
         ) {
           await transaction.rollback();
@@ -995,7 +1009,7 @@ export namespace activitiesController {
               .estimatedTotalKmDurationBetweenLocations
               .estimatedAspToPickupKmDuration
               ? inData.estimatedTotalKmDurationBetweenLocations
-                .estimatedAspToPickupKmDuration
+                  .estimatedAspToPickupKmDuration
               : null,
             estimatedPickupToDropKm: inData.estimatedTotalKmBetweenLocations
               .estimatedPickupToDropKm
@@ -1005,41 +1019,41 @@ export namespace activitiesController {
               .estimatedTotalKmDurationBetweenLocations
               .estimatedPickupToDropKmDuration
               ? inData.estimatedTotalKmDurationBetweenLocations
-                .estimatedPickupToDropKmDuration
+                  .estimatedPickupToDropKmDuration
               : null,
 
             estimatedAspToBreakdownKm: inData.estimatedTotalKmBetweenLocations
               .estimatedAspToBreakdownKm
               ? inData.estimatedTotalKmBetweenLocations
-                .estimatedAspToBreakdownKm
+                  .estimatedAspToBreakdownKm
               : null,
             estimatedAspToBreakdownKmDuration: inData
               .estimatedTotalKmDurationBetweenLocations
               .estimatedAspToBreakdownKmDuration
               ? inData.estimatedTotalKmDurationBetweenLocations
-                .estimatedAspToBreakdownKmDuration
+                  .estimatedAspToBreakdownKmDuration
               : null,
             estimatedBreakdownToAspKm: inData.estimatedTotalKmBetweenLocations
               .estimatedBreakdownToAspKm
               ? inData.estimatedTotalKmBetweenLocations
-                .estimatedBreakdownToAspKm
+                  .estimatedBreakdownToAspKm
               : null,
             estimatedBreakdownToAspKmDuration: inData
               .estimatedTotalKmDurationBetweenLocations
               .estimatedBreakdownToAspKmDuration
               ? inData.estimatedTotalKmDurationBetweenLocations
-                .estimatedBreakdownToAspKmDuration
+                  .estimatedBreakdownToAspKmDuration
               : null,
             estimatedBreakdownToDropKm: inData.estimatedTotalKmBetweenLocations
               .estimatedBreakdownToDropKm
               ? inData.estimatedTotalKmBetweenLocations
-                .estimatedBreakdownToDropKm
+                  .estimatedBreakdownToDropKm
               : null,
             estimatedBreakdownToDropKmDuration: inData
               .estimatedTotalKmDurationBetweenLocations
               .estimatedBreakdownToDropKmDuration
               ? inData.estimatedTotalKmDurationBetweenLocations
-                .estimatedBreakdownToDropKmDuration
+                  .estimatedBreakdownToDropKmDuration
               : null,
 
             estimatedDropToAspKm: inData.estimatedTotalKmBetweenLocations
@@ -1050,7 +1064,7 @@ export namespace activitiesController {
               .estimatedTotalKmDurationBetweenLocations
               .estimatedDropToAspKmDuration
               ? inData.estimatedTotalKmDurationBetweenLocations
-                .estimatedDropToAspKmDuration
+                  .estimatedDropToAspKmDuration
               : null,
             estimatedServiceCost: inData.estimatedServiceCost,
             estimatedTotalTax: inData.estimatedTotalTax,
@@ -1063,21 +1077,28 @@ export namespace activitiesController {
                 ? inData.ownPatrolVehicleRegistrationNumber
                 : null,
             //IF COCO ASP HAVE COCO TECHNICIAN, THEN UPDATE ASP MECHANIC ID AND ASP MECHANIC ASSIGNED AT COLUMN ON SEND REQUEST
-            aspMechanicId: checkCaseIdExists.dataValues.typeId == 32 && inData.cocoAspTechnicianId
-              ? inData.cocoAspTechnicianId
-              : null,
-            aspMechanicAssignedAt: checkCaseIdExists.dataValues.typeId == 32 && inData.cocoAspTechnicianId
-              ? new Date()
-              : null,
+            aspMechanicId:
+              checkCaseIdExists.dataValues.typeId == 32 &&
+              inData.cocoAspTechnicianId
+                ? inData.cocoAspTechnicianId
+                : null,
+            aspMechanicAssignedAt:
+              checkCaseIdExists.dataValues.typeId == 32 &&
+              inData.cocoAspTechnicianId
+                ? new Date()
+                : null,
           };
-          const createdAspDetail = await ActivityAspDetails.create(aspActivityData, {
-            transaction: transaction,
-          });
+          const createdAspDetail = await ActivityAspDetails.create(
+            aspActivityData,
+            {
+              transaction: transaction,
+            }
+          );
           return {
             activityId: record.dataValues.id,
             activity: record,
             activityAspDetail: createdAspDetail,
-            aspActivityData: aspActivityData
+            aspActivityData: aspActivityData,
           };
         })
         .then(async function (result: any) {
@@ -1101,7 +1122,14 @@ export namespace activitiesController {
                 activityStatusId: [4, 8], // Cancelled, Rejected
                 id: { [Op.ne]: activityId }, // Exclude the new activity
               },
-              attributes: ["id", "nonMembershipType", "additionalChargeableKm", "paymentForAdditionalKmCaptured", "additionalKmForPayment", "paidTotalKm"],
+              attributes: [
+                "id",
+                "nonMembershipType",
+                "additionalChargeableKm",
+                "paymentForAdditionalKmCaptured",
+                "additionalKmForPayment",
+                "paidTotalKm",
+              ],
               include: [
                 {
                   model: ActivityAspDetails,
@@ -1115,7 +1143,7 @@ export namespace activitiesController {
                     "additionalKmDiscountReasonId",
                     "additionalKmDiscountReason",
                     "additionalKmEstimatedTotalTax",
-                    "additionalKmEstimatedTotalAmount"
+                    "additionalKmEstimatedTotalAmount",
                   ],
                   required: true,
                   where: serviceIdFilter, // Filter by serviceId
@@ -1146,15 +1174,19 @@ export namespace activitiesController {
             if (canceledOrRejectedActivities.length > 0) {
               // Process each canceled or rejected activity
               for (const canceledOrRejectedActivity of canceledOrRejectedActivities) {
-                const canceledOrRejectedActivityAspDetail = canceledOrRejectedActivity.activityAspDetail;
+                const canceledOrRejectedActivityAspDetail =
+                  canceledOrRejectedActivity.activityAspDetail;
 
                 // Always switch transactions from canceled or rejected activity to new activity
-                const switchResult = await switchTransactionsFromCanceledOrRejectedActivity(
-                  canceledOrRejectedActivity.dataValues.id,
-                  activityId,
-                  checkCaseIdExists.dataValues.agentId || inData.authUserId || 1,
-                  transaction
-                );
+                const switchResult =
+                  await switchTransactionsFromCanceledOrRejectedActivity(
+                    canceledOrRejectedActivity.dataValues.id,
+                    activityId,
+                    checkCaseIdExists.dataValues.agentId ||
+                      inData.authUserId ||
+                      1,
+                    transaction
+                  );
 
                 if (switchResult.success && switchResult.transactionCount > 0) {
                   // Calculate KM difference
@@ -1171,15 +1203,23 @@ export namespace activitiesController {
                     aspActivityData,
                     false // usePaidKm = false to use current estimated values
                   );
-                  const kmDifference = Math.abs(newActivityKm - canceledOrRejectedActivityKm);
+                  const kmDifference = Math.abs(
+                    newActivityKm - canceledOrRejectedActivityKm
+                  );
 
-                  if (canceledOrRejectedActivity.dataValues.paymentForAdditionalKmCaptured == true) {
+                  if (
+                    canceledOrRejectedActivity.dataValues
+                      .paymentForAdditionalKmCaptured == true
+                  ) {
                     await Promise.all([
                       Activities.update(
                         {
-                          paidTotalKm: canceledOrRejectedActivity.dataValues.paidTotalKm,
+                          paidTotalKm:
+                            canceledOrRejectedActivity.dataValues.paidTotalKm,
                           hasAdditionalKmForPayment: true,
-                          additionalKmForPayment: canceledOrRejectedActivity.dataValues.additionalKmForPayment,
+                          additionalKmForPayment:
+                            canceledOrRejectedActivity.dataValues
+                              .additionalKmForPayment,
                           paymentForAdditionalKmCaptured: true,
                           customerAgreedToAdditionalPayment: true,
                         },
@@ -1191,19 +1231,26 @@ export namespace activitiesController {
                       ActivityAspDetails.update(
                         {
                           additionalKmEstimatedServiceCost:
-                            canceledOrRejectedActivityAspDetail.dataValues.additionalKmEstimatedServiceCost || null,
+                            canceledOrRejectedActivityAspDetail.dataValues
+                              .additionalKmEstimatedServiceCost || null,
                           additionalKmDiscountPercentage:
-                            canceledOrRejectedActivityAspDetail.dataValues.additionalKmDiscountPercentage || null,
+                            canceledOrRejectedActivityAspDetail.dataValues
+                              .additionalKmDiscountPercentage || null,
                           additionalKmDiscountAmount:
-                            canceledOrRejectedActivityAspDetail.dataValues.additionalKmDiscountAmount || null,
+                            canceledOrRejectedActivityAspDetail.dataValues
+                              .additionalKmDiscountAmount || null,
                           additionalKmDiscountReasonId:
-                            canceledOrRejectedActivityAspDetail.dataValues.additionalKmDiscountReasonId || null,
+                            canceledOrRejectedActivityAspDetail.dataValues
+                              .additionalKmDiscountReasonId || null,
                           additionalKmDiscountReason:
-                            canceledOrRejectedActivityAspDetail.dataValues.additionalKmDiscountReason || null,
+                            canceledOrRejectedActivityAspDetail.dataValues
+                              .additionalKmDiscountReason || null,
                           additionalKmEstimatedTotalTax:
-                            canceledOrRejectedActivityAspDetail.dataValues.additionalKmEstimatedTotalTax || null,
+                            canceledOrRejectedActivityAspDetail.dataValues
+                              .additionalKmEstimatedTotalTax || null,
                           additionalKmEstimatedTotalAmount:
-                            canceledOrRejectedActivityAspDetail.dataValues.additionalKmEstimatedTotalAmount || null,
+                            canceledOrRejectedActivityAspDetail.dataValues
+                              .additionalKmEstimatedTotalAmount || null,
                         },
                         {
                           where: { activityId: activityId },
@@ -1218,7 +1265,8 @@ export namespace activitiesController {
                     if (kmDifference > kmComparisonThreshold) {
                       await Activities.update(
                         {
-                          paidTotalKm: canceledOrRejectedActivity.dataValues.paidTotalKm,
+                          paidTotalKm:
+                            canceledOrRejectedActivity.dataValues.paidTotalKm,
                           hasAdditionalKmForPayment: true,
                           additionalKmForPayment: kmDifference,
                           paymentForAdditionalKmCaptured: false,
@@ -1231,7 +1279,8 @@ export namespace activitiesController {
                     } else {
                       await Activities.update(
                         {
-                          paidTotalKm: canceledOrRejectedActivity.dataValues.paidTotalKm,
+                          paidTotalKm:
+                            canceledOrRejectedActivity.dataValues.paidTotalKm,
                           hasAdditionalKmForPayment: false,
                           additionalKmForPayment: null,
                           paymentForAdditionalKmCaptured: false,
@@ -1243,7 +1292,6 @@ export namespace activitiesController {
                       );
                     }
                   }
-
                 }
               }
             }
@@ -1296,7 +1344,10 @@ export namespace activitiesController {
           await Promise.all(processArray);
 
           //IF COCO ASP HAVE COCO TECHNICIAN, THEN UPDATE ASP MECHANIC ID AND ASP MECHANIC ASSIGNED AT COLUMN ON SEND REQUEST
-          if (checkCaseIdExists.dataValues.typeId == 32 && inData.cocoAspTechnicianId) {
+          if (
+            checkCaseIdExists.dataValues.typeId == 32 &&
+            inData.cocoAspTechnicianId
+          ) {
             await ActivityLogs.create(
               {
                 activityId: activityId,
@@ -1388,17 +1439,20 @@ export namespace activitiesController {
             checkCaseIdExists.dataValues.typeId == 31 &&
             inData.isAutoAllocatedAspProcess
           ) {
-            Utils.createReportSyncTableRecord(
-              "autoAllocatedAspReportDetails", [
-              activityId
+            Utils.createReportSyncTableRecord("autoAllocatedAspReportDetails", [
+              activityId,
             ]);
           }
-
 
           // Sync client report details, client report with mobile number details
           if (checkCaseIdExists.dataValues.typeId == 31) {
             Utils.createReportSyncTableRecord(
-              ["clientReportDetails", "clientReportWithMobileNumberDetails", "caseReportDetails", "exceptionReportDetails"],
+              [
+                "clientReportDetails",
+                "clientReportWithMobileNumberDetails",
+                "caseReportDetails",
+                "exceptionReportDetails",
+              ],
               [inData.caseDetailId]
             );
           }
@@ -1550,7 +1604,7 @@ export namespace activitiesController {
           .estimatedTotalKmDurationBetweenLocations
           .estimatedAspToPickupKmDuration
           ? inData.estimatedTotalKmDurationBetweenLocations
-            .estimatedAspToPickupKmDuration
+              .estimatedAspToPickupKmDuration
           : null,
         estimatedPickupToDropKm: inData.estimatedTotalKmBetweenLocations
           .estimatedPickupToDropKm
@@ -1560,7 +1614,7 @@ export namespace activitiesController {
           .estimatedTotalKmDurationBetweenLocations
           .estimatedPickupToDropKmDuration
           ? inData.estimatedTotalKmDurationBetweenLocations
-            .estimatedPickupToDropKmDuration
+              .estimatedPickupToDropKmDuration
           : null,
 
         estimatedAspToBreakdownKm: inData.estimatedTotalKmBetweenLocations
@@ -1571,7 +1625,7 @@ export namespace activitiesController {
           .estimatedTotalKmDurationBetweenLocations
           .estimatedAspToBreakdownKmDuration
           ? inData.estimatedTotalKmDurationBetweenLocations
-            .estimatedAspToBreakdownKmDuration
+              .estimatedAspToBreakdownKmDuration
           : null,
         estimatedBreakdownToAspKm: inData.estimatedTotalKmBetweenLocations
           .estimatedBreakdownToAspKm
@@ -1581,7 +1635,7 @@ export namespace activitiesController {
           .estimatedTotalKmDurationBetweenLocations
           .estimatedBreakdownToAspKmDuration
           ? inData.estimatedTotalKmDurationBetweenLocations
-            .estimatedBreakdownToAspKmDuration
+              .estimatedBreakdownToAspKmDuration
           : null,
         estimatedBreakdownToDropKm: inData.estimatedTotalKmBetweenLocations
           .estimatedBreakdownToDropKm
@@ -1591,7 +1645,7 @@ export namespace activitiesController {
           .estimatedTotalKmDurationBetweenLocations
           .estimatedBreakdownToDropKmDuration
           ? inData.estimatedTotalKmDurationBetweenLocations
-            .estimatedBreakdownToDropKmDuration
+              .estimatedBreakdownToDropKmDuration
           : null,
 
         estimatedDropToAspKm: inData.estimatedTotalKmBetweenLocations
@@ -1601,7 +1655,7 @@ export namespace activitiesController {
         estimatedDropToAspKmDuration: inData
           .estimatedTotalKmDurationBetweenLocations.estimatedDropToAspKmDuration
           ? inData.estimatedTotalKmDurationBetweenLocations
-            .estimatedDropToAspKmDuration
+              .estimatedDropToAspKmDuration
           : null,
         estimatedServiceCost: inData.estimatedServiceCost,
         estimatedTotalTax: inData.estimatedTotalTax,
@@ -1613,10 +1667,16 @@ export namespace activitiesController {
           ? inData.ownPatrolVehicleRegistrationNumber
           : null,
         //IF COCO ASP HAVE COCO TECHNICIAN, THEN UPDATE ASP MECHANIC ID AND ASP MECHANIC ASSIGNED AT COLUMN ON SEND REQUEST
-        aspMechanicId: checkCaseIdExists.dataValues.typeId == 32 && inData.cocoAspTechnicianId
-          ? inData.cocoAspTechnicianId
-          : null,
-        aspMechanicAssignedAt: checkCaseIdExists.dataValues.typeId == 32 && inData.cocoAspTechnicianId ? new Date() : null,
+        aspMechanicId:
+          checkCaseIdExists.dataValues.typeId == 32 &&
+          inData.cocoAspTechnicianId
+            ? inData.cocoAspTechnicianId
+            : null,
+        aspMechanicAssignedAt:
+          checkCaseIdExists.dataValues.typeId == 32 &&
+          inData.cocoAspTechnicianId
+            ? new Date()
+            : null,
       };
       promiseArray.push(
         ActivityAspDetails.update(aspActivityData, {
@@ -1752,17 +1812,24 @@ export namespace activitiesController {
       await transaction.commit();
 
       //If send request to asp then sync asp auto allocated details for crm report.
-      if (checkCaseIdExists.dataValues.typeId == 31 && inData.isAutoAllocatedAspProcess) {
-        Utils.createReportSyncTableRecord(
-          "autoAllocatedAspReportDetails",
-          [inData.activityId]
-        );
+      if (
+        checkCaseIdExists.dataValues.typeId == 31 &&
+        inData.isAutoAllocatedAspProcess
+      ) {
+        Utils.createReportSyncTableRecord("autoAllocatedAspReportDetails", [
+          inData.activityId,
+        ]);
       }
 
       // Sync client report details, client report with mobile number details
       if (checkCaseIdExists.dataValues.typeId == 31) {
         Utils.createReportSyncTableRecord(
-          ["clientReportDetails", "clientReportWithMobileNumberDetails", "caseReportDetails", "exceptionReportDetails"],
+          [
+            "clientReportDetails",
+            "clientReportWithMobileNumberDetails",
+            "caseReportDetails",
+            "exceptionReportDetails",
+          ],
           [inData.caseDetailId]
         );
       }
@@ -1789,7 +1856,7 @@ export namespace activitiesController {
     }
   }
 
-  export async function listCases(req: Request, res: Response) { }
+  export async function listCases(req: Request, res: Response) {}
 
   //get owner activities list
   export async function getAspActivityDashboardData(
@@ -2596,7 +2663,10 @@ export namespace activitiesController {
   }
 
   //get owner activities list - BuddyApp
-  export async function getAspActivitiesListBuddyApp(req: Request, res: Response) {
+  export async function getAspActivitiesListBuddyApp(
+    req: Request,
+    res: Response
+  ) {
     try {
       //Require data destructure;
       const inData = req.validBody;
@@ -2704,7 +2774,7 @@ export namespace activitiesController {
           [Op.or]: [
             { [Op.eq]: null }, // NULL
             { [Op.in]: [1, 2, 14, 15, 16, 17, 18, 13] }, // ACCEPTED || WAITING FOR SERVICE INITIATION || STARTED TO BD || REACHED BD || STARTED TO DEALER || REACHED DEALER || ACTIVITY STARTED || ACTIVITY ENDED
-          ]
+          ],
         };
         whereCaseDetail.statusId = 2; // INPROGRESS
       }
@@ -2806,23 +2876,25 @@ export namespace activitiesController {
     requestedAspActivityStatusId: number
   ): string | null => {
     // Only for CRM cases
-    if (!activity || !activity.caseDetail || activity.caseDetail.typeId !== 31) {
+    if (
+      !activity ||
+      !activity.caseDetail ||
+      activity.caseDetail.typeId !== 31
+    ) {
       return "3";
     }
 
     // Flag "3" (Canceled): If activity is canceled
-    if (
-      activity.activityStatusId == 4 ||
-      activity.aspActivityStatusId == 10
-    ) {
+    if (activity.activityStatusId == 4 || activity.aspActivityStatusId == 10) {
       return "3";
     }
 
     // Map aspActivityStatusId to corresponding datetime column
     let datetimeColumn: string | null = null;
-    const statusId = typeof requestedAspActivityStatusId === 'string'
-      ? parseInt(requestedAspActivityStatusId)
-      : requestedAspActivityStatusId;
+    const statusId =
+      typeof requestedAspActivityStatusId === "string"
+        ? parseInt(requestedAspActivityStatusId)
+        : requestedAspActivityStatusId;
     switch (statusId) {
       case 3: // Started To Pickup
         datetimeColumn = "aspStartedToPickupAt";
@@ -2879,7 +2951,10 @@ export namespace activitiesController {
     routeOrigin: string | null | undefined
   ): any => {
     if (routeOrigin === "buddyApp") {
-      const flag = getBuddyAppStatusFlag(activity, requestedAspActivityStatusId);
+      const flag = getBuddyAppStatusFlag(
+        activity,
+        requestedAspActivityStatusId
+      );
       if (flag !== null) {
         response.appActivityStatusFlag = flag;
       }
@@ -3529,7 +3604,10 @@ export namespace activitiesController {
           notifiDetails.templateId = 50; //  REACHED PICKUP LOCATION OTP TEMPLATE
           notifiDetails.otp = otp;
           notificationController.sendNotification(notifiDetails);
-        } else if (parseInt(aspActivityStatusId) == 6 || parseInt(aspActivityStatusId) == 17) {
+        } else if (
+          parseInt(aspActivityStatusId) == 6 ||
+          parseInt(aspActivityStatusId) == 17
+        ) {
           // REACHED DROP LOCATION
 
           //DELIVERY REQUEST
@@ -3658,7 +3736,7 @@ export namespace activitiesController {
 
           toMobileNumber = activity.caseDetail.caseInformation
             ? activity.caseDetail.caseInformation.dataValues
-              .customerCurrentMobileNumber
+                .customerCurrentMobileNumber
             : null;
           if (!toMobileNumber) {
             await transaction.rollback();
@@ -3677,8 +3755,8 @@ export namespace activitiesController {
           //IF DATETIME GIVEN FROM FRONT END THEN GIVEN DATE TIME IS BD REACH TIME OTHERWISE CURRENT DATETIME IS BD REACH TIME
           const breakdownReachTime = formattedDateTime
             ? moment
-              .tz(formattedDateTime, "Asia/Kolkata")
-              .format("YYYY-MM-DD HH:mm:ss")
+                .tz(formattedDateTime, "Asia/Kolkata")
+                .format("YYYY-MM-DD HH:mm:ss")
             : moment().tz("Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
 
           // CHECK BD REACH SLA VIOLATION FOR WEB ONLY
@@ -3688,7 +3766,9 @@ export namespace activitiesController {
               activityId: activity.id,
               typeId: 870, //ASP Breakdown Reach Time SLA - L1
               date: breakdownReachTime,
-              slaViolateReasonId: slaViolateReasonId ? slaViolateReasonId : null,
+              slaViolateReasonId: slaViolateReasonId
+                ? slaViolateReasonId
+                : null,
               slaViolateReasonComments: slaViolateReasonComments
                 ? slaViolateReasonComments
                 : null,
@@ -3698,7 +3778,9 @@ export namespace activitiesController {
             };
 
             const slaViolateReasonProcessResponse =
-              await crmSlaController.processSlaViolateReason(slaViolateRequests);
+              await crmSlaController.processSlaViolateReason(
+                slaViolateRequests
+              );
             if (!slaViolateReasonProcessResponse.success) {
               await transaction.rollback();
               const response = addFlagToResponse(
@@ -3809,7 +3891,8 @@ export namespace activitiesController {
                 : new Date(),
               reachedToPickupInApp: logTypeId == 241 ? 1 : 0,
             }),
-            ...((parseInt(aspActivityStatusId) == 6 || parseInt(aspActivityStatusId) == 17) && {
+            ...((parseInt(aspActivityStatusId) == 6 ||
+              parseInt(aspActivityStatusId) == 17) && {
               aspReachedToDropAt: formattedDateTime
                 ? formattedDateTime
                 : new Date(),
@@ -3843,7 +3926,9 @@ export namespace activitiesController {
               actionTypeId: actionTypeId,
               title: activityLogTitle,
               description: activityLogDescription,
-              aspActivityReportNewValue: getMasterDetail?.data?.data?.aspActivityStatusWithoutValidation?.name || null
+              aspActivityReportNewValue:
+                getMasterDetail?.data?.data?.aspActivityStatusWithoutValidation
+                  ?.name || null,
             },
             {
               transaction: transaction,
@@ -3899,9 +3984,7 @@ export namespace activitiesController {
         ]);
 
         // CREATE REPORT SYNC TABLE RECORD FOR ASP ACTIVITY REPORT
-        if (
-          activity.caseDetail.typeId == 31 && createdActivityLog
-        ) {
+        if (activity.caseDetail.typeId == 31 && createdActivityLog) {
           Utils.createReportSyncTableRecord("aspActivityReportDetails", [
             createdActivityLog.dataValues.id,
           ]);
@@ -3910,7 +3993,12 @@ export namespace activitiesController {
         // Sync client report details, client report with mobile number details
         if (activity.caseDetail.typeId == 31) {
           Utils.createReportSyncTableRecord(
-            ["clientReportDetails", "clientReportWithMobileNumberDetails", "caseReportDetails", "exceptionReportDetails"],
+            [
+              "clientReportDetails",
+              "clientReportWithMobileNumberDetails",
+              "caseReportDetails",
+              "exceptionReportDetails",
+            ],
             [activity.caseDetail.id]
           );
         }
@@ -3937,7 +4025,8 @@ export namespace activitiesController {
       } else {
         let activityStatusId = 3; // INPROGRESS
         let actualAspActivityStatusId = aspActivityStatusId;
-        let aspActivityReportNewValue = getMasterDetail?.data?.data?.aspActivityStatusWithoutValidation?.name;
+        let aspActivityReportNewValue =
+          getMasterDetail?.data?.data?.aspActivityStatusWithoutValidation?.name;
 
         //CHANGE STATUS
         await Activities.update(
@@ -3959,7 +4048,8 @@ export namespace activitiesController {
                 : new Date(),
               startedToPickupInApp: logTypeId == 241 ? 1 : 0,
             }),
-            ...((parseInt(aspActivityStatusId) == 5 || parseInt(aspActivityStatusId) == 16) && {
+            ...((parseInt(aspActivityStatusId) == 5 ||
+              parseInt(aspActivityStatusId) == 16) && {
               aspStartedToDropAt: formattedDateTime
                 ? formattedDateTime
                 : new Date(),
@@ -3996,29 +4086,37 @@ export namespace activitiesController {
                 : new Date(),
               serviceDuration: activity.dataValues.serviceStartDateTime
                 ? moment
-                  .duration(
-                    moment.tz(formattedDateTime ? formattedDateTime : new Date(), "Asia/Kolkata").diff(
-                      moment.tz(activity.dataValues.serviceStartDateTime, "Asia/Kolkata")
+                    .duration(
+                      moment
+                        .tz(
+                          formattedDateTime ? formattedDateTime : new Date(),
+                          "Asia/Kolkata"
+                        )
+                        .diff(
+                          moment.tz(
+                            activity.dataValues.serviceStartDateTime,
+                            "Asia/Kolkata"
+                          )
+                        )
                     )
-                  )
-                  .asSeconds()
-                  .toString()
+                    .asSeconds()
+                    .toString()
                 : null,
             }),
             // FOR VDM CASES - UPDATE END SERVICE IF ASP STARTED TO GARAG OR REACHED TO GARAGE AND END SERVICE NOT SET
             ...((parseInt(aspActivityStatusId) == 7 ||
               parseInt(aspActivityStatusId) == 8) &&
-              !activity.dataValues.aspEndServiceAt &&
-              activity.caseDetail.dataValues.typeId == 32 &&
-              activity.dataValues.aspReachedToPickupAt &&
-              activity.dataValues.aspStartedToDropAt &&
-              activity.dataValues.aspReachedToDropAt
+            !activity.dataValues.aspEndServiceAt &&
+            activity.caseDetail.dataValues.typeId == 32 &&
+            activity.dataValues.aspReachedToPickupAt &&
+            activity.dataValues.aspStartedToDropAt &&
+            activity.dataValues.aspReachedToDropAt
               ? {
-                aspEndServiceAt: formattedDateTime
-                  ? formattedDateTime
-                  : new Date(),
-                endServiceInApp: logTypeId == 241 ? 1 : 0,
-              }
+                  aspEndServiceAt: formattedDateTime
+                    ? formattedDateTime
+                    : new Date(),
+                  endServiceInApp: logTypeId == 241 ? 1 : 0,
+                }
               : {}),
           },
           {
@@ -4037,7 +4135,7 @@ export namespace activitiesController {
               actionTypeId: actionTypeId,
               title: activityLogTitle,
               description: activityLogDescription,
-              aspActivityReportNewValue: aspActivityReportNewValue
+              aspActivityReportNewValue: aspActivityReportNewValue,
             },
             {
               transaction: transaction,
@@ -4079,16 +4177,13 @@ export namespace activitiesController {
           parseInt(aspActivityStatusId) == 14 &&
           activity.isAspAutoAllocated
         ) {
-          Utils.createReportSyncTableRecord(
-            "autoAllocatedAspReportDetails",
-            [activityId]
-          );
+          Utils.createReportSyncTableRecord("autoAllocatedAspReportDetails", [
+            activityId,
+          ]);
         }
 
         // CREATE REPORT SYNC TABLE RECORD FOR ASP ACTIVITY REPORT
-        if (
-          activity.caseDetail.typeId == 31 && createdActivityLog
-        ) {
+        if (activity.caseDetail.typeId == 31 && createdActivityLog) {
           Utils.createReportSyncTableRecord("aspActivityReportDetails", [
             createdActivityLog.dataValues.id,
           ]);
@@ -4097,7 +4192,12 @@ export namespace activitiesController {
         // Sync client report details, client report with mobile number details
         if (activity.caseDetail.typeId == 31) {
           Utils.createReportSyncTableRecord(
-            ["clientReportDetails", "clientReportWithMobileNumberDetails", "caseReportDetails", "exceptionReportDetails"],
+            [
+              "clientReportDetails",
+              "clientReportWithMobileNumberDetails",
+              "caseReportDetails",
+              "exceptionReportDetails",
+            ],
             [activity.caseDetail.id]
           );
         }
@@ -4767,7 +4867,13 @@ export namespace activitiesController {
             where: {
               id: activity.dataValues.caseDetailId,
             },
-            attributes: ["id", "clientId", "vin", "registrationNumber", "typeId"],
+            attributes: [
+              "id",
+              "clientId",
+              "vin",
+              "registrationNumber",
+              "typeId",
+            ],
           });
           if (!caseDetail) {
             await transaction.rollback();
@@ -5054,10 +5160,7 @@ export namespace activitiesController {
   }
 
   // Update Service Status (Unified function for Repair On Site and Tow)
-  export async function updateServiceStatus(
-    req: Request,
-    res: Response
-  ) {
+  export async function updateServiceStatus(req: Request, res: Response) {
     const transaction = await sequelize.transaction();
     try {
       const {
@@ -5133,11 +5236,15 @@ export namespace activitiesController {
       }
 
       // Check if service status has already been updated
-      if (activity.dataValues.serviceStatus !== null && activity.dataValues.serviceStatus !== undefined) {
+      if (
+        activity.dataValues.serviceStatus !== null &&
+        activity.dataValues.serviceStatus !== undefined
+      ) {
         await transaction.rollback();
         return res.status(200).json({
           success: false,
-          error: "Service status has already been updated and cannot be modified again",
+          error:
+            "Service status has already been updated and cannot be modified again",
         });
       }
 
@@ -5297,7 +5404,12 @@ export namespace activitiesController {
       // Sync client report details, client report with mobile number details
       if (activity.caseDetail.typeId == 31) {
         Utils.createReportSyncTableRecord(
-          ["clientReportDetails", "clientReportWithMobileNumberDetails", "caseReportDetails", "exceptionReportDetails"],
+          [
+            "clientReportDetails",
+            "clientReportWithMobileNumberDetails",
+            "caseReportDetails",
+            "exceptionReportDetails",
+          ],
           [activity.dataValues.caseDetailId]
         );
       }
@@ -5312,7 +5424,9 @@ export namespace activitiesController {
 
       return res.status(200).json({
         success: true,
-        message: `${serviceType === "repairOnSite" ? "Repair on site" : "Tow"} status updated successfully`,
+        message: `${
+          serviceType === "repairOnSite" ? "Repair on site" : "Tow"
+        } status updated successfully`,
       });
     } catch (error: any) {
       await transaction.rollback();
@@ -5324,10 +5438,7 @@ export namespace activitiesController {
   }
 
   // Update Repair On Site Status (Wrapper function for backward compatibility)
-  export async function updateRepairOnSiteStatus(
-    req: Request,
-    res: Response
-  ) {
+  export async function updateRepairOnSiteStatus(req: Request, res: Response) {
     // Map old request format to new unified format
     req.body.serviceType = "repairOnSite";
     req.body.status = req.body.repairOnSiteStatus;
@@ -5338,10 +5449,7 @@ export namespace activitiesController {
   }
 
   // Update Tow Status (Wrapper function for backward compatibility)
-  export async function updateTowStatus(
-    req: Request,
-    res: Response
-  ) {
+  export async function updateTowStatus(req: Request, res: Response) {
     // Map old request format to new unified format
     req.body.serviceType = "tow";
     req.body.status = req.body.towStatus;
@@ -5489,19 +5597,18 @@ export namespace activitiesController {
           ),
         ]);
 
-        const custodyServiceRequestResponse =
-          await getNotesAndCreateActivity(
-            bearerToken,
-            custodyServiceId,
-            custodySubServiceId,
-            aspId,
-            caseDetail,
-            activity,
-            caseInformation,
-            assignedTo,
-            authUserId,
-            transaction
-          );
+        const custodyServiceRequestResponse = await getNotesAndCreateActivity(
+          bearerToken,
+          custodyServiceId,
+          custodySubServiceId,
+          aspId,
+          caseDetail,
+          activity,
+          caseInformation,
+          assignedTo,
+          authUserId,
+          transaction
+        );
 
         if (!custodyServiceRequestResponse.success) {
           await transaction.rollback();
@@ -5624,7 +5731,12 @@ export namespace activitiesController {
           // Sync client report details, client report with mobile number details
           updatePromises.push(
             Utils.createReportSyncTableRecord(
-              ["clientReportDetails", "clientReportWithMobileNumberDetails", "caseReportDetails", "exceptionReportDetails"],
+              [
+                "clientReportDetails",
+                "clientReportWithMobileNumberDetails",
+                "caseReportDetails",
+                "exceptionReportDetails",
+              ],
               [createdActivity.dataValues.caseDetailId]
             )
           );
@@ -5675,10 +5787,7 @@ export namespace activitiesController {
   }
 
   // Raise Cab Assistance Request
-  export async function raiseCabAssistanceRequest(
-    req: Request,
-    res: Response
-  ) {
+  export async function raiseCabAssistanceRequest(req: Request, res: Response) {
     const transaction = await sequelize.transaction();
     try {
       const {
@@ -6024,9 +6133,7 @@ export namespace activitiesController {
           );
         if (!towingServiceCreateActivityResponse.success) {
           await transaction.rollback();
-          return res
-            .status(200)
-            .json(towingServiceCreateActivityResponse);
+          return res.status(200).json(towingServiceCreateActivityResponse);
         }
       } else {
         // TOWING REQUESTED AS NO
@@ -6075,6 +6182,7 @@ export namespace activitiesController {
   export async function acceptActivity(req: Request, res: Response) {
     const transaction = await sequelize.transaction();
     try {
+      console.log("inside asppp aceepttt")
       const inData = req.validBody;
 
       let aspApiUrl = `${masterService}/${endpointMaster.asps.getAspDetails}?aspId=${inData.aspId}`;
@@ -6090,7 +6198,13 @@ export namespace activitiesController {
               id: inData.activityId,
               activityStatusId: 1, //Open
             },
-            attributes: ["id", "caseDetailId", "customerNeedToPay", "isAspAutoAllocated", "aspActivityStatusId"],
+            attributes: [
+              "id",
+              "caseDetailId",
+              "customerNeedToPay",
+              "isAspAutoAllocated",
+              "aspActivityStatusId",
+            ],
             include: [
               {
                 model: CaseDetails,
@@ -6186,7 +6300,10 @@ export namespace activitiesController {
 
         // Validate proposed delay reason if Expected Reach Date exceeds Breakdown Reach Time SLA
         if (inData.endTime && inData.breakdownReachTimeSlaDateTime) {
-          if (inData.endTime > inData.breakdownReachTimeSlaDateTime && !inData.proposedDelayReasonId) {
+          if (
+            inData.endTime > inData.breakdownReachTimeSlaDateTime &&
+            !inData.proposedDelayReasonId
+          ) {
             await transaction.rollback();
             return res.status(200).json({
               success: false,
@@ -6210,7 +6327,9 @@ export namespace activitiesController {
               ? inData.slaViolateReasonComments
               : null,
             authUserId: inData.authUserId,
-            authUserRoleId: inData.authUserRoleId ? inData.authUserRoleId : null,
+            authUserRoleId: inData.authUserRoleId
+              ? inData.authUserRoleId
+              : null,
             transaction: transaction,
           };
 
@@ -6273,7 +6392,7 @@ export namespace activitiesController {
           activityUpdateData.dealerApprovalStatusId = 42; //APPROVED
           activityUpdateData.activityStatusId = 10; //PAYMENT PAID
           activityUpdateData.aspActivityStatusId = 2; //WAITING FOR SERVICE INITIATION
-          activityUpdateData.activityAppStatusId = 3; //WAITING FOR SERVICE INITIATION          
+          activityUpdateData.activityAppStatusId = 3; //WAITING FOR SERVICE INITIATION
         } else {
           // Check if activity has mapped one-time service transactions (from canceled activity)
           const mappedTransactions: any = await ActivityTransactions.findAll({
@@ -6392,14 +6511,10 @@ export namespace activitiesController {
       ]);
 
       //If activity accepted then sync asp auto allocated details for crm report.
-      if (
-        activity.caseDetail.typeId == 31 &&
-        activity.isAspAutoAllocated
-      ) {
-        Utils.createReportSyncTableRecord(
-          "autoAllocatedAspReportDetails",
-          [inData.activityId]
-        );
+      if (activity.caseDetail.typeId == 31 && activity.isAspAutoAllocated) {
+        Utils.createReportSyncTableRecord("autoAllocatedAspReportDetails", [
+          inData.activityId,
+        ]);
       }
 
       // CREATE REPORT SYNC TABLE RECORD FOR ASP ACTIVITY REPORT
@@ -6412,7 +6527,12 @@ export namespace activitiesController {
       // Sync client report details, client report with mobile number details
       if (activity.caseDetail.typeId == 31) {
         Utils.createReportSyncTableRecord(
-          ["clientReportDetails", "clientReportWithMobileNumberDetails", "caseReportDetails", "exceptionReportDetails"],
+          [
+            "clientReportDetails",
+            "clientReportWithMobileNumberDetails",
+            "caseReportDetails",
+            "exceptionReportDetails",
+          ],
           [activity.dataValues.caseDetailId]
         );
       }
@@ -6424,11 +6544,34 @@ export namespace activitiesController {
           [inData.activityId]
         );
       }
+      
+      try {
+        console.log("insise tryyyy");
+        
+          const acceptedActivity: any = await Activities.findOne({
+    where: { id: inData.activityId },
+    include: [
+      {
+        model: CaseDetails,
+        attributes: ["breakdownLocationTypeId","agentId","l1AgentId"],
+      },
+    ],
+  });
+ console.log("insise tryyyy",acceptedActivity);
+  if (acceptedActivity?.aspServiceAcceptedAt) {
+    await createAspStartReminders(acceptedActivity);
+  }
+} catch (err) {
+  console.log("errrrrr",err)
+  console.error("Failed to create ASP start reminders", err);
+}
+ 
 
       return res.status(200).json({
         success: true,
         message: "Activity Accepted Successfully",
       });
+   
     } catch (error: any) {
       await transaction.rollback();
       return res.status(500).json({
@@ -6451,7 +6594,12 @@ export namespace activitiesController {
             id: inData.activityId,
             activityStatusId: 1, //Open
           },
-          attributes: ["id", "caseDetailId", "isAspAutoAllocated", "aspActivityStatusId"],
+          attributes: [
+            "id",
+            "caseDetailId",
+            "isAspAutoAllocated",
+            "aspActivityStatusId",
+          ],
           include: {
             model: CaseDetails,
             where: {
@@ -6659,14 +6807,10 @@ export namespace activitiesController {
       ]);
 
       //If activity reject then sync asp auto allocated details for crm report.
-      if (
-        activity.caseDetail.typeId == 31 &&
-        activity.isAspAutoAllocated
-      ) {
-        Utils.createReportSyncTableRecord(
-          "autoAllocatedAspReportDetails",
-          [inData.activityId]
-        );
+      if (activity.caseDetail.typeId == 31 && activity.isAspAutoAllocated) {
+        Utils.createReportSyncTableRecord("autoAllocatedAspReportDetails", [
+          inData.activityId,
+        ]);
       }
 
       // CREATE REPORT SYNC TABLE RECORD FOR ASP ACTIVITY REPORT
@@ -6679,7 +6823,12 @@ export namespace activitiesController {
       // Sync client report details, client report with mobile number details
       if (activity.caseDetail.typeId == 31) {
         Utils.createReportSyncTableRecord(
-          ["clientReportDetails", "clientReportWithMobileNumberDetails", "caseReportDetails", "exceptionReportDetails"],
+          [
+            "clientReportDetails",
+            "clientReportWithMobileNumberDetails",
+            "caseReportDetails",
+            "exceptionReportDetails",
+          ],
           [activity.dataValues.caseDetailId]
         );
       }
@@ -6690,6 +6839,72 @@ export namespace activitiesController {
           ["financialReportDetails", "activityReportDetails"],
           [inData.activityId]
         );
+      }
+
+      // AFTER transaction.commit()
+
+      const rejectedActivity: any = await Activities.findOne({
+        where: { id: inData.activityId },
+        include: [
+          {
+            model: CaseDetails,
+            as: "caseDetail", // ✅ IMPORTANT: must match association alias
+            required: true,
+            include: [
+              {
+                model: CaseInformation,
+                as: "caseInformation", // ✅ alias
+                required: true,
+              },
+            ],
+          },
+          {
+            model: ActivityAspDetails,
+            as: "activityAspDetail", // ✅ alias
+            required: true,
+            attributes: ["subServiceId"],
+          },
+        ],
+      });
+
+      if (!rejectedActivity) {
+        throw new Error("Rejected activity not found");
+      }
+
+      // RSA only
+      if (rejectedActivity.caseDetail?.typeId === 31) {
+        const subServiceId = rejectedActivity.activityAspDetail?.subServiceId;
+
+        if (!subServiceId) {
+          throw new Error("SubServiceId not found");
+        }
+
+        const getMasterDetail = await axios.post(
+          `${masterService}/${endpointMaster.getMasterDetails}`,
+          { subServiceId }
+        );
+        // console.log("🔴 Rejected Activity → Creating new activity", {
+        //   rejectedActivity,
+        // });
+        if (getMasterDetail?.data?.success) {
+          await createActivityAndActivityAspDetail(
+            rejectedActivity.caseDetail, // SAME CASE
+            rejectedActivity.caseDetail.caseInformation, // SAME CASE INFO
+            inData.authUserId,
+            getMasterDetail.data.data.subService.serviceId,
+            subServiceId,
+            rejectedActivity.caseDetail.caseInformation
+              ?.breakdownToDropLocationDistance || null,
+            rejectedActivity.isInitiallyCreated,
+            rejectedActivity.isImmediateService,
+            rejectedActivity.serviceInitiatingAt,
+            rejectedActivity.serviceExpectedAt,
+            0, // aspAutoAllocation OFF
+            null, // no transaction
+            rejectedActivity.dataValues.agentPickedAt, // optional
+            rejectedActivity.caseDetail.agentId
+          );
+        }
       }
 
       return res.status(200).json({
@@ -6796,8 +7011,11 @@ export namespace activitiesController {
 
       // For CRM paid service: allow assigning driver in activityStatusId=10 only if a successful one-time-service
       // transaction exists (refund not initiated OR refund failed).
-      if (activity?.dataValues?.activityStatusId == 10 && (activity?.dataValues?.customerNeedToPay == 1 ||
-        activity?.dataValues?.customerNeedToPay == true)) {
+      if (
+        activity?.dataValues?.activityStatusId == 10 &&
+        (activity?.dataValues?.customerNeedToPay == 1 ||
+          activity?.dataValues?.customerNeedToPay == true)
+      ) {
         const successfulNonMembershipTxn = await ActivityTransactions.findOne({
           where: {
             activityId: inData.activityId,
@@ -6825,28 +7043,36 @@ export namespace activitiesController {
       }
 
       // FOR RSA CRM CASE TYPE IF ASP IS COCO ASP THEN CHECK IF THE ASP HAS MORE THAN CONFIGURED ACTIVITIES IN PROGRESS
-      if (Utils.isCocoAspActivityLimitEnabled() &&
+      if (
+        Utils.isCocoAspActivityLimitEnabled() &&
         activity.caseDetail.typeId == 31 &&
         getASPDetail?.data?.data?.isOwnPatrol &&
         inData.aspMechanicId
       ) {
         let serviceScheduledDate = null;
-        //INITIALLY CREATED AND NOT IMMEDIATE SERVICE 
-        if (activity.isInitiallyCreated == 1 && activity.isImmediateService == 0) {
-          serviceScheduledDate =
-            moment.tz(activity.serviceInitiatingAt, "Asia/Kolkata").format("YYYY-MM-DD");
+        //INITIALLY CREATED AND NOT IMMEDIATE SERVICE
+        if (
+          activity.isInitiallyCreated == 1 &&
+          activity.isImmediateService == 0
+        ) {
+          serviceScheduledDate = moment
+            .tz(activity.serviceInitiatingAt, "Asia/Kolkata")
+            .format("YYYY-MM-DD");
         } else if (activity.isInitiallyCreated == 0) {
           //NOT INITIALLY CREATED
-          serviceScheduledDate = moment.tz(activity.createdAt, "Asia/Kolkata").format("YYYY-MM-DD");
+          serviceScheduledDate = moment
+            .tz(activity.createdAt, "Asia/Kolkata")
+            .format("YYYY-MM-DD");
         } else {
           //INITIALLY CREATED AND IMMEDIATE SERVICE
           serviceScheduledDate = activity.caseDetail.dataValues.date;
         }
 
-        const inProgressCheckResponse = await Utils.checkCocoAspInProgressActivities(
-          inData.aspMechanicId,
-          serviceScheduledDate
-        );
+        const inProgressCheckResponse =
+          await Utils.checkCocoAspInProgressActivities(
+            inData.aspMechanicId,
+            serviceScheduledDate
+          );
         if (!inProgressCheckResponse.success) {
           await transaction.rollback();
           return res.status(200).json({
@@ -6856,15 +7082,18 @@ export namespace activitiesController {
         }
 
         const activityLimit = Utils.getCocoAspActivityLimit();
-        const totalActivitiesCount = (inProgressCheckResponse.mechanicActivitiesCount || 0) +
+        const totalActivitiesCount =
+          (inProgressCheckResponse.mechanicActivitiesCount || 0) +
           (inProgressCheckResponse.towingActivitiesCount || 0);
         // IF THE COCO TECHNICIAN HAS EQUAL TO OR MORE THAN CONFIGURED TOTAL ACTIVITIES (MECHANIC + TOWING) IN PROGRESS THEN RETURN ERROR
-        if (inProgressCheckResponse.success && totalActivitiesCount >= activityLimit) {
+        if (
+          inProgressCheckResponse.success &&
+          totalActivitiesCount >= activityLimit
+        ) {
           await transaction.rollback();
           return res.status(200).json({
             success: false,
-            error:
-              `This COCO technician has already been working on the maximum allowed ${activityLimit} cases. Please assign another technician.`,
+            error: `This COCO technician has already been working on the maximum allowed ${activityLimit} cases. Please assign another technician.`,
           });
         }
       }
@@ -6930,8 +7159,10 @@ export namespace activitiesController {
               workshopName: getASPDetail.data.data.workshopName,
               mechanicDetail: inData.aspMechanicId,
               notificationType: "CRM",
-              breakdownOrPickupReachEta: activityAspDetail.dataValues.estimatedAspToBreakdownKmDuration || "0 m",
-            }
+              breakdownOrPickupReachEta:
+                activityAspDetail.dataValues
+                  .estimatedAspToBreakdownKmDuration || "0 m",
+            };
             notificationController.sendNotification(details); // function get agent token details for agent, dealer, etc
           }
         }
@@ -7003,6 +7234,7 @@ export namespace activitiesController {
   //GET ACTIVITY DETAILS
   export async function getActivityData(req: Request, res: Response) {
     try {
+      // console.log(req,"reqqqqqqqq")
       const { activityId } = req.validBody;
       const data: any = await activityAspDetails.findOne({
         attributes: {
@@ -7029,6 +7261,7 @@ export namespace activitiesController {
                 "updatedAt",
                 "deletedAt",
               ],
+              include: ["aspServiceRejectedAt", "serviceRejectedInApp"],
             },
             include: [
               {
@@ -7225,8 +7458,7 @@ export namespace activitiesController {
       data.activity.dataValues.reimbursementTransaction =
         reimbursementTransaction;
       data.activity.dataValues.dealerAttachments = dealerAttachments;
-      data.activity.dataValues.bankDetailAttachments =
-        bankDetailAttachments;
+      data.activity.dataValues.bankDetailAttachments = bankDetailAttachments;
       data.activity.dataValues.digitalInventoryAttachments =
         digitalInventoryAttachments;
 
@@ -7311,8 +7543,8 @@ export namespace activitiesController {
       if (activityAspFromLocation) {
         data.activity.dataValues.activityAspFromLocations.push(
           activityAspFromLocation.latitude +
-          "," +
-          activityAspFromLocation.longitude
+            "," +
+            activityAspFromLocation.longitude
         );
       }
 
@@ -7325,7 +7557,7 @@ export namespace activitiesController {
           activityAspToLocation.latitude + "," + activityAspToLocation.longitude
         );
       }
-
+// console.log(data,"dataaaaaaaaaaa")
       return res.status(200).json({
         success: true,
         message: "Data Fetched Successfully",
@@ -7581,6 +7813,7 @@ export namespace activitiesController {
   //ASP Mechanic Accept Activitity
   export async function mechanicAcceptActivity(req: Request, res: Response) {
     try {
+      console.log("inside asp mechanixcccc")
       const { activityId, aspId, aspMechanicId } = req.validBody;
       const activity = await Activities.findOne({
         where: { id: activityId },
@@ -7750,6 +7983,7 @@ export namespace activitiesController {
           title: activityLogTitle,
         });
       }
+      
 
       return res.status(200).json({
         success: true,
@@ -8554,7 +8788,12 @@ export namespace activitiesController {
       // Sync client report details, client report with mobile number details
       if (activityExists && activityExists.caseDetail.dataValues.typeId == 31) {
         Utils.createReportSyncTableRecord(
-          ["clientReportDetails", "clientReportWithMobileNumberDetails", "caseReportDetails", "exceptionReportDetails"],
+          [
+            "clientReportDetails",
+            "clientReportWithMobileNumberDetails",
+            "caseReportDetails",
+            "exceptionReportDetails",
+          ],
           [activityExists.dataValues.caseDetailId]
         );
       }
@@ -8755,7 +8994,7 @@ export namespace activitiesController {
 
         actualTotalKmReason = activityAspDetail.dataValues.actualTotalKmReason
           ? activityAspDetail.dataValues.actualTotalKmReason +
-          ` , ${actualTotalKmReasonContent}`
+            ` , ${actualTotalKmReasonContent}`
           : actualTotalKmReasonContent;
       }
 
@@ -9326,7 +9565,7 @@ export namespace activitiesController {
             "financeStatusId",
             "activityStatusId",
             "aspActivityStatusId",
-            "isAspAutoAllocated"
+            "isAspAutoAllocated",
           ],
           include: [
             {
@@ -9404,16 +9643,17 @@ export namespace activitiesController {
           const paymentStatusChecks = await Promise.all(
             activityTransactions.map(async (txn: any) => {
               try {
-                const razorpayPaymentStatusCheckResponse: any = await axios.post(
-                  `${process.env.RAZORPAY_PAYMENT_STATUS_CHECK_URL}`,
-                  {
-                    payment_link_id: txn.razorpayOrderId,
-                  }
-                );
+                const razorpayPaymentStatusCheckResponse: any =
+                  await axios.post(
+                    `${process.env.RAZORPAY_PAYMENT_STATUS_CHECK_URL}`,
+                    {
+                      payment_link_id: txn.razorpayOrderId,
+                    }
+                  );
 
                 if (
-                  razorpayPaymentStatusCheckResponse?.data?.response?.payments?.length >
-                  0 &&
+                  razorpayPaymentStatusCheckResponse?.data?.response?.payments
+                    ?.length > 0 &&
                   razorpayPaymentStatusCheckResponse.data.response.payments.find(
                     (payment: any) => payment.status == "captured"
                   )
@@ -9694,10 +9934,9 @@ export namespace activitiesController {
         activity.caseDetail.dataValues.typeId == 31 &&
         activity.isAspAutoAllocated
       ) {
-        Utils.createReportSyncTableRecord(
-          "autoAllocatedAspReportDetails",
-          [activityId]
-        );
+        Utils.createReportSyncTableRecord("autoAllocatedAspReportDetails", [
+          activityId,
+        ]);
       }
 
       // CREATE REPORT SYNC TABLE RECORD FOR ASP ACTIVITY REPORT
@@ -9710,7 +9949,12 @@ export namespace activitiesController {
       // Sync client report details, client report with mobile number details
       if (activity.caseDetail.dataValues.typeId == 31) {
         Utils.createReportSyncTableRecord(
-          ["clientReportDetails", "clientReportWithMobileNumberDetails", "caseReportDetails", "exceptionReportDetails"],
+          [
+            "clientReportDetails",
+            "clientReportWithMobileNumberDetails",
+            "caseReportDetails",
+            "exceptionReportDetails",
+          ],
           [activity.dataValues.caseDetailId]
         );
       }
@@ -9844,18 +10088,18 @@ export namespace activitiesController {
             unbilledDealerDeliveryRequestIndividualRate += activity
               .activityAspDetail.dataValues.actualAdditionalCharge
               ? +activity.activityAspDetail.dataValues.actualServiceCost +
-              +activity.activityAspDetail.dataValues.actualAdditionalCharge +
-              +activity.activityAspDetail.dataValues.actualClientWaitingCharge
+                +activity.activityAspDetail.dataValues.actualAdditionalCharge +
+                +activity.activityAspDetail.dataValues.actualClientWaitingCharge
               : +activity.activityAspDetail.dataValues.actualServiceCost +
-              +activity.activityAspDetail.dataValues
-                .actualClientWaitingCharge;
+                +activity.activityAspDetail.dataValues
+                  .actualClientWaitingCharge;
           } else if (
             activity.activityAspDetail.dataValues.estimatedServiceCost
           ) {
             unbilledDealerDeliveryRequestIndividualRate += activity
               .activityAspDetail.dataValues.estimatedAdditionalCharge
               ? +activity.activityAspDetail.dataValues.estimatedServiceCost +
-              +activity.activityAspDetail.dataValues.estimatedAdditionalCharge
+                +activity.activityAspDetail.dataValues.estimatedAdditionalCharge
               : +activity.activityAspDetail.dataValues.estimatedServiceCost;
           }
           unbilledDealerDeliveryRequestActivityIds.push(activity.dataValues.id);
@@ -9890,8 +10134,8 @@ export namespace activitiesController {
         headerLevelDescription: `Towards vehicle transfer fee from ${moment
           .tz(startDate, "Asia/Kolkata")
           .format("DD/MM/YYYY")} to ${moment
-            .tz(endDate, "Asia/Kolkata")
-            .format("DD/MM/YYYY")}`,
+          .tz(endDate, "Asia/Kolkata")
+          .format("DD/MM/YYYY")}`,
         deliveryRequest: [
           {
             description: `Total ${unbilledDealerDeliveryRequests.rows.length} vehicle transfer`,
@@ -9960,8 +10204,12 @@ export namespace activitiesController {
   ) {
     const transaction = await sequelize.transaction();
     try {
-      const { activityId, customerAgreedToAdditionalPayment, additionalPaymentRemarks, authUserId } =
-        req.validBody;
+      const {
+        activityId,
+        customerAgreedToAdditionalPayment,
+        additionalPaymentRemarks,
+        authUserId,
+      } = req.validBody;
 
       // Check case type first - only proceed if case type is 31 (CRM case type)
       const activity: any = await Activities.findOne({
@@ -10031,7 +10279,9 @@ export namespace activitiesController {
         {
           activityId: activityId,
           typeId: 240, // Web
-          title: `Customer did not agree to proceed with additional KM payment link. Comments: ${additionalPaymentRemarks || "No comments provided"}`,
+          title: `Customer did not agree to proceed with additional KM payment link. Comments: ${
+            additionalPaymentRemarks || "No comments provided"
+          }`,
           createdById: authUserId,
         },
         {
@@ -10104,7 +10354,7 @@ export namespace activitiesController {
               "callCenterId",
               "statusId",
               "createdAt",
-              "typeId"
+              "typeId",
             ],
             required: true,
             where: {
@@ -10120,7 +10370,7 @@ export namespace activitiesController {
               "estimatedTotalKm",
               "estimatedServiceCost",
               "estimatedAdditionalCharge",
-              "additionalKmEstimatedServiceCost"
+              "additionalKmEstimatedServiceCost",
             ],
             required: true,
           },
@@ -10134,38 +10384,37 @@ export namespace activitiesController {
         });
       }
 
-      const [caseInformation, getAgentDetail]: any =
-        await Promise.all([
-          //CASE INFORMATION
-          CaseInformation.findOne({
-            where: {
-              caseDetailId: activityExists.dataValues.caseDetailId,
-            },
-            attributes: [
-              "id",
-              "customerContactName",
-              "customerMobileNumber",
-              "customerCurrentContactName",
-              "customerCurrentMobileNumber",
-              "customerLocation",
-              "customerStateId",
-              "customerCityId",
-              "serviceEligibility",
-              "policyNumber",
-              "breakdownLat",
-              "breakdownLong",
-              "breakdownLocation",
-              "breakdownAreaId",
-              "nonMembershipType",
-              "additionalChargeableKm",
-              "sendPaymentLinkTo",
-            ],
-          }),
-          //GET AGENT DETAILS
-          axios.post(`${userServiceUrl}/${userServiceEndpoint.getUser}`, {
-            id: authUserId,
-          }),
-        ]);
+      const [caseInformation, getAgentDetail]: any = await Promise.all([
+        //CASE INFORMATION
+        CaseInformation.findOne({
+          where: {
+            caseDetailId: activityExists.dataValues.caseDetailId,
+          },
+          attributes: [
+            "id",
+            "customerContactName",
+            "customerMobileNumber",
+            "customerCurrentContactName",
+            "customerCurrentMobileNumber",
+            "customerLocation",
+            "customerStateId",
+            "customerCityId",
+            "serviceEligibility",
+            "policyNumber",
+            "breakdownLat",
+            "breakdownLong",
+            "breakdownLocation",
+            "breakdownAreaId",
+            "nonMembershipType",
+            "additionalChargeableKm",
+            "sendPaymentLinkTo",
+          ],
+        }),
+        //GET AGENT DETAILS
+        axios.post(`${userServiceUrl}/${userServiceEndpoint.getUser}`, {
+          id: authUserId,
+        }),
+      ]);
 
       if (!caseInformation) {
         await transaction.rollback();
@@ -10192,12 +10441,18 @@ export namespace activitiesController {
         paymentTypeId: 174, //One Time Service
         transactionTypeId: 181, //Debit
         paymentStatusId: 190, //Pending
-        isForAdditionalKmPayment: activityExists.dataValues.hasAdditionalKmForPayment == true ? true : false,
+        isForAdditionalKmPayment:
+          activityExists.dataValues.hasAdditionalKmForPayment == true
+            ? true
+            : false,
         createdById: authUserId,
       };
-      const createdTransaction = await ActivityTransactions.create(activityTransactionData, {
-        transaction: transaction,
-      });
+      const createdTransaction = await ActivityTransactions.create(
+        activityTransactionData,
+        {
+          transaction: transaction,
+        }
+      );
       const activityTransactionId = createdTransaction.dataValues.id;
 
       //GET MASTER DETAILS
@@ -10246,18 +10501,21 @@ export namespace activitiesController {
       }
 
       // Check if this is for additional KM payment
-      const isAdditionalKmPayment = activityExists.dataValues.hasAdditionalKmForPayment;
+      const isAdditionalKmPayment =
+        activityExists.dataValues.hasAdditionalKmForPayment;
 
       let totalKm = 0;
       // For additional KM payment, use additionalKmForPayment
       if (isAdditionalKmPayment) {
-        totalKm = parseFloat(activityExists.dataValues.additionalKmForPayment || "0");
+        totalKm = parseFloat(
+          activityExists.dataValues.additionalKmForPayment || "0"
+        );
       } else if (
         activityExists.activityAspDetail.dataValues.estimatedTotalKm &&
         (activityExists.dataValues.nonMembershipType ==
           "Non Warranty Service" ||
           activityExists.dataValues.nonMembershipType ==
-          "One Time Paid Service")
+            "One Time Paid Service")
       ) {
         totalKm = parseFloat(
           activityExists.activityAspDetail.dataValues.estimatedTotalKm
@@ -10305,10 +10563,10 @@ export namespace activitiesController {
         paymentModeName:
           getMasterDetail.data?.data?.paymentMethod?.name || null,
 
-        estimatedAdditionalCharge: isAdditionalKmPayment ? 0 : (
-          activityExists?.activityAspDetail?.dataValues
-            ?.estimatedAdditionalCharge || 0
-        ),
+        estimatedAdditionalCharge: isAdditionalKmPayment
+          ? 0
+          : activityExists?.activityAspDetail?.dataValues
+              ?.estimatedAdditionalCharge || 0,
         discountPercentage: discountPercentage ? discountPercentage : null,
         discountAmount: discountAmount ? discountAmount : null,
         discountReasonId: discountReasonId ? discountReasonId : null,
@@ -10363,25 +10621,26 @@ export namespace activitiesController {
         const taxPercentage =
           getMasterDetail?.data?.data?.igstTax?.percentage || 0;
         const newNetAmount =
-          parseFloat(activityExists.activityAspDetail.additionalKmEstimatedServiceCost || 0) -
-          parseFloat(discountAmount || 0);
+          parseFloat(
+            activityExists.activityAspDetail.additionalKmEstimatedServiceCost ||
+              0
+          ) - parseFloat(discountAmount || 0);
         const newTaxAmount = newNetAmount * (taxPercentage / 100);
 
         activityUpdateData.customerAgreedToAdditionalPayment = true;
 
-        activityAspDetailsUpdateData.additionalKmDiscountPercentage = discountPercentage
-          ? parseFloat(discountPercentage).toFixed(2)
-          : null;
+        activityAspDetailsUpdateData.additionalKmDiscountPercentage =
+          discountPercentage ? parseFloat(discountPercentage).toFixed(2) : null;
         activityAspDetailsUpdateData.additionalKmDiscountAmount = discountAmount
           ? parseFloat(discountAmount).toFixed(2)
           : null;
-        activityAspDetailsUpdateData.additionalKmDiscountReasonId = discountReasonId
-          ? discountReasonId
-          : null;
+        activityAspDetailsUpdateData.additionalKmDiscountReasonId =
+          discountReasonId ? discountReasonId : null;
         activityAspDetailsUpdateData.additionalKmDiscountReason = discountReason
           ? discountReason
           : null;
-        activityAspDetailsUpdateData.additionalKmEstimatedTotalTax = newTaxAmount.toFixed(2);
+        activityAspDetailsUpdateData.additionalKmEstimatedTotalTax =
+          newTaxAmount.toFixed(2);
         activityAspDetailsUpdateData.additionalKmEstimatedTotalAmount = (
           newNetAmount + newTaxAmount
         ).toFixed(2);
@@ -10395,7 +10654,9 @@ export namespace activitiesController {
         const taxPercentage =
           getMasterDetail?.data?.data?.igstTax?.percentage || 0;
         const newNetAmount =
-          parseFloat(activityExists.activityAspDetail.estimatedServiceCost || 0) +
+          parseFloat(
+            activityExists.activityAspDetail.estimatedServiceCost || 0
+          ) +
           parseFloat(
             activityExists.activityAspDetail.estimatedAdditionalCharge || 0
           ) -
@@ -10417,7 +10678,8 @@ export namespace activitiesController {
         activityAspDetailsUpdateData.discountReason = discountReason
           ? discountReason
           : null;
-        activityAspDetailsUpdateData.estimatedTotalTax = newTaxAmount.toFixed(2);
+        activityAspDetailsUpdateData.estimatedTotalTax =
+          newTaxAmount.toFixed(2);
         activityAspDetailsUpdateData.estimatedTotalAmount = (
           newNetAmount + newTaxAmount
         ).toFixed(2);
@@ -10428,8 +10690,10 @@ export namespace activitiesController {
         // UPDATE ACTIVITY TRANSACTION WITH MEMBERSHIP ID AND RAZORPAY ORDER ID
         ActivityTransactions.update(
           {
-            membershipId: nonMembershipPaymentResponse.data.membershipPrimaryId || null,
-            razorpayOrderId: nonMembershipPaymentResponse.data.razorpayOrderId || null,
+            membershipId:
+              nonMembershipPaymentResponse.data.membershipPrimaryId || null,
+            razorpayOrderId:
+              nonMembershipPaymentResponse.data.razorpayOrderId || null,
             amount: nonMembershipPaymentResponse.data.amount || null,
             totalKm: totalKm > 0 ? totalKm.toString() : "0",
             updatedById: authUserId,
@@ -10442,13 +10706,10 @@ export namespace activitiesController {
           }
         ),
         //UPDATE ACTIVITY PAYMENT DETAILS
-        Activities.update(
-          activityUpdateData,
-          {
-            where: { id: activityId },
-            transaction: transaction,
-          }
-        ),
+        Activities.update(activityUpdateData, {
+          where: { id: activityId },
+          transaction: transaction,
+        }),
         //CREATE ACTIVITY LOG
         ActivityLogs.create(
           {
@@ -10458,15 +10719,12 @@ export namespace activitiesController {
           },
           { transaction }
         ),
-        ActivityAspDetails.update(
-          activityAspDetailsUpdateData,
-          {
-            where: {
-              id: activityExists.activityAspDetail.id,
-            },
-            transaction: transaction,
-          }
-        ),
+        ActivityAspDetails.update(activityAspDetailsUpdateData, {
+          where: {
+            id: activityExists.activityAspDetail.id,
+          },
+          transaction: transaction,
+        }),
       ]);
 
       await transaction.commit();
@@ -10536,25 +10794,32 @@ export namespace activitiesController {
         activityTransactionWhere.razorpayOrderId = payload.razorpayOrderId;
       }
 
-      const activityTransactionExists: any = await ActivityTransactions.findOne({
-        where: activityTransactionWhere,
-        attributes: ["id", "isForAdditionalKmPayment", "totalKm"],
-      });
+      const activityTransactionExists: any = await ActivityTransactions.findOne(
+        {
+          where: activityTransactionWhere,
+          attributes: ["id", "isForAdditionalKmPayment", "totalKm"],
+        }
+      );
 
       if (!activityTransactionExists) {
         await transaction.rollback();
         return res.status(200).json({
           success: false,
-          error: "Activity transaction not found for the provided razorpayOrderId",
+          error:
+            "Activity transaction not found for the provided razorpayOrderId",
         });
       }
 
       // Check if this transaction is for additional KM payment
-      const isForAdditionalKmPayment = activityTransactionExists.isForAdditionalKmPayment == true;
+      const isForAdditionalKmPayment =
+        activityTransactionExists.isForAdditionalKmPayment == true;
 
       // Prepare activity update data
       const activityUpdateData: any = {
-        paidTotalKm: (parseFloat(activityExists.dataValues.paidTotalKm || "0") + parseFloat(activityTransactionExists.dataValues.totalKm || "0")).toString(),
+        paidTotalKm: (
+          parseFloat(activityExists.dataValues.paidTotalKm || "0") +
+          parseFloat(activityTransactionExists.dataValues.totalKm || "0")
+        ).toString(),
       };
 
       // Prepare activity log title
@@ -10580,15 +10845,12 @@ export namespace activitiesController {
       await Promise.all([
         //UPDATE APPROVAL STATUS, PAYMENT METHOD, ACTIVITY AND ASP ACTIVITY STATUS
         // Note: Invoice fields removed - invoice will be generated at case closure
-        Activities.update(
-          activityUpdateData,
-          {
-            where: {
-              id: payload.activityId,
-            },
-            transaction: transaction,
-          }
-        ),
+        Activities.update(activityUpdateData, {
+          where: {
+            id: payload.activityId,
+          },
+          transaction: transaction,
+        }),
         ActivityTransactions.update(
           {
             paymentStatusId: 191, //SUCCESS
@@ -10635,10 +10897,9 @@ export namespace activitiesController {
         activityExists.caseDetail.dataValues.typeId == 31 &&
         activityExists.isAspAutoAllocated
       ) {
-        Utils.createReportSyncTableRecord(
-          "autoAllocatedAspReportDetails",
-          [payload.activityId]
-        );
+        Utils.createReportSyncTableRecord("autoAllocatedAspReportDetails", [
+          payload.activityId,
+        ]);
       }
 
       // CREATE REPORT SYNC TABLE RECORD FOR FINANCIAL REPORT AND ACTIVITY REPORT
@@ -10673,7 +10934,12 @@ export namespace activitiesController {
           id: transactionId,
           paymentTypeId: 174, //One time service
         },
-        attributes: ["id", "activityId", "razorpayOrderId", "razorpayTransactionId"],
+        attributes: [
+          "id",
+          "activityId",
+          "razorpayOrderId",
+          "razorpayTransactionId",
+        ],
         include: [
           {
             model: Activities,
@@ -10717,7 +10983,8 @@ export namespace activitiesController {
         await transaction.rollback();
         return res.status(200).json({
           success: false,
-          error: "No payment link found for this transaction. Please send a new payment link first.",
+          error:
+            "No payment link found for this transaction. Please send a new payment link first.",
         });
       }
 
@@ -10737,7 +11004,10 @@ export namespace activitiesController {
       }
 
       // Update activityTransaction with new razorpayOrderId if a new one is returned
-      if (response.data.razorpayOrderId && response.data.razorpayOrderId !== activityTransaction.razorpayOrderId) {
+      if (
+        response.data.razorpayOrderId &&
+        response.data.razorpayOrderId !== activityTransaction.razorpayOrderId
+      ) {
         await ActivityTransactions.update(
           {
             razorpayOrderId: response.data.razorpayOrderId,
@@ -10850,10 +11120,9 @@ export namespace activitiesController {
         activityExists.caseDetail.typeId == 31 &&
         activityExists.isAspAutoAllocated
       ) {
-        Utils.createReportSyncTableRecord(
-          "autoAllocatedAspReportDetails",
-          [payload.activityId]
-        );
+        Utils.createReportSyncTableRecord("autoAllocatedAspReportDetails", [
+          payload.activityId,
+        ]);
       }
 
       return res.status(200).json({
@@ -11350,7 +11619,10 @@ export namespace activitiesController {
             //Activity Ended
             aspActivityStatusIds.push(9); //End Trip
           }
-        } else if (serviceId == 1 && activity.caseDetail.caseInformation.dropLocation) {
+        } else if (
+          serviceId == 1 &&
+          activity.caseDetail.caseInformation.dropLocation
+        ) {
           // Towing service
           if (activity.dataValues.aspActivityStatusId == 2) {
             //Waiting for Service Initiation
@@ -11899,20 +12171,20 @@ export namespace activitiesController {
         serviceStartDateTime: serviceDetail?.activity?.dataValues
           .serviceStartDateTime
           ? moment
-            .tz(
-              serviceDetail.activity.dataValues.serviceStartDateTime,
-              "Asia/Kolkata"
-            )
-            .format("DD/MM/YYYY hh:mm A")
+              .tz(
+                serviceDetail.activity.dataValues.serviceStartDateTime,
+                "Asia/Kolkata"
+              )
+              .format("DD/MM/YYYY hh:mm A")
           : null,
         serviceEndDateTime: serviceDetail?.activity?.dataValues
           .serviceEndDateTime
           ? moment
-            .tz(
-              serviceDetail.activity.dataValues.serviceEndDateTime,
-              "Asia/Kolkata"
-            )
-            .format("DD/MM/YYYY hh:mm A")
+              .tz(
+                serviceDetail.activity.dataValues.serviceEndDateTime,
+                "Asia/Kolkata"
+              )
+              .format("DD/MM/YYYY hh:mm A")
           : null,
         breakDownLocation:
           serviceDetail.activity.caseDetail.caseInformation.breakdownLocation,
@@ -11927,11 +12199,11 @@ export namespace activitiesController {
             serviceDetail.activity.caseDetail.caseInformation.dropLocationLong,
           vehicleAcknowledgedBy: serviceDetail.dropActivityInventory
             ? serviceDetail.dropActivityInventory.dataValues
-              .vehicleAcknowledgedBy
+                .vehicleAcknowledgedBy
             : null,
           mobileNumberOfReceiver: serviceDetail.dropActivityInventory
             ? serviceDetail.dropActivityInventory.dataValues
-              .mobileNumberOfReceiver
+                .mobileNumberOfReceiver
             : null,
           additionalChargeableKm:
             serviceDetail.activity.dataValues.additionalChargeableKm,
@@ -11946,42 +12218,42 @@ export namespace activitiesController {
         aspReachedToBreakdownAt: serviceDetail.activity.dataValues
           .aspReachedToBreakdownAt
           ? moment
-            .tz(
-              serviceDetail.activity.dataValues.aspReachedToBreakdownAt,
-              "Asia/Kolkata"
-            )
-            .format("DD/MM/YYYY hh:mm A")
+              .tz(
+                serviceDetail.activity.dataValues.aspReachedToBreakdownAt,
+                "Asia/Kolkata"
+              )
+              .format("DD/MM/YYYY hh:mm A")
           : null,
         aspVehicleRegistrationNumber: serviceDetail.activity.activityAspDetail
           ? serviceDetail.activity.activityAspDetail
-            .aspVehicleRegistrationNumber
+              .aspVehicleRegistrationNumber
           : null,
         aspServiceAcceptedAt: serviceDetail.activity.dataValues
           .aspServiceAcceptedAt
           ? moment
-            .tz(
-              serviceDetail.activity.dataValues.aspServiceAcceptedAt,
-              "Asia/Kolkata"
-            )
-            .format("DD/MM/YYYY hh:mm A")
+              .tz(
+                serviceDetail.activity.dataValues.aspServiceAcceptedAt,
+                "Asia/Kolkata"
+              )
+              .format("DD/MM/YYYY hh:mm A")
           : null,
         aspServiceRejectedAt: serviceDetail.activity.dataValues
           .aspServiceRejectedAt
           ? moment
-            .tz(
-              serviceDetail.activity.dataValues.aspServiceRejectedAt,
-              "Asia/Kolkata"
-            )
-            .format("DD/MM/YYYY hh:mm A")
+              .tz(
+                serviceDetail.activity.dataValues.aspServiceRejectedAt,
+                "Asia/Kolkata"
+              )
+              .format("DD/MM/YYYY hh:mm A")
           : null,
         aspServiceCanceledAt: serviceDetail.activity.dataValues
           .aspServiceCanceledAt
           ? moment
-            .tz(
-              serviceDetail.activity.dataValues.aspServiceCanceledAt,
-              "Asia/Kolkata"
-            )
-            .format("DD/MM/YYYY hh:mm A")
+              .tz(
+                serviceDetail.activity.dataValues.aspServiceCanceledAt,
+                "Asia/Kolkata"
+              )
+              .format("DD/MM/YYYY hh:mm A")
           : null,
       };
 
@@ -12232,7 +12504,7 @@ export namespace activitiesController {
 
         actualTotalKmReason = activityAspDetail.dataValues.actualTotalKmReason
           ? activityAspDetail.dataValues.actualTotalKmReason +
-          ` , ${actualTotalKmReasonContent}`
+            ` , ${actualTotalKmReasonContent}`
           : actualTotalKmReasonContent;
       }
 
@@ -12385,13 +12657,13 @@ export namespace activitiesController {
         ),
         //UPDATE ACTIVITY CLIENT RATE CARD
         inData.clientRateCard &&
-        ActivityClientRateCards.update(
-          { ...inData.clientRateCard },
-          {
-            where: { activityId: inData.activityId },
-            transaction,
-          }
-        ),
+          ActivityClientRateCards.update(
+            { ...inData.clientRateCard },
+            {
+              where: { activityId: inData.activityId },
+              transaction,
+            }
+          ),
       ]);
 
       //FCM PUSH NOTIFICATIONS
@@ -12475,16 +12747,20 @@ export namespace activitiesController {
 
       //IF actual km update then sync asp auto allocated details for crm report.
       if (activity.isAspAutoAllocated) {
-        Utils.createReportSyncTableRecord(
-          "autoAllocatedAspReportDetails",
-          [inData.activityId]
-        );
+        Utils.createReportSyncTableRecord("autoAllocatedAspReportDetails", [
+          inData.activityId,
+        ]);
       }
 
       // Sync client report details, client report with mobile number details
       if (caseDetail.dataValues.typeId == 31) {
         Utils.createReportSyncTableRecord(
-          ["clientReportDetails", "clientReportWithMobileNumberDetails", "caseReportDetails", "exceptionReportDetails"],
+          [
+            "clientReportDetails",
+            "clientReportWithMobileNumberDetails",
+            "caseReportDetails",
+            "exceptionReportDetails",
+          ],
           [activity.dataValues.caseDetailId]
         );
       }
@@ -12593,10 +12869,11 @@ export namespace activitiesController {
           {
             activityId: activityExist.dataValues.id,
             typeId: 240, //WEB
-            title: `The agent "${getAgentDetail.data.user.name
-              }" has updated the route deviation KM (${parseFloat(
-                inData.routeDeviationKm
-              )}).`,
+            title: `The agent "${
+              getAgentDetail.data.user.name
+            }" has updated the route deviation KM (${parseFloat(
+              inData.routeDeviationKm
+            )}).`,
           },
           {
             transaction: transaction,
@@ -12742,7 +13019,12 @@ export namespace activitiesController {
       // Sync client report details, client report with mobile number details
       if (activityExist.caseDetail.typeId == 31) {
         Utils.createReportSyncTableRecord(
-          ["clientReportDetails", "clientReportWithMobileNumberDetails", "caseReportDetails", "exceptionReportDetails"],
+          [
+            "clientReportDetails",
+            "clientReportWithMobileNumberDetails",
+            "caseReportDetails",
+            "exceptionReportDetails",
+          ],
           [activityExist.caseDetail.id]
         );
       }
@@ -12799,14 +13081,14 @@ export namespace activitiesController {
       caseDetail.dataValues.serviceInitiatingAtInMilliSeconds = caseDetail
         ?.activities[0]?.serviceInitiatingAt
         ? moment
-          .tz(caseDetail.activities[0].serviceInitiatingAt, "Asia/Kolkata")
-          .valueOf()
+            .tz(caseDetail.activities[0].serviceInitiatingAt, "Asia/Kolkata")
+            .valueOf()
         : null;
       caseDetail.dataValues.activityCreatedAtInMilliSeconds = caseDetail
         ?.activities[0]?.createdAt
         ? moment
-          .tz(caseDetail.activities[0].createdAt, "Asia/Kolkata")
-          .valueOf()
+            .tz(caseDetail.activities[0].createdAt, "Asia/Kolkata")
+            .valueOf()
         : null;
       caseDetail.dataValues.caseDetail = {};
       caseDetail.dataValues.caseDetail.createdAtInMilliSeconds =
@@ -13130,7 +13412,7 @@ export namespace activitiesController {
               "vin",
               "registrationNumber",
               "caseNumber",
-              "typeId"
+              "typeId",
             ],
             required: true,
             where: {
@@ -13506,7 +13788,8 @@ export namespace activitiesController {
       const checkPaymentStatusResponse = await axios.post(
         `${process.env.RSA_BASE_URL}/crm/checkPaymentStatus`,
         {
-          customerInvRazorpayOrderId: activityTransaction.razorpayOrderId || null,
+          customerInvRazorpayOrderId:
+            activityTransaction.razorpayOrderId || null,
           nonMembershipId: activityTransaction.membershipId || null,
         }
       );
@@ -13669,11 +13952,17 @@ export namespace activitiesController {
 
       let aspMechanicInProgressActivities = [];
       for (const aspMechanicId of aspMechanicIds) {
-        const inProgressCheckResponse = await Utils.checkCocoAspInProgressActivities(aspMechanicId, serviceScheduledDate);
+        const inProgressCheckResponse =
+          await Utils.checkCocoAspInProgressActivities(
+            aspMechanicId,
+            serviceScheduledDate
+          );
         if (inProgressCheckResponse.success) {
           aspMechanicInProgressActivities.push({
             aspMechanicId: aspMechanicId,
-            assignedCount: (inProgressCheckResponse.mechanicActivitiesCount || 0) + (inProgressCheckResponse.towingActivitiesCount || 0),
+            assignedCount:
+              (inProgressCheckResponse.mechanicActivitiesCount || 0) +
+              (inProgressCheckResponse.towingActivitiesCount || 0),
           });
         }
       }
@@ -13701,7 +13990,14 @@ export namespace activitiesController {
           id: payload.transactionId,
           paymentTypeId: 174, //One time service
         },
-        attributes: ["id", "activityId", "membershipId", "amount", "refundStatusId", "paymentStatusId"],
+        attributes: [
+          "id",
+          "activityId",
+          "membershipId",
+          "amount",
+          "refundStatusId",
+          "paymentStatusId",
+        ],
         include: [
           {
             model: Activities,
@@ -13727,7 +14023,10 @@ export namespace activitiesController {
       }
 
       // Check if refund already exists and is not failed
-      if (activityTransaction.refundStatusId != null && activityTransaction.refundStatusId != 1303) {
+      if (
+        activityTransaction.refundStatusId != null &&
+        activityTransaction.refundStatusId != 1303
+      ) {
         await transaction.rollback();
         return res.status(200).json({
           success: false,
@@ -13854,7 +14153,7 @@ export namespace activitiesController {
           activityId: activityTransaction.activityId,
           typeId: 240, // Web
           title: `Refund initiated for transaction # ${payload.transactionId}`,
-          description: descriptionParts.join('<br />'),
+          description: descriptionParts.join("<br />"),
           createdById: payload.authUserId,
         },
         {
@@ -13931,7 +14230,9 @@ export namespace activitiesController {
 
       const descriptionParts: string[] = [];
       descriptionParts.push(
-        `Status: <span style="color:#999">${payload.type === 1 ? "Rejected" : "Approved"}</span>`
+        `Status: <span style="color:#999">${
+          payload.type === 1 ? "Rejected" : "Approved"
+        }</span>`
       );
 
       // Prepare update columns for activityTransactions
@@ -13939,7 +14240,8 @@ export namespace activitiesController {
       if (payload.type === 1) {
         // Reject
         transactionUpdateColumns.cancellationStatusId = 1312; // Cancellation Rejected
-        transactionUpdateColumns.cancellationRejectedReason = payload.cancellationRejectedReason.trim();
+        transactionUpdateColumns.cancellationRejectedReason =
+          payload.cancellationRejectedReason.trim();
         transactionUpdateColumns.refundId = null;
         transactionUpdateColumns.refundStatusId = null;
         transactionUpdateColumns.refundTypeId = null;
@@ -13965,7 +14267,9 @@ export namespace activitiesController {
             1303: "Failed",
           };
           descriptionParts.push(
-            `Refund Status: <span style="color:#999">${refundStatusMap[payload.refundStatusId] || "Unknown"}</span>`
+            `Refund Status: <span style="color:#999">${
+              refundStatusMap[payload.refundStatusId] || "Unknown"
+            }</span>`
           );
         }
         if (payload.refundTypeId) {
@@ -13975,7 +14279,9 @@ export namespace activitiesController {
             1202: "Partial Refund",
           };
           descriptionParts.push(
-            `Refund Type: <span style="color:#999">${refundTypeMap[payload.refundTypeId] || "Unknown"}</span>`
+            `Refund Type: <span style="color:#999">${
+              refundTypeMap[payload.refundTypeId] || "Unknown"
+            }</span>`
           );
         }
         if (payload.refundAmount) {
@@ -13996,21 +14302,18 @@ export namespace activitiesController {
       }
 
       await Promise.all([
-        ActivityTransactions.update(
-          transactionUpdateColumns,
-          {
-            where: {
-              id: activityTransaction.dataValues.id,
-            },
-            transaction: transaction,
-          }
-        ),
+        ActivityTransactions.update(transactionUpdateColumns, {
+          where: {
+            id: activityTransaction.dataValues.id,
+          },
+          transaction: transaction,
+        }),
         ActivityLogs.create(
           {
             activityId: activityId,
             typeId: 240, // Web
             title: "Refund Status Updated",
-            description: descriptionParts.join('<br />'),
+            description: descriptionParts.join("<br />"),
             createdById: payload.authUserId || null,
           },
           { transaction: transaction }
@@ -14085,7 +14388,7 @@ export namespace activitiesController {
           activityId: activityTransaction.activityId,
           typeId: 240, // Web
           title: "Refund Status Updated",
-          description: descriptionParts.join('<br />'),
+          description: descriptionParts.join("<br />"),
           createdById: payload.authUserId || null,
         },
         {
@@ -14118,7 +14421,15 @@ export namespace activitiesController {
           id: payload.transactionId,
           paymentTypeId: 174, //One time service
         },
-        attributes: ["id", "membershipId", "razorpayOrderId", "razorpayTransactionId", "refundStatusId", "refundId", "activityId"],
+        attributes: [
+          "id",
+          "membershipId",
+          "razorpayOrderId",
+          "razorpayTransactionId",
+          "refundStatusId",
+          "refundId",
+          "activityId",
+        ],
       });
 
       if (!activityTransaction) {
@@ -14203,11 +14514,7 @@ export namespace activitiesController {
         include: [
           {
             model: Activities,
-            attributes: [
-              "id",
-              "customerNeedToPay",
-              "sendPaymentLinkTo",
-            ],
+            attributes: ["id", "customerNeedToPay", "sendPaymentLinkTo"],
             include: [
               {
                 model: CaseDetails,
@@ -14224,50 +14531,72 @@ export namespace activitiesController {
       });
 
       // Get unique membershipIds from all activityTransactions for enableRefund check
-      const uniqueMembershipIds: number[] = Array.from(new Set(
-        activityTransactions
-          .map((txn: any) => txn.membershipId)
-          .filter((id: any): id is number => typeof id === 'number' && !isNaN(id))
-      ));
+      const uniqueMembershipIds: number[] = Array.from(
+        new Set(
+          activityTransactions
+            .map((txn: any) => txn.membershipId)
+            .filter(
+              (id: any): id is number => typeof id === "number" && !isNaN(id)
+            )
+        )
+      );
 
       // Fetch enableRefund for each unique membershipId
       const enableRefundMap: { [key: number]: boolean } = {};
-      const enableRefundPromises = uniqueMembershipIds.map(async (membershipId: number) => {
-        try {
-          const nonMembershipDetail = await axios.post(
-            `${process.env.RSA_BASE_URL}/crm/get/nonMembership/cancellationInfo`,
-            { nonMembershipId: membershipId }
-          );
-          if (nonMembershipDetail?.data?.success && nonMembershipDetail?.data?.enableRefund) {
-            enableRefundMap[membershipId] = nonMembershipDetail.data.enableRefund;
-          } else {
+      const enableRefundPromises = uniqueMembershipIds.map(
+        async (membershipId: number) => {
+          try {
+            const nonMembershipDetail = await axios.post(
+              `${process.env.RSA_BASE_URL}/crm/get/nonMembership/cancellationInfo`,
+              { nonMembershipId: membershipId }
+            );
+            if (
+              nonMembershipDetail?.data?.success &&
+              nonMembershipDetail?.data?.enableRefund
+            ) {
+              enableRefundMap[membershipId] =
+                nonMembershipDetail.data.enableRefund;
+            } else {
+              enableRefundMap[membershipId] = false;
+            }
+          } catch (error) {
+            // Silently fail - enableRefund will remain false
             enableRefundMap[membershipId] = false;
           }
-        } catch (error) {
-          // Silently fail - enableRefund will remain false
-          enableRefundMap[membershipId] = false;
         }
-      });
+      );
 
       // Wait for all enableRefund checks to complete
       await Promise.all(enableRefundPromises);
 
       // Get unique config IDs to fetch
-      const refundTypeIds: number[] = Array.from(new Set(
-        activityTransactions
-          .map((txn: any) => txn.refundTypeId)
-          .filter((id: any): id is number => typeof id === 'number' && !isNaN(id))
-      ));
-      const refundStatusIds: number[] = Array.from(new Set(
-        activityTransactions
-          .map((txn: any) => txn.refundStatusId)
-          .filter((id: any): id is number => typeof id === 'number' && !isNaN(id))
-      ));
-      const cancellationStatusIds: number[] = Array.from(new Set(
-        activityTransactions
-          .map((txn: any) => txn.cancellationStatusId)
-          .filter((id: any): id is number => typeof id === 'number' && !isNaN(id))
-      ));
+      const refundTypeIds: number[] = Array.from(
+        new Set(
+          activityTransactions
+            .map((txn: any) => txn.refundTypeId)
+            .filter(
+              (id: any): id is number => typeof id === "number" && !isNaN(id)
+            )
+        )
+      );
+      const refundStatusIds: number[] = Array.from(
+        new Set(
+          activityTransactions
+            .map((txn: any) => txn.refundStatusId)
+            .filter(
+              (id: any): id is number => typeof id === "number" && !isNaN(id)
+            )
+        )
+      );
+      const cancellationStatusIds: number[] = Array.from(
+        new Set(
+          activityTransactions
+            .map((txn: any) => txn.cancellationStatusId)
+            .filter(
+              (id: any): id is number => typeof id === "number" && !isNaN(id)
+            )
+        )
+      );
 
       // Fetch configs from Master Service
       const configPromises: any[] = [];
@@ -14285,7 +14614,9 @@ export namespace activitiesController {
       for (const refundTypeId of refundTypeIds) {
         configPromises.push(
           axios
-            .get(`${masterService}/${endpointMaster.configs.getConfigById}?id=${refundTypeId}`)
+            .get(
+              `${masterService}/${endpointMaster.configs.getConfigById}?id=${refundTypeId}`
+            )
             .then((res) => {
               if (res?.data?.success && res?.data?.data) {
                 configMap.refundTypes[refundTypeId] = res.data.data.name;
@@ -14301,7 +14632,9 @@ export namespace activitiesController {
       for (const refundStatusId of refundStatusIds) {
         configPromises.push(
           axios
-            .get(`${masterService}/${endpointMaster.configs.getConfigById}?id=${refundStatusId}`)
+            .get(
+              `${masterService}/${endpointMaster.configs.getConfigById}?id=${refundStatusId}`
+            )
             .then((res) => {
               if (res?.data?.success && res?.data?.data) {
                 configMap.refundStatuses[refundStatusId] = res.data.data.name;
@@ -14317,10 +14650,13 @@ export namespace activitiesController {
       for (const cancellationStatusId of cancellationStatusIds) {
         configPromises.push(
           axios
-            .get(`${masterService}/${endpointMaster.configs.getConfigById}?id=${cancellationStatusId}`)
+            .get(
+              `${masterService}/${endpointMaster.configs.getConfigById}?id=${cancellationStatusId}`
+            )
             .then((res) => {
               if (res?.data?.success && res?.data?.data) {
-                configMap.cancellationStatuses[cancellationStatusId] = res.data.data.name;
+                configMap.cancellationStatuses[cancellationStatusId] =
+                  res.data.data.name;
               }
             })
             .catch(() => {
@@ -14333,50 +14669,58 @@ export namespace activitiesController {
       await Promise.all(configPromises);
 
       // Map transactions with config lookups and enableRefund (per transaction membershipId)
-      const mappedTransactions = activityTransactions.map((transaction: any) => {
-        const paymentStatusId = transaction.paymentStatusId as number | null;
-        const refundTypeId = transaction.refundTypeId as number | null;
-        const refundStatusId = transaction.refundStatusId as number | null;
-        const cancellationStatusId = transaction.cancellationStatusId as number | null;
-        const membershipId = transaction.membershipId as number | null;
+      const mappedTransactions = activityTransactions.map(
+        (transaction: any) => {
+          const paymentStatusId = transaction.paymentStatusId as number | null;
+          const refundTypeId = transaction.refundTypeId as number | null;
+          const refundStatusId = transaction.refundStatusId as number | null;
+          const cancellationStatusId = transaction.cancellationStatusId as
+            | number
+            | null;
+          const membershipId = transaction.membershipId as number | null;
 
-        // Get enableRefund for this transaction's membershipId
-        const enableRefund = membershipId && enableRefundMap[membershipId] != null
-          ? enableRefundMap[membershipId]
-          : false;
+          // Get enableRefund for this transaction's membershipId
+          const enableRefund =
+            membershipId && enableRefundMap[membershipId] != null
+              ? enableRefundMap[membershipId]
+              : false;
 
-        // Extract fields from related models
-        const activity = transaction.activity;
-        const caseDetail = activity?.caseDetail;
+          // Extract fields from related models
+          const activity = transaction.activity;
+          const caseDetail = activity?.caseDetail;
 
-        const customerNeedToPay = activity?.customerNeedToPay == 1 ? true : false;
-        const sendPaymentLinkTo = activity?.sendPaymentLinkTo || null;
-        const isCustomerInvoiced = caseDetail?.isCustomerInvoiced == 1 ? true : false;
-        const customerInvoiceNumber = caseDetail?.customerInvoiceNumber || null;
+          const customerNeedToPay =
+            activity?.customerNeedToPay == 1 ? true : false;
+          const sendPaymentLinkTo = activity?.sendPaymentLinkTo || null;
+          const isCustomerInvoiced =
+            caseDetail?.isCustomerInvoiced == 1 ? true : false;
+          const customerInvoiceNumber =
+            caseDetail?.customerInvoiceNumber || null;
 
-        // Get transaction JSON and remove nested objects
-        const transactionJson = transaction.toJSON();
-        delete transactionJson.activity;
-        delete transactionJson.Activity;
+          // Get transaction JSON and remove nested objects
+          const transactionJson = transaction.toJSON();
+          delete transactionJson.activity;
+          delete transactionJson.Activity;
 
-        return {
-          ...transactionJson,
-          enableRefund: enableRefund,
-          customerNeedToPay: customerNeedToPay,
-          sendPaymentLinkTo: sendPaymentLinkTo,
-          isCustomerInvoiced: isCustomerInvoiced,
-          customerInvoiceNumber: customerInvoiceNumber,
-          refundType: refundTypeId
-            ? configMap.refundTypes[refundTypeId] || null
-            : null,
-          refundStatus: refundStatusId
-            ? configMap.refundStatuses[refundStatusId] || null
-            : null,
-          cancellationStatus: cancellationStatusId
-            ? configMap.cancellationStatuses[cancellationStatusId] || null
-            : null,
-        };
-      });
+          return {
+            ...transactionJson,
+            enableRefund: enableRefund,
+            customerNeedToPay: customerNeedToPay,
+            sendPaymentLinkTo: sendPaymentLinkTo,
+            isCustomerInvoiced: isCustomerInvoiced,
+            customerInvoiceNumber: customerInvoiceNumber,
+            refundType: refundTypeId
+              ? configMap.refundTypes[refundTypeId] || null
+              : null,
+            refundStatus: refundStatusId
+              ? configMap.refundStatuses[refundStatusId] || null
+              : null,
+            cancellationStatus: cancellationStatusId
+              ? configMap.cancellationStatuses[cancellationStatusId] || null
+              : null,
+          };
+        }
+      );
 
       return res.status(200).json({
         success: true,
@@ -14391,7 +14735,10 @@ export namespace activitiesController {
     }
   }
 
-  export async function updateCaseCancellationInvoice(req: Request, res: Response) {
+  export async function updateCaseCancellationInvoice(
+    req: Request,
+    res: Response
+  ) {
     const transaction = await sequelize.transaction();
     try {
       const payload = req.body;
@@ -14748,7 +15095,9 @@ export const createActivityAndActivityAspDetail: any = async (
   serviceInitiatingAt: any = null,
   serviceExpectedAt: any = null,
   aspAutoAllocation: number = 0,
-  transaction: any
+  transaction: any,
+  casePickedAt: Date | null = null, // NEW
+  agentId: number | null = null
 ) => {
   try {
     const getMasterDetail = await axios.post(
@@ -14756,34 +15105,61 @@ export const createActivityAndActivityAspDetail: any = async (
       { subServiceId }
     );
 
-    // 1️⃣ Create activity FIRST
-    const newActivity: any = await Activities.create(
-      {
-        caseDetailId: caseDetail.id,
-        activityStatusId: 1,
-        financeStatusId: 3,
-        createdById: authUserId,
-        isInitiallyCreated,
-        isImmediateService,
-        serviceInitiatingAt: serviceInitiatingAt
-          ? moment.tz(serviceInitiatingAt, "Asia/Kolkata").toDate()
-          : null,
-        serviceExpectedAt: serviceExpectedAt
-          ? moment.tz(serviceExpectedAt, "Asia/Kolkata").toDate()
-          : null,
-        aspAutoAllocation,
-      },
-      { transaction }
-    );
+    // // 1️⃣ Create activity FIRST
+    // const newActivity: any = await Activities.create(
+    //   {
+    //     caseDetailId: caseDetail.id,
+    //     activityStatusId: 1,
+    //     financeStatusId: 3,
+    //     createdById: authUserId,
+    //     isInitiallyCreated,
+    //     isImmediateService,
+    //     serviceInitiatingAt: serviceInitiatingAt
+    //       ? moment.tz(serviceInitiatingAt, "Asia/Kolkata").toDate()
+    //       : null,
+    //     serviceExpectedAt: serviceExpectedAt
+    //       ? moment.tz(serviceExpectedAt, "Asia/Kolkata").toDate()
+    //       : null,
+    //     aspAutoAllocation,
+    //   },
+
+    // );
+
+    const pickedTime = casePickedAt || null;
+    const pickedAgentId = agentId || null;
+    const newActivityData: any = {
+      caseDetailId: caseDetail.id,
+      activityStatusId: 1,
+      financeStatusId: 3,
+      createdById: authUserId,
+      isInitiallyCreated,
+      isImmediateService,
+      serviceInitiatingAt: serviceInitiatingAt
+        ? moment.tz(serviceInitiatingAt, "Asia/Kolkata").toDate()
+        : null,
+      serviceExpectedAt: serviceExpectedAt
+        ? moment.tz(serviceExpectedAt, "Asia/Kolkata").toDate()
+        : null,
+      aspAutoAllocation,
+    };
+
+    // ✅ Only for rejected flow, set picked time and agent
+    if (pickedTime) {
+      newActivityData.agentPickedAt = pickedTime;
+      newActivityData.aspAssignedById = pickedAgentId;
+    }
+
+    const newActivity: any = await Activities.create(newActivityData, {
+      transaction,
+    });
 
     // 2️⃣ Generate activity number from DB ID
     const financialYear = Utils.getCurrentFinancialYear();
-    const activityNumber = `RCF${financialYear}${String(newActivity.id).padStart(9, "0")}`;
+    const activityNumber = `RCF${financialYear}${String(
+      newActivity.id
+    ).padStart(9, "0")}`;
 
-    await newActivity.update(
-      { activityNumber },
-      { transaction }
-    );
+    await newActivity.update({ activityNumber }, { transaction });
 
     // 3️⃣ Create ASP detail
     await ActivityAspDetails.create(
@@ -14792,8 +15168,7 @@ export const createActivityAndActivityAspDetail: any = async (
         subServiceId,
         subServiceHasAspAssignment:
           getMasterDetail?.data?.data?.subService?.hasAspAssignment || null,
-        serviceId:
-          getMasterDetail?.data?.data?.subService?.serviceId || null,
+        serviceId: getMasterDetail?.data?.data?.subService?.serviceId || null,
         createdById: authUserId,
       },
       { transaction }
@@ -15180,13 +15555,13 @@ const getAssignedCountBaseQuery = (
         ...(isImmediateService !== null && { isImmediateService }),
         ...(isInitiallyCreated === 1 &&
           isImmediateService === 0 && {
-          [Op.and]: [
-            Sequelize.where(
-              Sequelize.fn("DATE", Sequelize.col("serviceInitiatingAt")),
-              serviceScheduledDate
-            ),
-          ],
-        }),
+            [Op.and]: [
+              Sequelize.where(
+                Sequelize.fn("DATE", Sequelize.col("serviceInitiatingAt")),
+                serviceScheduledDate
+              ),
+            ],
+          }),
         ...(isInitiallyCreated === 0 && {
           [Op.and]: [
             Sequelize.where(
@@ -15207,12 +15582,12 @@ const getAssignedCountBaseQuery = (
             },
             ...(isInitiallyCreated === null &&
               isImmediateService === null && {
-              deliveryRequestPickupDate: serviceScheduledDate,
-            }),
+                deliveryRequestPickupDate: serviceScheduledDate,
+              }),
             ...(isInitiallyCreated === 1 &&
               isImmediateService === 1 && {
-              date: serviceScheduledDate,
-            }),
+                date: serviceScheduledDate,
+              }),
           },
         },
       ],
@@ -15246,13 +15621,13 @@ const getWorkStatusBaseQuery = (
         ...(isImmediateService !== null && { isImmediateService }),
         ...(isInitiallyCreated === 1 &&
           isImmediateService === 0 && {
-          [Op.and]: [
-            Sequelize.where(
-              Sequelize.fn("DATE", Sequelize.col("serviceInitiatingAt")),
-              serviceScheduledDate
-            ),
-          ],
-        }),
+            [Op.and]: [
+              Sequelize.where(
+                Sequelize.fn("DATE", Sequelize.col("serviceInitiatingAt")),
+                serviceScheduledDate
+              ),
+            ],
+          }),
         ...(isInitiallyCreated === 0 && {
           [Op.and]: [
             Sequelize.where(
@@ -15273,12 +15648,12 @@ const getWorkStatusBaseQuery = (
             },
             ...(isInitiallyCreated === null &&
               isImmediateService === null && {
-              deliveryRequestPickupDate: serviceScheduledDate,
-            }),
+                deliveryRequestPickupDate: serviceScheduledDate,
+              }),
             ...(isInitiallyCreated === 1 &&
               isImmediateService === 1 && {
-              date: serviceScheduledDate,
-            }),
+                date: serviceScheduledDate,
+              }),
           },
         },
       ],

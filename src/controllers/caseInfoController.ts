@@ -69,6 +69,8 @@ export namespace caseInfoController {
     const transaction: any = await sequelize.transaction();
     try {
       const inData = req.validBody;
+      console.log(inData,"indataaaaaaaaaaa");
+      
       //CUSTOM VALIDATION
       if (inData.isVinOrVehicleManuallyEntered) {
         const checkVinOrVehicleValidResponse = await axios.post(
@@ -197,6 +199,39 @@ export namespace caseInfoController {
         });
       }
 
+      // Fetch breakdown area details to get locationTypeId
+let breakdownLocationTypeId: number | null = null;
+  console.log("inData.breakdownAreaId",inData.breakdownAreaId)
+if (inData.breakdownAreaId) {
+  console.log("inside iffffff",inData.breakdownAreaId)
+  try {
+    const cityResponse = await axios.post(
+      `${masterService}/${endpointMaster.cities.getById}`,
+      {
+        id: inData.breakdownAreaId
+      }
+    );
+
+    if (cityResponse.data.success) {
+      breakdownLocationTypeId = cityResponse.data.data.locationTypeId;
+      console.log(breakdownLocationTypeId,"breakdownLocationTypeId")
+    } else {
+      await transaction.rollback();
+      return res.status(200).json({
+        success: false,
+        error: "Invalid breakdown area"
+      });
+    }
+  } catch (error: any) {
+    await transaction.rollback();
+    return res.status(500).json({
+      success: false,
+      error: "Failed to fetch breakdown location type"
+    });
+  }
+}
+
+
       // Create Case Information
       let caseDetailData: any = {
         date: new Date(),
@@ -216,6 +251,7 @@ export namespace caseInfoController {
         createdById: inData.createdById,
         rmId: inData.breakdownAreaRmId ? inData.breakdownAreaRmId : null,
         inboundCallMonitorUCID: inData.monitorUcid,
+        breakdownLocationTypeId: breakdownLocationTypeId
       };
 
       // Set caseCreateClickedAt from tempCaseFormDetail createdAt (L1 "Case Create" click time)
@@ -708,6 +744,145 @@ export namespace caseInfoController {
       });
     }
   }
+
+export async function sendCaseRemindersForLoggedInAgent(
+  req: Request,
+  res: Response
+) {
+  try {
+    const REMINDER_CONFIG: any = {
+      730: [1, 2, 3],      // City
+      731: [15, 30, 45],  // Highway
+      732: [20, 40, 60],  // Hilly
+    };
+
+    const loggedInUserId = req.body.authUserId;
+
+    if (!loggedInUserId) {
+      return res.status(400).json({
+        success: false,
+        message: "authUserId is required",
+      });
+    }
+
+    const now = moment().tz("Asia/Kolkata");
+
+    /**
+     * STEP 1: Fetch eligible activities with case details
+     */
+    const activities = await Activities.findAll({
+      where: {
+        // Agent picked activity
+        agentPickedAt: {
+          [Op.ne]: null,
+        },
+
+        // ASP accepted activity
+        aspServiceAcceptedAt: {
+          [Op.ne]: null,
+        },
+
+        deletedAt: null,
+      },
+      include: [
+        {
+          model: CaseDetails,
+          as: "caseDetail",
+          required: true,
+          where: {
+            agentId: loggedInUserId, 
+            statusId: {
+              [Op.in]: [1, 2], // OPEN / INPROGRESS
+            },
+
+            breakdownLocationTypeId: {
+              [Op.in]: [730, 731, 732],
+            },
+          },
+          attributes: [
+            "id",
+            "caseNumber",
+            "breakdownLocationTypeId",
+          ],
+        },
+      ],
+      attributes: [
+        "id",
+        "caseDetailId",
+        "aspServiceAcceptedAt",
+      ],
+    });
+
+    if (!activities.length) {
+      return res.status(200).json({
+        success: true,
+        message: "No eligible cases for reminder",
+        data: [],
+      });
+    }
+
+    let sentReminders: any[] = [];
+
+    /**
+     * STEP 2: Process reminders
+     */
+    for (const activity of activities) {
+       const act: any = activity;
+      const caseDetail = act.caseDetail;
+
+      const reminderMinutes =
+        REMINDER_CONFIG[caseDetail.breakdownLocationTypeId];
+
+      if (!reminderMinutes) continue;
+
+      // ⏰ Reminder starts from ASP acceptance
+      const baseTime = moment(act.aspServiceAcceptedAt).tz(
+        "Asia/Kolkata"
+      );
+
+      for (let i = 0; i < reminderMinutes.length; i++) {
+        const reminderNo = i + 1;
+
+        const reminderTime = baseTime
+          .clone()
+          .add(reminderMinutes[i], "minutes");
+
+        if (now.isBefore(reminderTime)) continue;
+
+        /**
+         * SEND NOTIFICATION
+         */
+        await notificationController.sendNotification({
+          caseDetailId: caseDetail.id,
+          templateId: 1,
+          notificationType: "CRM",
+          sourceFrom: 1,
+        });
+
+        sentReminders.push({
+          caseDetailId: caseDetail.id,
+          caseNumber: caseDetail.caseNumber,
+          reminderNo,
+        });
+      }
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Reminders processed successfully",
+      data: sentReminders,
+    });
+  } catch (error: any) {
+    console.error("Reminder error:", error);
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
+
+
 
   export async function autoAllocationProcess(
     createdCaseDetail: any,

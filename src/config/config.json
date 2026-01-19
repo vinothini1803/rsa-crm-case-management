@@ -110,7 +110,8 @@
         "getAllState": "states"
       },
       "cities": {
-        "getAllCity": "cities"
+        "getAllCity": "cities",
+        "getById":"cities/getById"
       },
       "asps": {
         "getAllAsp": "asps",

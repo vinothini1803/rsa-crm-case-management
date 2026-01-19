@@ -10,7 +10,7 @@ export namespace activityCharges {
         try {
             const inData = req.query.activityId;
             const data = await ActivityCharges.findAll({where: {activityId: inData}});
-            console.log(data);
+            // console.log(data);
 
             if (data.length === 0) {
                 return res.status(204).json({

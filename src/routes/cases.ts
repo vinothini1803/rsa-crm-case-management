@@ -693,6 +693,8 @@ router.post(
   validate(validateCaseInformationForm),
   caseInfoController.addCaseInformation
 );
+router.post("/sendReminder",caseInfoController.sendCaseRemindersForLoggedInAgent)
+
 
 router.post(
   "/getNotyLogList",

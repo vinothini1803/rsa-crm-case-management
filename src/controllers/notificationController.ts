@@ -522,7 +522,7 @@ export namespace NotificationController {
           [Op.and]: whereConditions,
         },
         attributes: ["id", "title", "body", "sourceFrom", "createdAt"],
-        group: ["body", "createdAt"],
+        // group: ["body", "createdAt"],
         order: [["id", "DESC"]],
       });
 

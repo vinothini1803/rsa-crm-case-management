@@ -9819,7 +9819,7 @@ export namespace caseController {
               ],
             },
           ],
-          group: ["id"],
+          // group: ["id"],
           order: [["id", "desc"]],
         });
 
@@ -9952,7 +9952,7 @@ export namespace caseController {
             ],
           },
         ],
-        group: ["id"],
+        // group: ["id"],
         order: [["id", "desc"]],
       };
 
