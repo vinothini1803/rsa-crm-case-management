@@ -144,6 +144,10 @@ const caseDetails = sequelize.define(
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: true,
     },
+    breakdownLocationTypeId: {
+  type: DataTypes.INTEGER,
+  allowNull: true,
+},
     pickupLatitude: {
       type: DataTypes.STRING(60),
       allowNull: true,
